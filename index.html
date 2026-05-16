@@ -6,7 +6,6 @@
     <title>Seguimiento Desgaste de Llantas FLT - CD Girardota</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style>
-        /* Paleta corporativa Bavaria */
         :root {
             --bavaria-red: #C8102E;
             --bavaria-dark-red: #9B0F22;
@@ -14,24 +13,108 @@
         }
         .bg-bavaria-red { background-color: var(--bavaria-red); }
         .text-bavaria-red { color: var(--bavaria-red); }
-        .hover-bavaria-red:hover { background-color: var(--bavaria-dark-red); }
         .border-bavaria-gold { border-color: var(--bavaria-gold); }
+
+        /* Diagram container: altura fija proporcional, sin espacio muerto */
+        .forklift-diagram {
+            position: relative;
+            width: 100%;
+            height: 220px;
+            background: #f9fafb;
+            border-radius: 10px;
+            border: 1px solid #e5e7eb;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .forklift-diagram img {
+            height: 100%;
+            width: auto;
+            object-fit: contain;
+            display: block;
+        }
+
+        /* Input de llanta flotante */
+        .llanta-input {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+        }
+        .llanta-input label {
+            font-size: 9px;
+            font-weight: 700;
+            color: #374151;
+            background: rgba(255,255,255,0.85);
+            padding: 1px 5px;
+            border-radius: 4px;
+            line-height: 1.2;
+            text-align: center;
+        }
+        .llanta-input input {
+            width: 58px;
+            background: white;
+            border: 1.5px solid #d1d5db;
+            border-radius: 6px;
+            padding: 5px 4px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 13px;
+            color: #111827;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+            -webkit-appearance: none;
+        }
+        .llanta-input input:focus {
+            outline: none;
+            border-color: var(--bavaria-red);
+            box-shadow: 0 0 0 3px rgba(200,16,46,0.15);
+        }
+
+        /* Botón principal */
+        .btn-guardar {
+            background-color: var(--bavaria-red);
+            color: white;
+            font-weight: 700;
+            width: 100%;
+            padding: 14px;
+            border-radius: 10px;
+            font-size: 15px;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .btn-guardar:hover { background-color: var(--bavaria-dark-red); }
+        .btn-guardar:disabled { opacity: 0.6; cursor: not-allowed; }
+
+        /* Select */
+        select {
+            -webkit-appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%236B7280'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 14px center;
+        }
     </style>
 </head>
-<body class="bg-gray-100 font-sans min-h-screen flex flex-col justify-between">
+<body style="background:#f3f4f6; font-family: sans-serif; min-height: 100vh; display:flex; flex-direction:column;">
 
-    <header class="bg-bavaria-red text-white py-4 px-6 shadow-md border-b-4 border-bavaria-gold text-center">
-        <h1 class="text-xl md:text-2xl font-bold tracking-wide uppercase">Seguimiento a Desgaste de Llantas FLT</h1>
-        <p class="text-xs md:text-sm font-medium tracking-wider opacity-90 mt-1">CD Girardota - Bavaria S.A.</p>
+    <header style="background:var(--bavaria-red); color:white; padding:14px 16px; text-align:center; border-bottom: 4px solid var(--bavaria-gold); position:sticky; top:0; z-index:50;">
+        <h1 style="font-size:16px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; margin:0; line-height:1.2;">Seguimiento a Desgaste de Llantas FLT</h1>
+        <p style="font-size:11px; opacity:0.88; margin:3px 0 0; letter-spacing:0.05em;">CD Girardota · Bavaria S.A.</p>
     </header>
 
-   <main class="flex-grow p-2 sm:p-6 w-full max-w-2xl mx-auto">
-        <form id="formDesgaste" class="bg-white rounded-xl shadow-lg p-4 sm:p-5 border border-gray-200 flex flex-col gap-4 w-full">
-            
-            <div class="text-center w-full">
-                <label for="numeroMaquina" class="block text-gray-700 font-bold mb-1.5 text-xs sm:text-sm uppercase tracking-wider">Número de Montacargas</label>
-                <select id="numeroMaquina" required class="w-full sm:w-2/3 mx-auto block bg-gray-50 border-2 border-gray-300 rounded-lg py-2.5 px-4 text-center font-bold text-base sm:text-lg text-gray-800 focus:outline-none focus:border-red-600 transition-colors">
-                    <option value="" disabled selected>-- Seleccione Máquina --</option>
+    <main style="flex:1; padding: 12px; max-width: 600px; width:100%; margin: 0 auto;">
+        <form id="formDesgaste" style="background:white; border-radius:14px; box-shadow:0 2px 12px rgba(0,0,0,0.08); padding:16px; display:flex; flex-direction:column; gap:14px;">
+
+            <!-- Selección de máquina -->
+            <div>
+                <label style="display:block; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:#6b7280; margin-bottom:6px; text-align:center;">Número de Montacargas</label>
+                <select id="numeroMaquina" required style="width:100%; border:2px solid #d1d5db; border-radius:10px; padding:11px 38px 11px 14px; font-size:16px; font-weight:700; color:#111827; background-color:#f9fafb; text-align:center;">
+                    <option value="" disabled selected>— Seleccione Máquina —</option>
                     <option value="561">561</option>
                     <option value="562">562</option>
                     <option value="567">567</option>
@@ -45,54 +128,64 @@
                 </select>
             </div>
 
-            <div class="relative w-full aspect-[2/1] my-2 flex items-center justify-center bg-gray-50 rounded-lg p-1 border border-gray-200 overflow-hidden">
-                <img src="montacargas.png" alt="Montacargas superior" class="h-full w-auto object-contain opacity-90 max-w-[85%]">
+            <!-- Diagrama montacargas con inputs -->
+            <div>
+                <label style="display:block; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:#6b7280; margin-bottom:6px; text-align:center;">Medidas de Llantas (mm)</label>
+                <div class="forklift-diagram">
+                    <img src="montacargas.png" alt="Vista superior montacargas">
 
-                <div class="absolute top-[8%] left-[28%] flex flex-col items-center">
-                    <span class="text-[9px] sm:text-[10px] font-bold text-gray-600 leading-tight">DEL. IZQ</span>
-                    <input type="number" id="llantaDI" step="0.1" min="0" placeholder="mm" required class="w-14 sm:w-16 bg-white border border-gray-400 rounded px-1 py-0.5 sm:py-1 text-center font-bold text-xs sm:text-sm focus:ring-2 focus:ring-red-500 shadow-sm">
-                </div>
+                    <!-- Delantera izquierda -->
+                    <div class="llanta-input" style="top: 10px; left: 22%;">
+                        <label>DEL. IZQ</label>
+                        <input type="number" id="llantaDI" step="0.1" min="0" placeholder="mm" required>
+                    </div>
 
-                <div class="absolute bottom-[8%] left-[28%] flex flex-col items-center">
-                    <input type="number" id="llantaDD" step="0.1" min="0" placeholder="mm" required class="w-14 sm:w-16 bg-white border border-gray-400 rounded px-1 py-0.5 sm:py-1 text-center font-bold text-xs sm:text-sm focus:ring-2 focus:ring-red-500 shadow-sm">
-                    <span class="text-[9px] sm:text-[10px] font-bold text-gray-600 leading-tight">DEL. DER</span>
-                </div>
+                    <!-- Delantera derecha -->
+                    <div class="llanta-input" style="bottom: 10px; left: 22%;">
+                        <input type="number" id="llantaDD" step="0.1" min="0" placeholder="mm" required>
+                        <label>DEL. DER</label>
+                    </div>
 
-                <div class="absolute top-[8%] right-[22%] flex flex-col items-center">
-                    <span class="text-[9px] sm:text-[10px] font-bold text-gray-600 leading-tight">TRAS. IZQ</span>
-                    <input type="number" id="llantaTI" step="0.1" min="0" placeholder="mm" required class="w-14 sm:w-16 bg-white border border-gray-400 rounded px-1 py-0.5 sm:py-1 text-center font-bold text-xs sm:text-sm focus:ring-2 focus:ring-red-500 shadow-sm">
-                </div>
+                    <!-- Trasera izquierda -->
+                    <div class="llanta-input" style="top: 10px; right: 16%;">
+                        <label>TRAS. IZQ</label>
+                        <input type="number" id="llantaTI" step="0.1" min="0" placeholder="mm" required>
+                    </div>
 
-                <div class="absolute bottom-[8%] right-[22%] flex flex-col items-center">
-                    <input type="number" id="llantaTD" step="0.1" min="0" placeholder="mm" required class="w-14 sm:w-16 bg-white border border-gray-400 rounded px-1 py-0.5 sm:py-1 text-center font-bold text-xs sm:text-sm focus:ring-2 focus:ring-red-500 shadow-sm">
-                    <span class="text-[9px] sm:text-[10px] font-bold text-gray-600 leading-tight">TRAS. DER</span>
+                    <!-- Trasera derecha -->
+                    <div class="llanta-input" style="bottom: 10px; right: 16%;">
+                        <input type="number" id="llantaTD" step="0.1" min="0" placeholder="mm" required>
+                        <label>TRAS. DER</label>
+                    </div>
                 </div>
             </div>
 
-            <div class="border-t border-gray-200 pt-3">
-                <label class="block text-gray-700 font-bold mb-1.5 text-xs sm:text-sm uppercase tracking-wider text-center">Evidencia Fotográfica</label>
-                <div class="flex flex-col items-center justify-center border-2 border-dashed border-gray-300 rounded-lg p-3 bg-gray-50 hover:bg-gray-100 transition-colors cursor-pointer relative min-h-[90px]">
-                    <input type="file" id="fotoInput" accept="image/*" capture="environment" class="absolute inset-0 opacity-0 cursor-pointer w-full h-full">
-                    <div id="uploadPrompt" class="text-center pointer-events-none">
-                        <svg class="mx-auto h-8 w-8 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <!-- Foto -->
+            <div>
+                <label style="display:block; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:#6b7280; margin-bottom:6px; text-align:center;">Evidencia Fotográfica</label>
+                <div style="position:relative; border:2px dashed #d1d5db; border-radius:10px; background:#f9fafb; min-height:80px; display:flex; align-items:center; justify-content:center; overflow:hidden; cursor:pointer; transition: border-color 0.2s;" id="fotoZone">
+                    <input type="file" id="fotoInput" accept="image/*" capture="environment"
+                        style="position:absolute; inset:0; opacity:0; cursor:pointer; width:100%; height:100%; z-index:2;">
+                    <div id="uploadPrompt" style="text-align:center; padding:14px; pointer-events:none;">
+                        <svg style="width:28px;height:28px;color:#9ca3af;margin:0 auto 6px;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
                         </svg>
-                        <p class="text-xs font-semibold text-gray-600 mt-1">Tomar Foto o Subir Archivo</p>
+                        <p style="font-size:12px; font-weight:600; color:#6b7280; margin:0;">Tomar foto o subir archivo</p>
                     </div>
-                    <canvas id="canvasWatermark" class="hidden"></canvas>
-                    <img id="previewImage" class="hidden mt-1 max-h-40 w-full object-contain rounded border border-gray-300 shadow-inner">
+                    <canvas id="canvasWatermark" style="display:none;"></canvas>
+                    <img id="previewImage" style="display:none; width:100%; max-height:200px; object-fit:contain; border-radius:8px;" alt="Vista previa">
                 </div>
             </div>
 
-            <button type="submit" id="btnGuardar" class="w-full bg-bavaria-red hover-bavaria-red text-white font-bold py-3 px-4 rounded-lg shadow-md transition-all duration-200 uppercase tracking-wide text-center mt-1 text-sm sm:text-base cursor-pointer">
-                Guardar Registro
-            </button>
+            <!-- Botón -->
+            <button type="submit" id="btnGuardar" class="btn-guardar">Guardar Registro</button>
+
         </form>
     </main>
 
-    <footer class="bg-gray-800 text-gray-400 py-3 text-center text-xs border-t border-gray-700">
-        &copy; 2026 Bavaria S.A. - Planta de Distribución Girardota
+    <footer style="background:#1f2937; color:#9ca3af; padding:10px; text-align:center; font-size:11px; border-top:1px solid #374151;">
+        &copy; 2026 Bavaria S.A. · Planta de Distribución Girardota
     </footer>
 
     <script>
@@ -103,61 +196,51 @@
         const canvas = document.getElementById('canvasWatermark');
         const ctx = canvas.getContext('2d');
         const numeroMaquina = document.getElementById('numeroMaquina');
+        const fotoZone = document.getElementById('fotoZone');
 
         let imagenConMarcaDeAguaBase64 = "";
 
-        // URL DE TU SCRIPT DE GOOGLE (Reemplázala después de publicar tu Apps Script)
         const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzw3NRgRkUSLAMLhLIwX2pQk6bcdRvjyzHlpiXqF19AmL_gLBku0rjXtMAtzBUZcg/exec";
 
-        // Procesamiento de la foto y adición de marca de agua
         fotoInput.addEventListener('change', function(e) {
             const file = e.target.files[0];
             if (!file) return;
-
             const reader = new FileReader();
             reader.onload = function(event) {
                 const img = new Image();
                 img.onload = function() {
-                    // Configurar el tamaño del canvas igual al de la imagen cargada
                     canvas.width = img.width;
                     canvas.height = img.height;
-
-                    // Dibujar la imagen original
                     ctx.drawImage(img, 0, 0);
 
-                    // Configurar estilo de la marca de agua
                     const maq = numeroMaquina.value || "S/N";
                     const fecha = new Date().toLocaleString('es-CO', { timeZone: 'America/Bogota' });
                     const textoMarca = `CD GIRARDOTA - FLT: ${maq} - ${fecha}`;
 
-                    // El tamaño de la fuente se ajusta proporcionalmente al tamaño de la imagen
                     const fontSize = Math.max(20, Math.floor(img.width * 0.03));
                     ctx.font = `bold ${fontSize}px Arial`;
-                    
-                    // Fondo negro semitransparente para que la marca de agua siempre sea legible
+
                     ctx.fillStyle = "rgba(0, 0, 0, 0.6)";
                     const textWidth = ctx.measureText(textoMarca).width;
                     ctx.fillRect(20, img.height - fontSize - 30, textWidth + 20, fontSize + 15);
 
-                    // Texto en blanco/dorado
                     ctx.fillStyle = "#FFC72C";
                     ctx.fillText(textoMarca, 30, img.height - 30);
 
-                    // Guardar resultado en Base64 y mostrar vista previa
                     imagenConMarcaDeAguaBase64 = canvas.toDataURL('image/jpeg', 0.8);
                     previewImage.src = imagenConMarcaDeAguaBase64;
-                    previewImage.classList.remove('hidden');
-                    uploadPrompt.classList.add('hidden');
+                    previewImage.style.display = 'block';
+                    uploadPrompt.style.display = 'none';
+                    fotoZone.style.borderStyle = 'solid';
+                    fotoZone.style.borderColor = 'var(--bavaria-red)';
                 };
                 img.src = event.target.result;
             };
             reader.readAsDataURL(file);
         });
 
-        // Evento al presionar Guardar
         form.addEventListener('submit', async function(e) {
             e.preventDefault();
-            
             const btn = document.getElementById('btnGuardar');
             btn.disabled = true;
             btn.textContent = "Enviando...";
@@ -168,31 +251,21 @@
                 llantaDD: document.getElementById('llantaDD').value,
                 llantaTI: document.getElementById('llantaTI').value,
                 llantaTD: document.getElementById('llantaTD').value,
-                foto: imagenConMarcaDeAguaBase64 // Se envía la imagen procesada con marca de agua
+                foto: imagenConMarcaDeAguaBase64
             };
 
             try {
-                // Validación para entorno local de pruebas si aún no configuras Apps Script
-                if (WEB_APP_URL.includes("AQUÍ_VA_TU_URL")) {
-                    alert(`[Simulación] Registro exitoso localmente para la máquina ${datos.maquina}. Configura el Apps Script para guardar en tu Google Sheet.`);
-                    limpiarFormulario();
-                    return;
-                }
-
-                // Envío real a la Base de Datos en Google Sheets
-                const response = await fetch(WEB_APP_URL, {
+                await fetch(WEB_APP_URL, {
                     method: 'POST',
-                    mode: 'no-cors', // Necesario para evitar bloqueos de CORS con Apps Script
+                    mode: 'no-cors',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(datos)
                 });
-
                 alert(`¡Registro guardado correctamente para el montacargas ${datos.maquina}!`);
                 limpiarFormulario();
-
             } catch (error) {
                 console.error("Error al enviar:", error);
-                alert("Hubo un problema al guardar el registro. Inténtalo de nuevo.");
+                alert("Hubo un problema al guardar. Inténtalo de nuevo.");
             } finally {
                 btn.disabled = false;
                 btn.textContent = "Guardar Registro";
@@ -201,9 +274,11 @@
 
         function limpiarFormulario() {
             form.reset();
-            previewImage.classList.add('hidden');
+            previewImage.style.display = 'none';
             previewImage.src = "";
-            uploadPrompt.classList.remove('hidden');
+            uploadPrompt.style.display = '';
+            fotoZone.style.borderStyle = 'dashed';
+            fotoZone.style.borderColor = '#d1d5db';
             imagenConMarcaDeAguaBase64 = "";
         }
     </script>
