@@ -45,29 +45,34 @@
                 </select>
             </div>
 
+            <div class="text-center border-t border-gray-100 pt-2">
+                <label for="horometro" class="block text-gray-700 font-bold mb-2 text-sm uppercase tracking-wider">Horómetro de la Máquina</label>
+                <input type="number" id="horometro" min="0" step="1" placeholder="Ej: 12345" required class="w-full md:w-2/3 mx-auto block bg-gray-50 border-2 border-gray-300 rounded-lg py-2.5 px-4 text-center font-bold text-lg text-gray-800 focus:outline-none focus:border-red-600 transition-colors">
+            </div>
+
             <div class="relative w-full aspect-[2/1] my-4 flex items-center justify-center bg-gray-50 rounded-lg p-2 border border-gray-200">
-    <img src="montacargas.png" alt="Montacargas superior" class="h-full object-contain max-w-xs opacity-90">
+                <img src="montacargas.png" alt="Montacargas superior" class="h-full object-contain max-w-xs opacity-90">
 
-    <div class="absolute top-[10%] left-[25%] flex flex-col items-center">
-        <span class="text-[10px] font-bold text-gray-600">DEL. IZQ</span>
-        <input type="number" id="llantaDI" step="0.1" min="0" placeholder="mm" required class="w-16 bg-white border border-gray-400 rounded px-1.5 py-1 text-center font-bold text-sm focus:ring-2 focus:ring-red-500">
-    </div>
+                <div class="absolute top-[10%] left-[25%] flex flex-col items-center">
+                    <span class="text-[10px] font-bold text-gray-600">P2</span>
+                    <input type="number" id="llantaDI" step="0.1" min="0" placeholder="mm" required class="w-16 bg-white border border-gray-400 rounded px-1.5 py-1 text-center font-bold text-sm focus:ring-2 focus:ring-red-500">
+                </div>
 
-    <div class="absolute bottom-[10%] left-[25%] flex flex-col items-center">
-        <input type="number" id="llantaDD" step="0.1" min="0" placeholder="mm" required class="w-16 bg-white border border-gray-400 rounded px-1.5 py-1 text-center font-bold text-sm focus:ring-2 focus:ring-red-500">
-        <span class="text-[10px] font-bold text-gray-600">DEL. DER</span>
-    </div>
+                <div class="absolute bottom-[10%] left-[25%] flex flex-col items-center">
+                    <input type="number" id="llantaDD" step="0.1" min="0" placeholder="mm" required class="w-16 bg-white border border-gray-400 rounded px-1.5 py-1 text-center font-bold text-sm focus:ring-2 focus:ring-red-500">
+                    <span class="text-[10px] font-bold text-gray-600">P1</span>
+                </div>
 
-    <div class="absolute top-[5%] right-[2%] flex flex-col items-center">
-        <span class="text-[10px] font-bold text-gray-600">TRAS. IZQ</span>
-        <input type="number" id="llantaTI" step="0.1" min="0" placeholder="mm" required class="w-16 bg-white border border-gray-400 rounded px-1.5 py-1 text-center font-bold text-sm focus:ring-2 focus:ring-red-500">
-    </div>
+                <div class="absolute top-[5%] right-[2%] flex flex-col items-center">
+                    <span class="text-[10px] font-bold text-gray-600">P4</span>
+                    <input type="number" id="llantaTI" step="0.1" min="0" placeholder="mm" required class="w-16 bg-white border border-gray-400 rounded px-1.5 py-1 text-center font-bold text-sm focus:ring-2 focus:ring-red-500">
+                </div>
 
-    <div class="absolute bottom-[5%] right-[2%] flex flex-col items-center">
-        <input type="number" id="llantaTD" step="0.1" min="0" placeholder="mm" required class="w-16 bg-white border border-gray-400 rounded px-1.5 py-1 text-center font-bold text-sm focus:ring-2 focus:ring-red-500">
-        <span class="text-[10px] font-bold text-gray-600">TRAS. DER</span>
-    </div>
-</div>
+                <div class="absolute bottom-[5%] right-[2%] flex flex-col items-center">
+                    <input type="number" id="llantaTD" step="0.1" min="0" placeholder="mm" required class="w-16 bg-white border border-gray-400 rounded px-1.5 py-1 text-center font-bold text-sm focus:ring-2 focus:ring-red-500">
+                    <span class="text-[10px] font-bold text-gray-600">P3</span>
+                </div>
+            </div>
 
             <div class="border-t border-gray-200 pt-4">
                 <label class="block text-gray-700 font-bold mb-2 text-sm uppercase tracking-wider text-center">Evidencia Fotográfica</label>
@@ -103,10 +108,11 @@
         const canvas = document.getElementById('canvasWatermark');
         const ctx = canvas.getContext('2d');
         const numeroMaquina = document.getElementById('numeroMaquina');
+        const horometro = document.getElementById('horometro');
 
         let imagenConMarcaDeAguaBase64 = "";
 
-        // URL DE TU SCRIPT DE GOOGLE (Reemplázala después de publicar tu Apps Script)
+        // URL DE TU SCRIPT DE GOOGLE
         const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzw3NRgRkUSLAMLhLIwX2pQk6bcdRvjyzHlpiXqF19AmL_gLBku0rjXtMAtzBUZcg/exec";
 
         // Procesamiento de la foto y adición de marca de agua
@@ -118,32 +124,24 @@
             reader.onload = function(event) {
                 const img = new Image();
                 img.onload = function() {
-                    // Configurar el tamaño del canvas igual al de la imagen cargada
                     canvas.width = img.width;
                     canvas.height = img.height;
-
-                    // Dibujar la imagen original
                     ctx.drawImage(img, 0, 0);
 
-                    // Configurar estilo de la marca de agua
                     const maq = numeroMaquina.value || "S/N";
                     const fecha = new Date().toLocaleString('es-CO', { timeZone: 'America/Bogota' });
                     const textoMarca = `CD GIRARDOTA - FLT: ${maq} - ${fecha}`;
 
-                    // El tamaño de la fuente se ajusta proporcionalmente al tamaño de la imagen
                     const fontSize = Math.max(20, Math.floor(img.width * 0.03));
                     ctx.font = `bold ${fontSize}px Arial`;
                     
-                    // Fondo negro semitransparente para que la marca de agua siempre sea legible
                     ctx.fillStyle = "rgba(0, 0, 0, 0.6)";
                     const textWidth = ctx.measureText(textoMarca).width;
                     ctx.fillRect(20, img.height - fontSize - 30, textWidth + 20, fontSize + 15);
 
-                    // Texto en blanco/dorado
                     ctx.fillStyle = "#FFC72C";
                     ctx.fillText(textoMarca, 30, img.height - 30);
 
-                    // Guardar resultado en Base64 y mostrar vista previa
                     imagenConMarcaDeAguaBase64 = canvas.toDataURL('image/jpeg', 0.8);
                     previewImage.src = imagenConMarcaDeAguaBase64;
                     previewImage.classList.remove('hidden');
@@ -164,25 +162,24 @@
 
             const datos = {
                 maquina: numeroMaquina.value,
+                horometro: horometro.value, // Envío del nuevo dato numérico
                 llantaDI: document.getElementById('llantaDI').value,
                 llantaDD: document.getElementById('llantaDD').value,
                 llantaTI: document.getElementById('llantaTI').value,
                 llantaTD: document.getElementById('llantaTD').value,
-                foto: imagenConMarcaDeAguaBase64 // Se envía la imagen procesada con marca de agua
+                foto: imagenConMarcaDeAguaBase64 
             };
 
             try {
-                // Validación para entorno local de pruebas si aún no configuras Apps Script
                 if (WEB_APP_URL.includes("AQUÍ_VA_TU_URL")) {
-                    alert(`[Simulación] Registro exitoso localmente para la máquina ${datos.maquina}. Configura el Apps Script para guardar en tu Google Sheet.`);
+                    alert(`[Simulación] Registro exitoso para máquina ${datos.maquina} (Horómetro: ${datos.horometro}).`);
                     limpiarFormulario();
                     return;
                 }
 
-                // Envío real a la Base de Datos en Google Sheets
                 const response = await fetch(WEB_APP_URL, {
                     method: 'POST',
-                    mode: 'no-cors', // Necesario para evitar bloqueos de CORS con Apps Script
+                    mode: 'no-cors', 
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(datos)
                 });
