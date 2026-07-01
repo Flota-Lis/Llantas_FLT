@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Seguimiento Desgaste de Llantas FLT - CD Girardota</title>
+    <title>Seguimiento Desgaste de Llantas FLT - Bavaria</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style>
         /* Paleta corporativa Bavaria */
@@ -22,100 +22,144 @@
 
     <header class="bg-bavaria-red text-white py-4 px-6 shadow-md border-b-4 border-bavaria-gold text-center">
         <h1 class="text-xl md:text-2xl font-bold tracking-wide uppercase">Seguimiento a Desgaste de Llantas FLT</h1>
-        <p class="text-xs md:text-sm font-medium tracking-wider opacity-90 mt-1">CD Girardota - Bavaria S.A.</p>
+        <p class="text-xs md:text-sm font-medium tracking-wider opacity-90 mt-1">Plataformas de Distribución - Bavaria S.A.</p>
     </header>
 
-    <main class="flex-grow p-4 md:p-6 max-w-lg mx-auto w-full">
-        <form id="formDesgaste" class="bg-white rounded-xl shadow-lg p-5 border border-gray-200 flex flex-col gap-5">
+    <main class="flex-grow p-2 sm:p-6 w-full max-w-2xl mx-auto">
+        <form id="formDesgaste" class="bg-white rounded-xl shadow-lg p-4 sm:p-5 border border-gray-200 flex flex-col gap-4 w-full">
             
-            <div class="text-center">
-                <label for="numeroMaquina" class="block text-gray-700 font-bold mb-2 text-sm uppercase tracking-wider">Número de Montacargas</label>
-                <select id="numeroMaquina" required class="w-full md:w-2/3 mx-auto block bg-gray-50 border-2 border-gray-300 rounded-lg py-2.5 px-4 text-center font-bold text-lg text-gray-800 focus:outline-none focus:border-red-600 transition-colors">
-                    <option value="" disabled selected>-- Seleccione Máquina --</option>
-                    <option value="561">561</option>
-                    <option value="562">562</option>
-                    <option value="567">567</option>
-                    <option value="603">603</option>
-                    <option value="681">681</option>
-                    <option value="761">761</option>
-                    <option value="832">832</option>
-                    <option value="838">838</option>
-                    <option value="855">855</option>
-                    <option value="860">860</option>
+            <div class="text-center w-full">
+                <label for="selectCD" class="block text-gray-700 font-bold mb-1.5 text-xs sm:text-sm uppercase tracking-wider">Centro de Distribución (CD)</label>
+                <select id="selectCD" required class="w-full sm:w-2/3 mx-auto block bg-gray-50 border-2 border-gray-300 rounded-lg py-2.5 px-4 text-center font-bold text-base sm:text-lg text-gray-800 focus:outline-none focus:border-red-600 transition-colors">
+                    <option value="" disabled selected>-- Seleccione CD --</option>
+                    <option value="GIRARDOTA">GIRARDOTA</option>
+                    <option value="CALI">CALI</option>
+                    <option value="TULUA">TULUA</option>
+                    <option value="PEREIRA">PEREIRA</option>
+                    <option value="FORJANDES">FORJANDES</option>
+                    <option value="ARENOSA">ARENOSA</option>
+                    <option value="SANTA MARTA">SANTA MARTA</option>
+                    <option value="SIBERIA">SIBERIA</option>
+                    <option value="SIBATE">SIBATE</option>
+                    <option value="AUTOSUR">AUTOSUR</option>
+                    <option value="CUCUTA">CUCUTA</option>
                 </select>
             </div>
 
-            <div class="text-center border-t border-gray-100 pt-2">
-                <label for="horometro" class="block text-gray-700 font-bold mb-2 text-sm uppercase tracking-wider">Horómetro de la Máquina</label>
-                <input type="number" id="horometro" min="0" step="1" placeholder="Ej: 12345" required class="w-full md:w-2/3 mx-auto block bg-gray-50 border-2 border-gray-300 rounded-lg py-2.5 px-4 text-center font-bold text-lg text-gray-800 focus:outline-none focus:border-red-600 transition-colors">
+            <div class="text-center w-full">
+                <label for="numeroMaquina" class="block text-gray-700 font-bold mb-1.5 text-xs sm:text-sm uppercase tracking-wider">Número de Montacargas</label>
+                <select id="numeroMaquina" required disabled class="w-full sm:w-2/3 mx-auto block bg-gray-100 border-2 border-gray-300 rounded-lg py-2.5 px-4 text-center font-bold text-base sm:text-lg text-gray-800 focus:outline-none focus:border-red-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
+                    <option value="" disabled selected>-- Primero elija un CD --</option>
+                </select>
             </div>
 
-            <div class="relative w-full aspect-[2/1] my-4 flex items-center justify-center bg-gray-50 rounded-lg p-2 border border-gray-200">
-                <img src="montacargas.png" alt="Montacargas superior" class="h-full object-contain max-w-xs opacity-90">
+            <div class="text-center border-t border-gray-100 pt-2 w-full">
+                <label for="horometro" class="block text-gray-700 font-bold mb-1.5 text-xs sm:text-sm uppercase tracking-wider">Horómetro de la Máquina</label>
+                <input type="number" id="horometro" min="0" step="1" placeholder="Ej: 12345" required class="w-full sm:w-2/3 mx-auto block bg-gray-50 border-2 border-gray-300 rounded-lg py-2.5 px-4 text-center font-bold text-base sm:text-lg text-gray-800 focus:outline-none focus:border-red-600 transition-colors">
+            </div>
 
-                <div class="absolute top-[10%] left-[25%] flex flex-col items-center">
-                    <span class="text-[10px] font-bold text-gray-600">P2</span>
-                    <input type="number" id="llantaDI" step="0.1" min="0" placeholder="mm" required class="w-16 bg-white border border-gray-400 rounded px-1.5 py-1 text-center font-bold text-sm focus:ring-2 focus:ring-red-500">
+            <div class="relative w-full aspect-[2/1] my-2 flex items-center justify-center bg-gray-50 rounded-lg p-1 border border-gray-200 overflow-hidden">
+                <img src="montacargas.png" alt="Montacargas superior" class="h-full w-auto object-contain opacity-90 max-w-[85%]">
+
+                <div class="absolute top-[8%] left-[28%] flex flex-col items-center">
+                    <span class="text-[9px] sm:text-[10px] font-bold text-gray-600 leading-tight">P2</span>
+                    <input type="number" id="llantaDI" step="0.1" min="0" placeholder="mm" required class="w-14 sm:w-16 bg-white border border-gray-400 rounded px-1 py-0.5 sm:py-1 text-center font-bold text-xs sm:text-sm focus:ring-2 focus:ring-red-500 shadow-sm">
                 </div>
 
-                <div class="absolute bottom-[10%] left-[25%] flex flex-col items-center">
-                    <input type="number" id="llantaDD" step="0.1" min="0" placeholder="mm" required class="w-16 bg-white border border-gray-400 rounded px-1.5 py-1 text-center font-bold text-sm focus:ring-2 focus:ring-red-500">
-                    <span class="text-[10px] font-bold text-gray-600">P1</span>
+                <div class="absolute bottom-[8%] left-[28%] flex flex-col items-center">
+                    <input type="number" id="llantaDD" step="0.1" min="0" placeholder="mm" required class="w-14 sm:w-16 bg-white border border-gray-400 rounded px-1 py-0.5 sm:py-1 text-center font-bold text-xs sm:text-sm focus:ring-2 focus:ring-red-500 shadow-sm">
+                    <span class="text-[9px] sm:text-[10px] font-bold text-gray-600 leading-tight">P1</span>
                 </div>
 
-                <div class="absolute top-[5%] right-[2%] flex flex-col items-center">
-                    <span class="text-[10px] font-bold text-gray-600">P4</span>
-                    <input type="number" id="llantaTI" step="0.1" min="0" placeholder="mm" required class="w-16 bg-white border border-gray-400 rounded px-1.5 py-1 text-center font-bold text-sm focus:ring-2 focus:ring-red-500">
+                <div class="absolute top-[8%] right-[22%] flex flex-col items-center">
+                    <span class="text-[9px] sm:text-[10px] font-bold text-gray-600 leading-tight">P4</span>
+                    <input type="number" id="llantaTI" step="0.1" min="0" placeholder="mm" required class="w-14 sm:w-16 bg-white border border-gray-400 rounded px-1 py-0.5 sm:py-1 text-center font-bold text-xs sm:text-sm focus:ring-2 focus:ring-red-500 shadow-sm">
                 </div>
 
-                <div class="absolute bottom-[5%] right-[2%] flex flex-col items-center">
-                    <input type="number" id="llantaTD" step="0.1" min="0" placeholder="mm" required class="w-16 bg-white border border-gray-400 rounded px-1.5 py-1 text-center font-bold text-sm focus:ring-2 focus:ring-red-500">
-                    <span class="text-[10px] font-bold text-gray-600">P3</span>
+                <div class="absolute bottom-[8%] right-[22%] flex flex-col items-center">
+                    <input type="number" id="llantaTD" step="0.1" min="0" placeholder="mm" required class="w-14 sm:w-16 bg-white border border-gray-400 rounded px-1 py-0.5 sm:py-1 text-center font-bold text-xs sm:text-sm focus:ring-2 focus:ring-red-500 shadow-sm">
+                    <span class="text-[9px] sm:text-[10px] font-bold text-gray-600 leading-tight">P3</span>
                 </div>
             </div>
 
-            <div class="border-t border-gray-200 pt-4">
-                <label class="block text-gray-700 font-bold mb-2 text-sm uppercase tracking-wider text-center">Evidencia Fotográfica</label>
-                <div class="flex flex-col items-center justify-center border-2 border-dashed border-gray-300 rounded-lg p-4 bg-gray-50 hover:bg-gray-100 transition-colors cursor-pointer relative">
+            <div class="border-t border-gray-200 pt-3">
+                <label class="block text-gray-700 font-bold mb-1.5 text-xs sm:text-sm uppercase tracking-wider text-center">Evidencia Fotográfica</label>
+                <div class="flex flex-col items-center justify-center border-2 border-dashed border-gray-300 rounded-lg p-3 bg-gray-50 hover:bg-gray-100 transition-colors cursor-pointer relative min-h-[90px]">
                     <input type="file" id="fotoInput" accept="image/*" capture="environment" class="absolute inset-0 opacity-0 cursor-pointer w-full h-full">
                     <div id="uploadPrompt" class="text-center pointer-events-none">
-                        <svg class="mx-auto h-10 w-10 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <svg class="mx-auto h-8 w-8 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
                         </svg>
-                        <p class="text-sm font-semibold text-gray-600 mt-2">Tomar Foto o Subir Archivo</p>
+                        <p class="text-xs font-semibold text-gray-600 mt-1">Tomar Foto o Subir Archivo</p>
                     </div>
                     <canvas id="canvasWatermark" class="hidden"></canvas>
-                    <img id="previewImage" class="hidden mt-2 max-h-48 w-full object-contain rounded border border-gray-300 shadow-inner">
+                    <img id="previewImage" class="hidden mt-1 max-h-40 w-full object-contain rounded border border-gray-300 shadow-inner">
                 </div>
             </div>
 
-            <button type="submit" id="btnGuardar" class="w-full bg-bavaria-red hover-bavaria-red text-white font-bold py-3 px-4 rounded-lg shadow-md transition-all duration-200 uppercase tracking-wide text-center mt-2 cursor-pointer">
+            <button type="submit" id="btnGuardar" class="w-full bg-bavaria-red hover-bavaria-red text-white font-bold py-3 px-4 rounded-lg shadow-md transition-all duration-200 uppercase tracking-wide text-center mt-1 text-sm sm:text-base cursor-pointer">
                 Guardar Registro
             </button>
         </form>
     </main>
 
     <footer class="bg-gray-800 text-gray-400 py-3 text-center text-xs border-t border-gray-700">
-        &copy; 2026 Bavaria S.A. - Planta de Distribución Girardota
+        &copy; 2026 Bavaria S.A. - Control Operaciones FLT
     </footer>
 
     <script>
+        // Mapeo completo de datos según la imagen provista
+        const maquinasPorCD = {
+            "GIRARDOTA": ["561", "562", "567", "603", "681", "761", "832", "838", "855", "860"],
+            "CALI": ["598", "604", "611", "780", "839", "842", "844", "850", "A13"],
+            "TULUA": ["MC1"],
+            "PEREIRA": ["629", "690", "786", "789"],
+            "FORJANDES": ["751", "818", "862", "863"],
+            "ARENOSA": ["MC7", "MC8", "688", "752"],
+            "SANTA MARTA": ["656", "657", "658", "808"],
+            "SIBERIA": ["632", "634", "635", "636", "638", "639", "649", "685", "877"],
+            "SIBATE": ["565", "610", "874", "875", "876"],
+            "AUTOSUR": ["364", "684", "747", "768", "769", "770", "773", "774"],
+            "CUCUTA": ["564", "640", "687", "748", "754", "759", "760"]
+        };
+
         const form = document.getElementById('formDesgaste');
+        const selectCD = document.getElementById('selectCD');
+        const numeroMaquina = document.getElementById('numeroMaquina');
+        const horometro = document.getElementById('horometro');
         const fotoInput = document.getElementById('fotoInput');
         const previewImage = document.getElementById('previewImage');
         const uploadPrompt = document.getElementById('uploadPrompt');
         const canvas = document.getElementById('canvasWatermark');
         const ctx = canvas.getContext('2d');
-        const numeroMaquina = document.getElementById('numeroMaquina');
-        const horometro = document.getElementById('horometro');
 
         let imagenConMarcaDeAguaBase64 = "";
 
         // URL DE TU SCRIPT DE GOOGLE
         const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzw3NRgRkUSLAMLhLIwX2pQk6bcdRvjyzHlpiXqF19AmL_gLBku0rjXtMAtzBUZcg/exec";
 
-        // Procesamiento de la foto y adición de marca de agua
+        // Lógica de cambio de CD
+        selectCD.addEventListener('change', function() {
+            const cdSeleccionado = this.value;
+            numeroMaquina.innerHTML = '<option value="" disabled selected>-- Seleccione Máquina --</option>';
+            
+            if (maquinasPorCD[cdSeleccionado]) {
+                maquinasPorCD[cdSeleccionado].forEach(maquina => {
+                    const opt = document.createElement('option');
+                    opt.value = maquina;
+                    opt.textContent = maquina;
+                    numeroMaquina.appendChild(opt);
+                });
+                numeroMaquina.disabled = false;
+                numeroMaquina.classList.remove('bg-gray-100');
+                numeroMaquina.classList.add('bg-gray-50');
+            } else {
+                numeroMaquina.disabled = true;
+            }
+        });
+
+        // Procesamiento de foto con marca de agua dinámica por CD
         fotoInput.addEventListener('change', function(e) {
             const file = e.target.files[0];
             if (!file) return;
@@ -128,9 +172,10 @@
                     canvas.height = img.height;
                     ctx.drawImage(img, 0, 0);
 
+                    const cd = selectCD.value || "S/CD";
                     const maq = numeroMaquina.value || "S/N";
                     const fecha = new Date().toLocaleString('es-CO', { timeZone: 'America/Bogota' });
-                    const textoMarca = `CD GIRARDOTA - FLT: ${maq} - ${fecha}`;
+                    const textoMarca = `CD ${cd} - FLT: ${maq} - ${fecha}`;
 
                     const fontSize = Math.max(20, Math.floor(img.width * 0.03));
                     ctx.font = `bold ${fontSize}px Arial`;
@@ -152,7 +197,7 @@
             reader.readAsDataURL(file);
         });
 
-        // Evento al presionar Guardar
+        // Enviar datos
         form.addEventListener('submit', async function(e) {
             e.preventDefault();
             
@@ -161,8 +206,9 @@
             btn.textContent = "Enviando...";
 
             const datos = {
+                cd: selectCD.value,
                 maquina: numeroMaquina.value,
-                horometro: horometro.value, // Envío del nuevo dato numérico
+                horometro: horometro.value,
                 llantaDI: document.getElementById('llantaDI').value,
                 llantaDD: document.getElementById('llantaDD').value,
                 llantaTI: document.getElementById('llantaTI').value,
@@ -171,12 +217,6 @@
             };
 
             try {
-                if (WEB_APP_URL.includes("AQUÍ_VA_TU_URL")) {
-                    alert(`[Simulación] Registro exitoso para máquina ${datos.maquina} (Horómetro: ${datos.horometro}).`);
-                    limpiarFormulario();
-                    return;
-                }
-
                 const response = await fetch(WEB_APP_URL, {
                     method: 'POST',
                     mode: 'no-cors', 
@@ -184,7 +224,7 @@
                     body: JSON.stringify(datos)
                 });
 
-                alert(`¡Registro guardado correctamente para el montacargas ${datos.maquina}!`);
+                alert(`¡Registro guardado correctamente para el montacargas ${datos.maquina} del CD ${datos.cd}!`);
                 limpiarFormulario();
 
             } catch (error) {
@@ -198,6 +238,10 @@
 
         function limpiarFormulario() {
             form.reset();
+            numeroMaquina.innerHTML = '<option value="" disabled selected>-- Primero elija un CD --</option>';
+            numeroMaquina.disabled = true;
+            numeroMaquina.classList.remove('bg-gray-50');
+            numeroMaquina.classList.add('bg-gray-100');
             previewImage.classList.add('hidden');
             previewImage.src = "";
             uploadPrompt.classList.remove('hidden');
