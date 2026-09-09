@@ -3,29 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Seguimiento Desgaste de Llantas FLT - Bavaria</title>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <title>Sistema de Llantas FLT - Bavaria</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        /* Paleta corporativa Bavaria */
-        :root {
-            --bavaria-red: #C8102E;
-            --bavaria-dark-red: #9B0F22;
-            --bavaria-gold: #FFC72C;
-        }
+        :root { --bavaria-red: #C8102E; --bavaria-dark-red: #9B0F22; --bavaria-gold: #FFC72C; }
         .bg-bavaria-red { background-color: var(--bavaria-red); }
         .text-bavaria-red { color: var(--bavaria-red); }
         .hover-bavaria-red:hover { background-color: var(--bavaria-dark-red); }
         .border-bavaria-gold { border-color: var(--bavaria-gold); }
+        .vista-oculta { display: none !important; }
+        
+        /* Ajustes de compactación para el dashboard */
+        canvas { max-height: 100% !important; }
+        table { font-size: 0.75rem; }
+        th, td { padding: 0.5rem !important; }
     </style>
 </head>
-<body class="bg-gray-100 font-sans min-h-screen flex flex-col justify-between">
+<body class="bg-gray-100 font-sans min-h-screen flex flex-col">
 
-    <header class="bg-bavaria-red text-white py-4 px-6 shadow-md border-b-4 border-bavaria-gold text-center">
-        <h1 class="text-xl md:text-2xl font-bold tracking-wide uppercase">Seguimiento a Desgaste de Llantas FLT</h1>
-        <p class="text-xs md:text-sm font-medium tracking-wider opacity-90 mt-1">Plataformas de Distribución - Bavaria S.A.</p>
+    <!-- HEADER UNIFICADO CON BOTONES DE NAVEGACIÓN -->
+    <header class="bg-bavaria-red text-white shadow-md border-b-4 border-bavaria-gold sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex flex-col md:flex-row justify-between items-center gap-3">
+            <div class="text-center md:text-left">
+                <h1 class="text-lg md:text-xl font-bold tracking-wide uppercase">Sistema de Llantas FLT</h1>
+                <p class="text-xs opacity-90">Plataformas de Distribución - Bavaria S.A.</p>
+            </div>
+            <div class="flex gap-2 bg-black/20 p-1 rounded-lg">
+                <button onclick="cambiarVista('formulario')" id="btnForm" class="px-4 py-2 rounded-md text-sm font-bold transition bg-white text-bavaria-red shadow">
+                    📝 Registrar
+                </button>
+                <button onclick="cambiarVista('dashboard')" id="btnDash" class="px-4 py-2 rounded-md text-sm font-bold transition text-white hover:bg-white/20">
+                    📊 Dashboard
+                </button>
+            </div>
+        </div>
     </header>
 
-    <main class="flex-grow p-2 sm:p-6 w-full max-w-2xl mx-auto">
+    <!-- ========================================== -->
+    <!-- VISTA 1: FORMULARIO DE REGISTRO            -->
+    <!-- ========================================== -->
+    <main id="vistaFormulario" class="flex-grow p-4 sm:p-6 w-full max-w-2xl mx-auto">
         <form id="formDesgaste" class="bg-white rounded-xl shadow-lg p-4 sm:p-5 border border-gray-200 flex flex-col gap-4 w-full">
             
             <div class="text-center w-full">
@@ -105,25 +123,143 @@
         </form>
     </main>
 
-    <footer class="bg-gray-800 text-gray-400 py-3 text-center text-xs border-t border-gray-700">
+    <!-- ========================================== -->
+    <!-- VISTA 2: DASHBOARD DE ANÁLISIS (COMPACTO)  -->
+    <!-- ========================================== -->
+    <main id="vistaDashboard" class="vista-oculta flex-grow p-2 sm:p-4 w-full max-w-6xl mx-auto space-y-4">
+        
+        <div class="bg-white p-3 rounded-xl shadow grid grid-cols-1 md:grid-cols-3 gap-3 items-end">
+            <div>
+                <label class="block text-xs font-bold text-gray-600 mb-1 uppercase">Centro de Distribución</label>
+                <select id="filtroCD" class="w-full border-2 border-gray-200 rounded-lg p-2 text-sm font-semibold focus:border-red-600">
+                    <option value="">Todos los CDs</option>
+                </select>
+            </div>
+            <div>
+                <label class="block text-xs font-bold text-gray-600 mb-1 uppercase">Montacargas</label>
+                <select id="filtroMaquina" disabled class="w-full border-2 border-gray-200 rounded-lg p-2 text-sm font-semibold focus:border-red-600 disabled:bg-gray-100">
+                    <option value="">Todas las máquinas</option>
+                </select>
+            </div>
+            <button onclick="generarAnalisis()" class="bg-bavaria-red text-white font-bold py-2 px-6 rounded-lg shadow hover:bg-red-800 transition text-sm uppercase">
+                📊 Actualizar
+            </button>
+        </div>
+
+        <div id="loadingDash" class="text-center py-12">
+            <div class="inline-block animate-spin rounded-full h-10 w-10 border-4 border-bavaria-red border-t-transparent"></div>
+            <p class="mt-3 text-gray-600 font-semibold">Cargando datos de Google Sheets...</p>
+        </div>
+
+        <div id="dashboardContent" class="hidden space-y-4">
+            <!-- KPIS COMPACTOS -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                <div class="bg-white p-3 rounded-xl shadow border-l-4 border-bavaria-red">
+                    <p class="text-[10px] font-bold text-gray-500 uppercase">Registros</p>
+                    <p id="kpiRegistros" class="text-2xl font-bold text-gray-800 mt-1">0</p>
+                </div>
+                <div class="bg-white p-3 rounded-xl shadow border-l-4 border-bavaria-gold">
+                    <p class="text-[10px] font-bold text-gray-500 uppercase">Montacargas</p>
+                    <p id="kpiMaquinas" class="text-2xl font-bold text-gray-800 mt-1">0</p>
+                </div>
+                <div class="bg-white p-3 rounded-xl shadow border-l-4 border-blue-600">
+                    <p class="text-[10px] font-bold text-gray-500 uppercase">Desgaste/Mes</p>
+                    <p id="kpiDesgaste" class="text-2xl font-bold text-gray-800 mt-1">0.0 mm</p>
+                </div>
+                <div class="bg-white p-3 rounded-xl shadow border-l-4 border-orange-600">
+                    <p class="text-[10px] font-bold text-gray-500 uppercase">Alertas</p>
+                    <p id="kpiAlertas" class="text-2xl font-bold text-red-600 mt-1">0</p>
+                </div>
+            </div>
+
+            <!-- GRÁFICAS COMPACTAS -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                <div class="bg-white p-3 rounded-xl shadow">
+                    <h3 class="font-bold text-gray-800 mb-2 text-sm uppercase">📉 Profundidad Promedio Mensual (mm)</h3>
+                    <div class="relative h-[200px]">
+                        <canvas id="chartProfundidad"></canvas>
+                    </div>
+                </div>
+                <div class="bg-white p-3 rounded-xl shadow">
+                    <h3 class="font-bold text-gray-800 mb-2 text-sm uppercase">🔥 Desgaste Mensual Acumulado (mm)</h3>
+                    <div class="relative h-[200px]">
+                        <canvas id="chartDesgaste"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TABLA DE ALERTAS -->
+            <div class="bg-white p-3 rounded-xl shadow">
+                <h3 class="font-bold text-gray-800 mb-2 text-sm uppercase">🚨 Montacargas con Desgaste Acelerado (>3.5 mm/mes)</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left">
+                        <thead class="bg-gray-100 text-gray-700 uppercase text-xs">
+                            <tr>
+                                <th class="p-3">CD</th>
+                                <th class="p-3">Máquina</th>
+                                <th class="p-3 text-right">Horómetro</th>
+                                <th class="p-3 text-right">Profundidad Actual</th>
+                                <th class="p-3 text-right">Desgaste/Mes</th>
+                                <th class="p-3 text-center">Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablaAlertas" class="divide-y divide-gray-100"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- PREDICTIVO -->
+            <div class="bg-gradient-to-r from-red-50 to-yellow-50 p-3 rounded-xl shadow border-l-4 border-bavaria-red">
+                <h3 class="font-bold text-gray-800 mb-2 text-sm uppercase">🔮 Predicción de Cambio de Llantas</h3>
+                <ul id="listaPrediccion" class="space-y-1.5 text-sm text-gray-700"></ul>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-gray-800 text-gray-400 py-3 text-center text-xs border-t border-gray-700 mt-auto">
         &copy; 2026 Anderson Alzate. - Desarrollador de Software
     </footer>
 
     <script>
-        // Mapeo completo de datos según la imagen provista
+        // ==========================================
+        // 1. LÓGICA DE NAVEGACIÓN
+        // ==========================================
+        function cambiarVista(vista) {
+            const formView = document.getElementById('vistaFormulario');
+            const dashView = document.getElementById('vistaDashboard');
+            const btnForm = document.getElementById('btnForm');
+            const btnDash = document.getElementById('btnDash');
+
+            if (vista === 'formulario') {
+                formView.classList.remove('vista-oculta');
+                dashView.classList.add('vista-oculta');
+                btnForm.classList.add('bg-white', 'text-bavaria-red', 'shadow');
+                btnForm.classList.remove('text-white', 'hover:bg-white/20');
+                btnDash.classList.remove('bg-white', 'text-bavaria-red', 'shadow');
+                btnDash.classList.add('text-white', 'hover:bg-white/20');
+            } else {
+                formView.classList.add('vista-oculta');
+                dashView.classList.remove('vista-oculta');
+                btnDash.classList.add('bg-white', 'text-bavaria-red', 'shadow');
+                btnDash.classList.remove('text-white', 'hover:bg-white/20');
+                btnForm.classList.remove('bg-white', 'text-bavaria-red', 'shadow');
+                btnForm.classList.add('text-white', 'hover:bg-white/20');
+                
+                if (datosGlobales.length === 0) iniciarDashboard();
+            }
+        }
+
+        // ==========================================
+        // 2. LÓGICA DEL FORMULARIO
+        // ==========================================
         const maquinasPorCD = {
             "GIRARDOTA": ["561", "562", "567", "603", "681", "761", "832", "838", "855", "860"],
             "CALI": ["598", "604", "611", "780", "839", "842", "844", "850", "A13"],
-            "TULUA": ["MC1"],
-            "PEREIRA": ["629", "690", "786", "789"],
-            "FORJANDES": ["751", "818", "862", "863"],
-            "ARENOSA": ["MC7", "MC8", "688", "752"],
-            "SANTA MARTA": ["656", "657", "658", "808"],
-            "SIBERIA": ["632", "634", "635", "636", "638", "639", "649", "685", "877"],
-            "SIBATE": ["565", "610", "874", "875", "876"],
-            "AUTOSUR": ["364", "684", "747", "768", "769", "770", "773", "774"],
-            "CUCUTA": ["564", "640", "687", "748", "754", "759", "760"],
-            "POPAYAN": ["196", "599"]
+            "TULUA": ["MC1"], "PEREIRA": ["629", "690", "786", "789"],
+            "FORJANDES": ["751", "818", "862", "863"], "ARENOSA": ["MC7", "MC8", "688", "752"],
+            "SANTA MARTA": ["656", "657", "658", "808"], "SIBERIA": ["632", "634", "635", "636", "638", "639", "649", "685", "877"],
+            "SIBATE": ["565", "610", "874", "875", "876"], "AUTOSUR": ["364", "684", "747", "768", "769", "770", "773", "774"],
+            "CUCUTA": ["564", "640", "687", "748", "754", "759", "760"], "POPAYAN": ["196", "599"]
         };
 
         const form = document.getElementById('formDesgaste');
@@ -135,60 +271,42 @@
         const uploadPrompt = document.getElementById('uploadPrompt');
         const canvas = document.getElementById('canvasWatermark');
         const ctx = canvas.getContext('2d');
-
         let imagenConMarcaDeAguaBase64 = "";
-
-        // URL DE TU SCRIPT DE GOOGLE
         const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzw3NRgRkUSLAMLhLIwX2pQk6bcdRvjyzHlpiXqF19AmL_gLBku0rjXtMAtzBUZcg/exec";
 
-        // Lógica de cambio de CD
         selectCD.addEventListener('change', function() {
-            const cdSeleccionado = this.value;
+            const cd = this.value;
             numeroMaquina.innerHTML = '<option value="" disabled selected>-- Seleccione Máquina --</option>';
-            
-            if (maquinasPorCD[cdSeleccionado]) {
-                maquinasPorCD[cdSeleccionado].forEach(maquina => {
+            if (maquinasPorCD[cd]) {
+                maquinasPorCD[cd].forEach(m => {
                     const opt = document.createElement('option');
-                    opt.value = maquina;
-                    opt.textContent = maquina;
+                    opt.value = m; opt.textContent = m;
                     numeroMaquina.appendChild(opt);
                 });
                 numeroMaquina.disabled = false;
-                numeroMaquina.classList.remove('bg-gray-100');
-                numeroMaquina.classList.add('bg-gray-50');
-            } else {
-                numeroMaquina.disabled = true;
-            }
+                numeroMaquina.classList.replace('bg-gray-100', 'bg-gray-50');
+            } else { numeroMaquina.disabled = true; }
         });
 
-        // Procesamiento de foto con marca de agua dinámica por CD
         fotoInput.addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            if (!file) return;
-
+            const file = e.target.files[0]; if (!file) return;
             const reader = new FileReader();
             reader.onload = function(event) {
                 const img = new Image();
                 img.onload = function() {
-                    canvas.width = img.width;
-                    canvas.height = img.height;
+                    canvas.width = img.width; canvas.height = img.height;
                     ctx.drawImage(img, 0, 0);
-
                     const cd = selectCD.value || "S/CD";
                     const maq = numeroMaquina.value || "S/N";
                     const fecha = new Date().toLocaleString('es-CO', { timeZone: 'America/Bogota' });
-                    const textoMarca = `CD ${cd} - FLT: ${maq} - ${fecha}`;
-
+                    const texto = `CD ${cd} - FLT: ${maq} - ${fecha}`;
                     const fontSize = Math.max(20, Math.floor(img.width * 0.03));
                     ctx.font = `bold ${fontSize}px Arial`;
-                    
                     ctx.fillStyle = "rgba(0, 0, 0, 0.6)";
-                    const textWidth = ctx.measureText(textoMarca).width;
+                    const textWidth = ctx.measureText(texto).width;
                     ctx.fillRect(20, img.height - fontSize - 30, textWidth + 20, fontSize + 15);
-
                     ctx.fillStyle = "#FFC72C";
-                    ctx.fillText(textoMarca, 30, img.height - 30);
-
+                    ctx.fillText(texto, 30, img.height - 30);
                     imagenConMarcaDeAguaBase64 = canvas.toDataURL('image/jpeg', 0.8);
                     previewImage.src = imagenConMarcaDeAguaBase64;
                     previewImage.classList.remove('hidden');
@@ -199,55 +317,244 @@
             reader.readAsDataURL(file);
         });
 
-        // Enviar datos
         form.addEventListener('submit', async function(e) {
             e.preventDefault();
-            
             const btn = document.getElementById('btnGuardar');
-            btn.disabled = true;
-            btn.textContent = "Enviando...";
-
+            btn.disabled = true; btn.textContent = "Enviando...";
             const datos = {
-                cd: selectCD.value,
-                maquina: numeroMaquina.value,
-                horometro: horometro.value,
-                llantaDI: document.getElementById('llantaDI').value,
-                llantaDD: document.getElementById('llantaDD').value,
-                llantaTI: document.getElementById('llantaTI').value,
-                llantaTD: document.getElementById('llantaTD').value,
+                cd: selectCD.value, maquina: numeroMaquina.value, horometro: horometro.value,
+                llantaDI: document.getElementById('llantaDI').value, llantaDD: document.getElementById('llantaDD').value,
+                llantaTI: document.getElementById('llantaTI').value, llantaTD: document.getElementById('llantaTD').value,
                 foto: imagenConMarcaDeAguaBase64 
             };
-
             try {
-                const response = await fetch(WEB_APP_URL, {
-                    method: 'POST',
-                    mode: 'no-cors', 
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(datos)
-                });
-
+                await fetch(WEB_APP_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(datos) });
                 alert(`¡Registro guardado correctamente para el montacargas ${datos.maquina} del CD ${datos.cd}!`);
-                limpiarFormulario();
-
+                form.reset();
+                numeroMaquina.innerHTML = '<option value="" disabled selected>-- Primero elija un CD --</option>';
+                numeroMaquina.disabled = true; numeroMaquina.classList.replace('bg-gray-50', 'bg-gray-100');
+                previewImage.classList.add('hidden'); previewImage.src = "";
+                uploadPrompt.classList.remove('hidden'); imagenConMarcaDeAguaBase64 = "";
             } catch (error) {
-                console.error("Error al enviar:", error);
-                alert("Hubo un problema al guardar el registro. Inténtalo de nuevo.");
+                alert("Hubo un problema al guardar el registro.");
             } finally {
-                btn.disabled = false;
-                btn.textContent = "Guardar Registro";
+                btn.disabled = false; btn.textContent = "Guardar Registro";
             }
         });
 
-        function limpiarFormulario() {
-            form.reset();
-            numeroMaquina.innerHTML = '<option value="" disabled selected>-- Primero elija un CD --</option>';
-            numeroMaquina.disabled = true;
-            numeroMaquina.classList.remove('bg-gray-50');
-            numeroMaquina.classList.add('bg-gray-100');
-            previewImage.classList.add('hidden');
-            previewImage.src = "";
-            uploadPrompt.classList.remove('hidden');
-            imagenConMarcaDeAguaBase64 = "";
+        // ==========================================
+        // 3. LÓGICA DEL DASHBOARD
+        // ==========================================
+        let datosGlobales = [];
+        let charts = {};
+
+        async function iniciarDashboard() {
+            try {
+                const res = await fetch(`${WEB_APP_URL}?action=get`);
+                const data = await res.json();
+                if (!data.success) throw new Error(data.message);
+                datosGlobales = data.rows || [];
+                if (datosGlobales.length === 0) {
+                    document.getElementById('loadingDash').innerHTML = '<p class="text-red-600 font-bold">No hay datos registrados aún.</p>';
+                    return;
+                }
+                const cds = [...new Set(datosGlobales.map(r => r.cd))].sort();
+                const selectFilterCD = document.getElementById('filtroCD');
+                cds.forEach(cd => {
+                    const opt = document.createElement('option');
+                    opt.value = cd; opt.textContent = cd;
+                    selectFilterCD.appendChild(opt);
+                });
+                document.getElementById('loadingDash').classList.add('hidden');
+                document.getElementById('dashboardContent').classList.remove('hidden');
+                generarAnalisis();
+            } catch (err) {
+                document.getElementById('loadingDash').innerHTML = `<p class="text-red-600 font-bold">Error: ${err.message}</p>`;
+            }
+        }
+
+        document.getElementById('filtroCD').addEventListener('change', function() {
+            const cd = this.value;
+            const selectM = document.getElementById('filtroMaquina');
+            selectM.innerHTML = '<option value="">Todas las máquinas</option>';
+            if (cd) {
+                const maqs = [...new Set(datosGlobales.filter(r => r.cd === cd).map(r => r.maquina))].sort();
+                maqs.forEach(m => {
+                    const opt = document.createElement('option');
+                    opt.value = m; opt.textContent = m;
+                    selectM.appendChild(opt);
+                });
+                selectM.disabled = false;
+            } else { selectM.disabled = true; }
+        });
+
+        function generarAnalisis() {
+            const cd = document.getElementById('filtroCD').value;
+            const maq = document.getElementById('filtroMaquina').value;
+            let datos = datosGlobales;
+            if (cd) datos = datos.filter(r => r.cd === cd);
+            if (maq) datos = datos.filter(r => r.maquina === maq);
+            if (datos.length === 0) { alert("No hay datos para estos filtros"); return; }
+            actualizarKPIs(datos); graficarProfundidad(datos); graficarDesgasteMensual(datos);
+            generarTablaAlertas(datos); generarPrediccion(datos);
+        }
+
+        function promedioLlantas(r) {
+            return (Number(r.llantaDI||0) + Number(r.llantaDD||0) + Number(r.llantaTI||0) + Number(r.llantaTD||0)) / 4;
+        }
+
+        function agruparPorMaquina(datos) {
+            const grupos = {};
+            datos.forEach(r => {
+                const key = `${r.cd}|${r.maquina}`;
+                if (!grupos[key]) grupos[key] = [];
+                grupos[key].push(r);
+            });
+            return grupos;
+        }
+
+        function agruparPorMes(datos) {
+            const grupos = {};
+            datos.forEach(r => {
+                const fecha = new Date(r.fecha);
+                const mes = `${fecha.getFullYear()}-${String(fecha.getMonth() + 1).padStart(2, '0')}`;
+                if (!grupos[mes]) grupos[mes] = [];
+                grupos[mes].push(r);
+            });
+            return Object.keys(grupos).sort().map(mes => ({
+                mes, promedio: grupos[mes].reduce((sum, r) => sum + promedioLlantas(r), 0) / grupos[mes].length
+            }));
+        }
+
+        function actualizarKPIs(datos) {
+            document.getElementById('kpiRegistros').textContent = datos.length;
+            const maqsUnicas = new Set(datos.map(r => `${r.cd}-${r.maquina}`));
+            document.getElementById('kpiMaquinas').textContent = maqsUnicas.size;
+            const grupos = agruparPorMaquina(datos);
+            let desgasteTotal = 0, count = 0, alertas = 0;
+            Object.values(grupos).forEach(arr => {
+                if (arr.length >= 2) {
+                    const desg = promedioLlantas(arr[0]) - promedioLlantas(arr[arr.length - 1]);
+                    desgasteTotal += desg; count++;
+                    if (desg > 3.5) alertas++;
+                }
+            });
+            document.getElementById('kpiDesgaste').textContent = count ? (desgasteTotal / count).toFixed(1) + ' mm' : '0.0 mm';
+            document.getElementById('kpiAlertas').textContent = alertas;
+        }
+
+        function graficarProfundidad(datos) {
+            const porMes = agruparPorMes(datos);
+            if (charts.prof) charts.prof.destroy();
+            charts.prof = new Chart(document.getElementById('chartProfundidad'), {
+                type: 'line',
+                data: {
+                    labels: porMes.map(p => p.mes),
+                    datasets: [{
+                        label: 'Profundidad (mm)',
+                        data: porMes.map(p => p.promedio.toFixed(1)),
+                        borderColor: '#C8102E',
+                        backgroundColor: 'rgba(200, 16, 46, 0.1)',
+                        fill: true,
+                        tension: 0.3,
+                        pointRadius: 3,
+                        pointHoverRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false }, tooltip: { enabled: true } },
+                    scales: { 
+                        y: { beginAtZero: false, ticks: { font: { size: 10 } } },
+                        x: { ticks: { font: { size: 10 } } }
+                    }
+                }
+            });
+        }
+
+        function graficarDesgasteMensual(datos) {
+            const porMes = agruparPorMes(datos);
+            const desgastes = [];
+            for (let i = 1; i < porMes.length; i++) {
+                const desg = Math.max(0, porMes[i-1].promedio - porMes[i].promedio);
+                desgastes.push({ mes: porMes[i].mes, valor: desg.toFixed(1) });
+            }
+            if (charts.desg) charts.desg.destroy();
+            charts.desg = new Chart(document.getElementById('chartDesgaste'), {
+                type: 'bar',
+                data: {
+                    labels: desgastes.map(d => d.mes),
+                    datasets: [{
+                        label: 'Desgaste (mm)',
+                        data: desgastes.map(d => d.valor),
+                        backgroundColor: '#FFC72C',
+                        borderColor: '#C8102E',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: { beginAtZero: true, ticks: { font: { size: 10 } } },
+                        x: { ticks: { font: { size: 10 } } }
+                    }
+                }
+            });
+        }
+
+        function generarTablaAlertas(datos) {
+            const grupos = agruparPorMaquina(datos);
+            const tbody = document.getElementById('tablaAlertas');
+            tbody.innerHTML = '';
+            let filas = [];
+            Object.entries(grupos).forEach(([key, arr]) => {
+                if (arr.length < 2) return;
+                const desg = promedioLlantas(arr[0]) - promedioLlantas(arr[arr.length - 1]);
+                if (desg > 3.0) {
+                    const [cd, maq] = key.split('|');
+                    filas.push({ cd, maq, horometro: arr[arr.length - 1].horometro, actual: promedioLlantas(arr[arr.length - 1]), desg });
+                }
+            });
+            filas.sort((a, b) => b.desg - a.desg).slice(0, 10).forEach(f => {
+                const estado = f.desg > 5 ? '<span class="bg-red-100 text-red-800 px-2 py-1 rounded text-xs font-bold">CRÍTICO</span>' : 
+                               f.desg > 3.5 ? '<span class="bg-orange-100 text-orange-800 px-2 py-1 rounded text-xs font-bold">ALTO</span>' : 
+                               '<span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded text-xs font-bold">MODERADO</span>';
+                tbody.innerHTML += `<tr class="hover:bg-gray-50">
+                    <td class="p-3 font-semibold">${f.cd}</td><td class="p-3 font-bold text-bavaria-red">${f.maq}</td>
+                    <td class="p-3 text-right">${f.horometro}</td><td class="p-3 text-right">${f.actual.toFixed(1)} mm</td>
+                    <td class="p-3 text-right font-bold">${f.desg.toFixed(2)} mm</td><td class="p-3 text-center">${estado}</td>
+                </tr>`;
+            });
+            if (filas.length === 0) tbody.innerHTML = '<tr><td colspan="6" class="p-4 text-center text-gray-500">✅ No hay máquinas con desgaste acelerado</td></tr>';
+        }
+
+        function generarPrediccion(datos) {
+            const grupos = agruparPorMaquina(datos);
+            const ul = document.getElementById('listaPrediccion');
+            ul.innerHTML = '';
+            let predicciones = [];
+            const LIMITE_CAMBIO = 25; 
+            Object.entries(grupos).forEach(([key, arr]) => {
+                if (arr.length < 2) return;
+                const diasEntre = (new Date(arr[arr.length - 1].fecha) - new Date(arr[0].fecha)) / (1000 * 60 * 60 * 24);
+                if (diasEntre <= 0) return;
+                const desgDiario = (promedioLlantas(arr[0]) - promedioLlantas(arr[arr.length - 1])) / diasEntre;
+                const actual = promedioLlantas(arr[arr.length - 1]);
+                if (desgDiario > 0 && actual > LIMITE_CAMBIO) {
+                    const diasRestantes = (actual - LIMITE_CAMBIO) / desgDiario;
+                    const fechaEst = new Date();
+                    fechaEst.setDate(fechaEst.getDate() + diasRestantes);
+                    const [cd, maq] = key.split('|');
+                    predicciones.push({ cd, maq, dias: Math.ceil(diasRestantes), fecha: fechaEst.toLocaleDateString('es-CO') });
+                }
+            });
+            predicciones.sort((a, b) => a.dias - b.dias).slice(0, 5).forEach(p => {
+                ul.innerHTML += `<li>🔸 <strong>${p.cd} - FLT ${p.maq}</strong>: Cambio estimado en <strong class="text-bavaria-red">${p.dias} días</strong> (${p.fecha}).</li>`;
+            });
+            if (predicciones.length === 0) ul.innerHTML = '<li>✅ Todas las llantas están dentro de los parámetros normales de vida útil.</li>';
         }
     </script>
 </body>
