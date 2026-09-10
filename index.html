@@ -13,16 +13,16 @@
         .hover-bavaria-red:hover { background-color: var(--bavaria-dark-red); }
         .border-bavaria-gold { border-color: var(--bavaria-gold); }
         .vista-oculta { display: none !important; }
-        
-        /* Ajustes de compactación para el dashboard */
         canvas { max-height: 100% !important; }
         table { font-size: 0.75rem; }
         th, td { padding: 0.5rem !important; }
+        .tab-activa { background-color: var(--bavaria-red); color: white; }
+        .tab-inactiva { background-color: #f3f4f6; color: #374151; }
+        .tab-inactiva:hover { background-color: #e5e7eb; }
     </style>
 </head>
 <body class="bg-gray-100 font-sans min-h-screen flex flex-col">
 
-    <!-- HEADER UNIFICADO CON BOTONES DE NAVEGACIÓN -->
     <header class="bg-bavaria-red text-white shadow-md border-b-4 border-bavaria-gold sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 py-3 flex flex-col md:flex-row justify-between items-center gap-3">
             <div class="text-center md:text-left">
@@ -30,22 +30,14 @@
                 <p class="text-xs opacity-90">Plataformas de Distribución - Bavaria S.A.</p>
             </div>
             <div class="flex gap-2 bg-black/20 p-1 rounded-lg">
-                <button onclick="cambiarVista('formulario')" id="btnForm" class="px-4 py-2 rounded-md text-sm font-bold transition bg-white text-bavaria-red shadow">
-                    📝 Registrar
-                </button>
-                <button onclick="cambiarVista('dashboard')" id="btnDash" class="px-4 py-2 rounded-md text-sm font-bold transition text-white hover:bg-white/20">
-                    📊 Dashboard
-                </button>
+                <button onclick="cambiarVista('formulario')" id="btnForm" class="px-4 py-2 rounded-md text-sm font-bold transition bg-white text-bavaria-red shadow">📝 Registrar</button>
+                <button onclick="cambiarVista('dashboard')" id="btnDash" class="px-4 py-2 rounded-md text-sm font-bold transition text-white hover:bg-white/20">📊 Dashboard</button>
             </div>
         </div>
     </header>
 
-    <!-- ========================================== -->
-    <!-- VISTA 1: FORMULARIO DE REGISTRO            -->
-    <!-- ========================================== -->
     <main id="vistaFormulario" class="flex-grow p-4 sm:p-6 w-full max-w-2xl mx-auto">
         <form id="formDesgaste" class="bg-white rounded-xl shadow-lg p-4 sm:p-5 border border-gray-200 flex flex-col gap-4 w-full">
-            
             <div class="text-center w-full">
                 <label for="selectCD" class="block text-gray-700 font-bold mb-1.5 text-xs sm:text-sm uppercase tracking-wider">Centro de Distribución (CD)</label>
                 <select id="selectCD" required class="w-full sm:w-2/3 mx-auto block bg-gray-50 border-2 border-gray-300 rounded-lg py-2.5 px-4 text-center font-bold text-base sm:text-lg text-gray-800 focus:outline-none focus:border-red-600 transition-colors">
@@ -64,43 +56,35 @@
                     <option value="POPAYAN">POPAYAN</option>
                 </select>
             </div>
-
             <div class="text-center w-full">
                 <label for="numeroMaquina" class="block text-gray-700 font-bold mb-1.5 text-xs sm:text-sm uppercase tracking-wider">Número de Montacargas</label>
                 <select id="numeroMaquina" required disabled class="w-full sm:w-2/3 mx-auto block bg-gray-100 border-2 border-gray-300 rounded-lg py-2.5 px-4 text-center font-bold text-base sm:text-lg text-gray-800 focus:outline-none focus:border-red-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
                     <option value="" disabled selected>-- Primero elija un CD --</option>
                 </select>
             </div>
-
             <div class="text-center border-t border-gray-100 pt-2 w-full">
                 <label for="horometro" class="block text-gray-700 font-bold mb-1.5 text-xs sm:text-sm uppercase tracking-wider">Horómetro de la Máquina</label>
                 <input type="number" id="horometro" min="0" step="1" placeholder="Ej: 12345" required class="w-full sm:w-2/3 mx-auto block bg-gray-50 border-2 border-gray-300 rounded-lg py-2.5 px-4 text-center font-bold text-base sm:text-lg text-gray-800 focus:outline-none focus:border-red-600 transition-colors">
             </div>
-
             <div class="relative w-full aspect-[2/1] my-2 flex items-center justify-center bg-gray-50 rounded-lg p-1 border border-gray-200 overflow-hidden">
                 <img src="montacargas.png" alt="Montacargas superior" class="h-full w-auto object-contain opacity-90 max-w-[85%]">
-
                 <div class="absolute top-[8%] left-[28%] flex flex-col items-center">
                     <span class="text-[9px] sm:text-[10px] font-bold text-gray-600 leading-tight">P2</span>
                     <input type="number" id="llantaDI" step="0.1" min="0" placeholder="mm" required class="w-14 sm:w-16 bg-white border border-gray-400 rounded px-1 py-0.5 sm:py-1 text-center font-bold text-xs sm:text-sm focus:ring-2 focus:ring-red-500 shadow-sm">
                 </div>
-
                 <div class="absolute bottom-[8%] left-[28%] flex flex-col items-center">
                     <input type="number" id="llantaDD" step="0.1" min="0" placeholder="mm" required class="w-14 sm:w-16 bg-white border border-gray-400 rounded px-1 py-0.5 sm:py-1 text-center font-bold text-xs sm:text-sm focus:ring-2 focus:ring-red-500 shadow-sm">
                     <span class="text-[9px] sm:text-[10px] font-bold text-gray-600 leading-tight">P1</span>
                 </div>
-
                 <div class="absolute top-[8%] right-[22%] flex flex-col items-center">
                     <span class="text-[9px] sm:text-[10px] font-bold text-gray-600 leading-tight">P4</span>
                     <input type="number" id="llantaTI" step="0.1" min="0" placeholder="mm" required class="w-14 sm:w-16 bg-white border border-gray-400 rounded px-1 py-0.5 sm:py-1 text-center font-bold text-xs sm:text-sm focus:ring-2 focus:ring-red-500 shadow-sm">
                 </div>
-
                 <div class="absolute bottom-[8%] right-[22%] flex flex-col items-center">
                     <input type="number" id="llantaTD" step="0.1" min="0" placeholder="mm" required class="w-14 sm:w-16 bg-white border border-gray-400 rounded px-1 py-0.5 sm:py-1 text-center font-bold text-xs sm:text-sm focus:ring-2 focus:ring-red-500 shadow-sm">
                     <span class="text-[9px] sm:text-[10px] font-bold text-gray-600 leading-tight">P3</span>
                 </div>
             </div>
-
             <div class="border-t border-gray-200 pt-3">
                 <label class="block text-gray-700 font-bold mb-1.5 text-xs sm:text-sm uppercase tracking-wider text-center">Evidencia Fotográfica</label>
                 <div class="flex flex-col items-center justify-center border-2 border-dashed border-gray-300 rounded-lg p-3 bg-gray-50 hover:bg-gray-100 transition-colors cursor-pointer relative min-h-[90px]">
@@ -116,19 +100,12 @@
                     <img id="previewImage" class="hidden mt-1 max-h-40 w-full object-contain rounded border border-gray-300 shadow-inner">
                 </div>
             </div>
-
-            <button type="submit" id="btnGuardar" class="w-full bg-bavaria-red hover-bavaria-red text-white font-bold py-3 px-4 rounded-lg shadow-md transition-all duration-200 uppercase tracking-wide text-center mt-1 text-sm sm:text-base cursor-pointer">
-                Guardar Registro
-            </button>
+            <button type="submit" id="btnGuardar" class="w-full bg-bavaria-red hover-bavaria-red text-white font-bold py-3 px-4 rounded-lg shadow-md transition-all duration-200 uppercase tracking-wide text-center mt-1 text-sm sm:text-base cursor-pointer">Guardar Registro</button>
         </form>
     </main>
 
-    <!-- ========================================== -->
-    <!-- VISTA 2: DASHBOARD DE ANÁLISIS (COMPACTO)  -->
-    <!-- ========================================== -->
     <main id="vistaDashboard" class="vista-oculta flex-grow p-2 sm:p-4 w-full max-w-6xl mx-auto space-y-4">
-        
-        <div class="bg-white p-3 rounded-xl shadow grid grid-cols-1 md:grid-cols-3 gap-3 items-end">
+        <div class="bg-white p-3 rounded-xl shadow grid grid-cols-2 md:grid-cols-4 gap-3 items-end">
             <div>
                 <label class="block text-xs font-bold text-gray-600 mb-1 uppercase">Centro de Distribución</label>
                 <select id="filtroCD" class="w-full border-2 border-gray-200 rounded-lg p-2 text-sm font-semibold focus:border-red-600">
@@ -141,9 +118,23 @@
                     <option value="">Todas las máquinas</option>
                 </select>
             </div>
-            <button onclick="generarAnalisis()" class="bg-bavaria-red text-white font-bold py-2 px-6 rounded-lg shadow hover:bg-red-800 transition text-sm uppercase">
-                📊 Actualizar
-            </button>
+            <div>
+                <label class="block text-xs font-bold text-gray-600 mb-1 uppercase">Mes</label>
+                <input type="month" id="filtroMes" class="w-full border-2 border-gray-200 rounded-lg p-2 text-sm font-semibold focus:border-red-600">
+            </div>
+            <div>
+                <label class="block text-xs font-bold text-gray-600 mb-1 uppercase">Posición Llanta</label>
+                <select id="filtroPosicion" class="w-full border-2 border-gray-200 rounded-lg p-2 text-sm font-semibold focus:border-red-600">
+                    <option value="TODAS">Todas (Promedio)</option>
+                    <option value="DI">Delantera Izq (P2)</option>
+                    <option value="DD">Delantera Der (P1)</option>
+                    <option value="TI">Trasera Izq (P4)</option>
+                    <option value="TD">Trasera Der (P3)</option>
+                </select>
+            </div>
+        </div>
+        <div class="text-center">
+            <button onclick="generarAnalisis()" class="bg-bavaria-red text-white font-bold py-2 px-8 rounded-lg shadow hover:bg-red-800 transition text-sm uppercase">📊 Actualizar Análisis</button>
         </div>
 
         <div id="loadingDash" class="text-center py-12">
@@ -152,7 +143,7 @@
         </div>
 
         <div id="dashboardContent" class="hidden space-y-4">
-            <!-- KPIS COMPACTOS -->
+            <!-- KPIs -->
             <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
                 <div class="bg-white p-3 rounded-xl shadow border-l-4 border-bavaria-red">
                     <p class="text-[10px] font-bold text-gray-500 uppercase">Registros</p>
@@ -172,46 +163,120 @@
                 </div>
             </div>
 
-            <!-- GRÁFICAS COMPACTAS -->
+            <!-- Gráficas -->
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
                 <div class="bg-white p-3 rounded-xl shadow">
-                    <h3 class="font-bold text-gray-800 mb-2 text-sm uppercase">📉 Profundidad Promedio Mensual (mm)</h3>
-                    <div class="relative h-[200px]">
-                        <canvas id="chartProfundidad"></canvas>
-                    </div>
+                    <h3 class="font-bold text-gray-800 mb-2 text-sm uppercase"> Profundidad Promedio Mensual (mm)</h3>
+                    <div class="relative h-[200px]"><canvas id="chartProfundidad"></canvas></div>
                 </div>
                 <div class="bg-white p-3 rounded-xl shadow">
-                    <h3 class="font-bold text-gray-800 mb-2 text-sm uppercase">🔥 Desgaste Mensual Acumulado (mm)</h3>
-                    <div class="relative h-[200px]">
-                        <canvas id="chartDesgaste"></canvas>
-                    </div>
+                    <h3 class="font-bold text-gray-800 mb-2 text-sm uppercase"> Desgaste Mensual Acumulado (mm)</h3>
+                    <div class="relative h-[200px]"><canvas id="chartDesgaste"></canvas></div>
                 </div>
             </div>
 
-            <!-- TABLA DE ALERTAS -->
+            <!-- Tabla de alertas -->
             <div class="bg-white p-3 rounded-xl shadow">
                 <h3 class="font-bold text-gray-800 mb-2 text-sm uppercase">🚨 Montacargas con Desgaste Acelerado (>3.5 mm/mes)</h3>
                 <div class="overflow-x-auto">
                     <table class="w-full text-sm text-left">
                         <thead class="bg-gray-100 text-gray-700 uppercase text-xs">
-                            <tr>
-                                <th class="p-3">CD</th>
-                                <th class="p-3">Máquina</th>
-                                <th class="p-3 text-right">Horómetro</th>
-                                <th class="p-3 text-right">Profundidad Actual</th>
-                                <th class="p-3 text-right">Desgaste/Mes</th>
-                                <th class="p-3 text-center">Estado</th>
-                            </tr>
+                            <tr><th class="p-3">CD</th><th class="p-3">Máquina</th><th class="p-3 text-right">Horómetro</th><th class="p-3 text-right">Profundidad Actual</th><th class="p-3 text-right">Desgaste/Mes</th><th class="p-3 text-center">Estado</th></tr>
                         </thead>
                         <tbody id="tablaAlertas" class="divide-y divide-gray-100"></tbody>
                     </table>
                 </div>
             </div>
 
-            <!-- PREDICTIVO -->
+            <!-- Predicción -->
             <div class="bg-gradient-to-r from-red-50 to-yellow-50 p-3 rounded-xl shadow border-l-4 border-bavaria-red">
                 <h3 class="font-bold text-gray-800 mb-2 text-sm uppercase">🔮 Predicción de Cambio de Llantas</h3>
                 <ul id="listaPrediccion" class="space-y-1.5 text-sm text-gray-700"></ul>
+            </div>
+
+            <!-- ========================================== -->
+            <!-- NUEVAS SECCIONES: ANÁLISIS AVANZADOS       -->
+            <!-- ========================================== -->
+            <div class="bg-white p-3 rounded-xl shadow">
+                <h3 class="font-bold text-gray-800 mb-3 text-sm uppercase">🔬 Análisis Avanzados de Flota</h3>
+                
+                <!-- Pestañas -->
+                <div class="flex flex-wrap gap-2 mb-4 border-b border-gray-200 pb-2">
+                    <button onclick="cambiarTab('eficiencia')" id="tabEficiencia" class="px-4 py-2 rounded-lg text-xs font-bold transition tab-activa">
+                        ⚡ Eficiencia mm/hr
+                    </button>
+                    <button onclick="cambiarTab('ranking')" id="tabRanking" class="px-4 py-2 rounded-lg text-xs font-bold transition tab-inactiva">
+                         Ranking Horas
+                    </button>
+                    <button onclick="cambiarTab('asimetria')" id="tabAsimetria" class="px-4 py-2 rounded-lg text-xs font-bold transition tab-inactiva">
+                        ⚖️ Asimetría (Alineación)
+                    </button>
+                </div>
+
+                <!-- Contenido pestañas -->
+                <div id="contenidoEficiencia" class="tab-contenido">
+                    <div class="mb-3 p-2 bg-blue-50 rounded border-l-4 border-blue-500 text-xs text-blue-800">
+                        💡 <strong>Eficiencia de llantas:</strong> Mide cuántos mm se desgasta por cada hora de operación. Valores > 0.02 mm/hr indican problemas mecánicos (alineación, frenos, suspensión).
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm text-left">
+                            <thead class="bg-gray-100 text-gray-700 uppercase text-xs">
+                                <tr>
+                                    <th class="p-2">CD</th>
+                                    <th class="p-2">Máquina</th>
+                                    <th class="p-2 text-right">Horas Trabajadas</th>
+                                    <th class="p-2 text-right">Desgaste Total</th>
+                                    <th class="p-2 text-right">Eficiencia (mm/hr)</th>
+                                    <th class="p-2 text-center">Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tablaEficiencia" class="divide-y divide-gray-100"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div id="contenidoRanking" class="tab-contenido vista-oculta">
+                    <div class="mb-3 p-2 bg-yellow-50 rounded border-l-4 border-yellow-500 text-xs text-yellow-800">
+                        💡 <strong>Ranking de uso:</strong> Identifica las máquinas con mayor carga de trabajo. Útil para programar mantenimientos preventivos y balancear la operación entre CDs.
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm text-left">
+                            <thead class="bg-gray-100 text-gray-700 uppercase text-xs">
+                                <tr>
+                                    <th class="p-2 text-center">#</th>
+                                    <th class="p-2">CD</th>
+                                    <th class="p-2">Máquina</th>
+                                    <th class="p-2 text-right">Horas en Período</th>
+                                    <th class="p-2 text-right">Promedio hrs/día</th>
+                                    <th class="p-2 text-right text-xs text-gray-500">Horómetro Total</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tablaRankingHoras" class="divide-y divide-gray-100"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div id="contenidoAsimetria" class="tab-contenido vista-oculta">
+                    <div class="mb-3 p-2 bg-orange-50 rounded border-l-4 border-orange-500 text-xs text-orange-800">
+                        💡 <strong>Asimetría de llantas:</strong> Detecta diferencias de desgaste entre llantas del mismo eje. Diferencias > 5mm indican problemas de alineación, suspensión o hábitos de conducción.
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm text-left">
+                            <thead class="bg-gray-100 text-gray-700 uppercase text-xs">
+                                <tr>
+                                    <th class="p-2">CD</th>
+                                    <th class="p-2">Máquina</th>
+                                    <th class="p-2 text-center">Delanteras (Izq/Der)</th>
+                                    <th class="p-2 text-right">Dif. Delantera</th>
+                                    <th class="p-2 text-center">Traseras (Izq/Der)</th>
+                                    <th class="p-2 text-right">Dif. Trasera</th>
+                                    <th class="p-2 text-center">Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tablaAsimetria" class="divide-y divide-gray-100"></tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </main>
@@ -220,342 +285,679 @@
         &copy; 2026 Anderson Alzate. - Desarrollador de Software
     </footer>
 
-    <script>
-        // ==========================================
-        // 1. LÓGICA DE NAVEGACIÓN
-        // ==========================================
-        function cambiarVista(vista) {
-            const formView = document.getElementById('vistaFormulario');
-            const dashView = document.getElementById('vistaDashboard');
-            const btnForm = document.getElementById('btnForm');
-            const btnDash = document.getElementById('btnDash');
+<script>
+// ==========================================
+// NAVEGACIÓN
+// ==========================================
+function cambiarVista(vista) {
+    const formView = document.getElementById('vistaFormulario');
+    const dashView = document.getElementById('vistaDashboard');
+    const btnForm = document.getElementById('btnForm');
+    const btnDash = document.getElementById('btnDash');
+    if (vista === 'formulario') {
+        formView.classList.remove('vista-oculta');
+        dashView.classList.add('vista-oculta');
+        btnForm.classList.add('bg-white', 'text-bavaria-red', 'shadow');
+        btnForm.classList.remove('text-white', 'hover:bg-white/20');
+        btnDash.classList.remove('bg-white', 'text-bavaria-red', 'shadow');
+        btnDash.classList.add('text-white', 'hover:bg-white/20');
+    } else {
+        formView.classList.add('vista-oculta');
+        dashView.classList.remove('vista-oculta');
+        btnDash.classList.add('bg-white', 'text-bavaria-red', 'shadow');
+        btnDash.classList.remove('text-white', 'hover:bg-white/20');
+        btnForm.classList.remove('bg-white', 'text-bavaria-red', 'shadow');
+        btnForm.classList.add('text-white', 'hover:bg-white/20');
+        if (datosGlobales.length === 0) iniciarDashboard();
+    }
+}
 
-            if (vista === 'formulario') {
-                formView.classList.remove('vista-oculta');
-                dashView.classList.add('vista-oculta');
-                btnForm.classList.add('bg-white', 'text-bavaria-red', 'shadow');
-                btnForm.classList.remove('text-white', 'hover:bg-white/20');
-                btnDash.classList.remove('bg-white', 'text-bavaria-red', 'shadow');
-                btnDash.classList.add('text-white', 'hover:bg-white/20');
-            } else {
-                formView.classList.add('vista-oculta');
-                dashView.classList.remove('vista-oculta');
-                btnDash.classList.add('bg-white', 'text-bavaria-red', 'shadow');
-                btnDash.classList.remove('text-white', 'hover:bg-white/20');
-                btnForm.classList.remove('bg-white', 'text-bavaria-red', 'shadow');
-                btnForm.classList.add('text-white', 'hover:bg-white/20');
-                
-                if (datosGlobales.length === 0) iniciarDashboard();
-            }
-        }
+// NUEVA: Sistema de pestañas para análisis avanzados
+function cambiarTab(tab) {
+    // Ocultar todos los contenidos
+    document.querySelectorAll('.tab-contenido').forEach(el => el.classList.add('vista-oculta'));
+    // Quitar clase activa de todos los botones
+    document.querySelectorAll('[id^="tab"]').forEach(el => {
+        el.classList.remove('tab-activa');
+        el.classList.add('tab-inactiva');
+    });
+    
+    // Mostrar el seleccionado
+    document.getElementById('contenido' + tab.charAt(0).toUpperCase() + tab.slice(1)).classList.remove('vista-oculta');
+    document.getElementById('tab' + tab.charAt(0).toUpperCase() + tab.slice(1)).classList.remove('tab-inactiva');
+    document.getElementById('tab' + tab.charAt(0).toUpperCase() + tab.slice(1)).classList.add('tab-activa');
+}
 
-        // ==========================================
-        // 2. LÓGICA DEL FORMULARIO
-        // ==========================================
-        const maquinasPorCD = {
-            "GIRARDOTA": ["561", "562", "567", "603", "681", "761", "832", "838", "855", "860","CP2"],
-            "CALI": ["598", "604", "611", "780", "839", "842", "844", "850", "A13"],
-            "TULUA": ["MC1"], "PEREIRA": ["629", "690", "786", "789"],
-            "FORJANDES": ["751", "818", "862", "863"], "ARENOSA": ["MC7", "MC8", "688", "752"],
-            "SANTA MARTA": ["656", "657", "658", "808"], "SIBERIA": ["632", "634", "635", "636", "638", "639", "649", "685", "877"],
-            "SIBATE": ["565", "610", "874", "875", "876"], "AUTOSUR": ["364", "684", "747", "768", "769", "770", "773", "774"],
-            "CUCUTA": ["564", "640", "687", "748", "754", "759", "760"], "POPAYAN": ["196", "599"]
+// ==========================================
+// FORMULARIO
+// ==========================================
+const maquinasPorCD = {
+    "GIRARDOTA": ["561", "562", "567", "603", "681", "761", "832", "838", "855", "860", "CP2"],
+    "CALI": ["598", "604", "611", "780", "839", "842", "844", "850", "A13"],
+    "TULUA": ["MC1"], "PEREIRA": ["629", "690", "786", "789"],
+    "FORJANDES": ["751", "818", "862", "863"], "ARENOSA": ["MC7", "MC8", "688", "752"],
+    "SANTA MARTA": ["656", "657", "658", "808"], "SIBERIA": ["632", "634", "635", "636", "638", "639", "649", "685", "877"],
+    "SIBATE": ["565", "610", "874", "875", "876"], "AUTOSUR": ["364", "684", "747", "768", "769", "770", "773", "774"],
+    "CUCUTA": ["564", "640", "687", "748", "754", "759", "760"], "POPAYAN": ["196", "599"]
+};
+
+const form = document.getElementById('formDesgaste');
+const selectCD = document.getElementById('selectCD');
+const numeroMaquina = document.getElementById('numeroMaquina');
+const horometro = document.getElementById('horometro');
+const fotoInput = document.getElementById('fotoInput');
+const previewImage = document.getElementById('previewImage');
+const uploadPrompt = document.getElementById('uploadPrompt');
+const canvas = document.getElementById('canvasWatermark');
+const ctx = canvas.getContext('2d');
+let imagenConMarcaDeAguaBase64 = "";
+const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzw3NRgRkUSLAMLhLIwX2pQk6bcdRvjyzHlpiXqF19AmL_gLBku0rjXtMAtzBUZcg/exec";
+
+selectCD.addEventListener('change', function() {
+    const cd = this.value;
+    numeroMaquina.innerHTML = '<option value="" disabled selected>-- Seleccione Máquina --</option>';
+    if (maquinasPorCD[cd]) {
+        maquinasPorCD[cd].forEach(m => {
+            const opt = document.createElement('option');
+            opt.value = m; opt.textContent = m;
+            numeroMaquina.appendChild(opt);
+        });
+        numeroMaquina.disabled = false;
+        numeroMaquina.classList.replace('bg-gray-100', 'bg-gray-50');
+    } else { numeroMaquina.disabled = true; }
+});
+
+fotoInput.addEventListener('change', function(e) {
+    const file = e.target.files[0]; if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function(event) {
+        const img = new Image();
+        img.onload = function() {
+            canvas.width = img.width; canvas.height = img.height;
+            ctx.drawImage(img, 0, 0);
+            const cd = selectCD.value || "S/CD";
+            const maq = numeroMaquina.value || "S/N";
+            const fecha = new Date().toLocaleString('es-CO', { timeZone: 'America/Bogota' });
+            const texto = `CD ${cd} - FLT: ${maq} - ${fecha}`;
+            const fontSize = Math.max(20, Math.floor(img.width * 0.03));
+            ctx.font = `bold ${fontSize}px Arial`;
+            ctx.fillStyle = "rgba(0, 0, 0, 0.6)";
+            const textWidth = ctx.measureText(texto).width;
+            ctx.fillRect(20, img.height - fontSize - 30, textWidth + 20, fontSize + 15);
+            ctx.fillStyle = "#FFC72C";
+            ctx.fillText(texto, 30, img.height - 30);
+            imagenConMarcaDeAguaBase64 = canvas.toDataURL('image/jpeg', 0.8);
+            previewImage.src = imagenConMarcaDeAguaBase64;
+            previewImage.classList.remove('hidden');
+            uploadPrompt.classList.add('hidden');
         };
+        img.src = event.target.result;
+    };
+    reader.readAsDataURL(file);
+});
 
-        const form = document.getElementById('formDesgaste');
-        const selectCD = document.getElementById('selectCD');
-        const numeroMaquina = document.getElementById('numeroMaquina');
-        const horometro = document.getElementById('horometro');
-        const fotoInput = document.getElementById('fotoInput');
-        const previewImage = document.getElementById('previewImage');
-        const uploadPrompt = document.getElementById('uploadPrompt');
-        const canvas = document.getElementById('canvasWatermark');
-        const ctx = canvas.getContext('2d');
-        let imagenConMarcaDeAguaBase64 = "";
-        const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzw3NRgRkUSLAMLhLIwX2pQk6bcdRvjyzHlpiXqF19AmL_gLBku0rjXtMAtzBUZcg/exec";
+form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const btn = document.getElementById('btnGuardar');
+    btn.disabled = true; btn.textContent = "Enviando...";
+    const datos = {
+        cd: selectCD.value, maquina: numeroMaquina.value, horometro: horometro.value,
+        llantaDI: document.getElementById('llantaDI').value, llantaDD: document.getElementById('llantaDD').value,
+        llantaTI: document.getElementById('llantaTI').value, llantaTD: document.getElementById('llantaTD').value,
+        foto: imagenConMarcaDeAguaBase64 
+    };
+    try {
+        await fetch(WEB_APP_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(datos) });
+        alert(`¡Registro guardado correctamente para el montacargas ${datos.maquina} del CD ${datos.cd}!`);
+        form.reset();
+        numeroMaquina.innerHTML = '<option value="" disabled selected>-- Primero elija un CD --</option>';
+        numeroMaquina.disabled = true; numeroMaquina.classList.replace('bg-gray-50', 'bg-gray-100');
+        previewImage.classList.add('hidden'); previewImage.src = "";
+        uploadPrompt.classList.remove('hidden'); imagenConMarcaDeAguaBase64 = "";
+    } catch (error) {
+        alert("Hubo un problema al guardar el registro.");
+    } finally {
+        btn.disabled = false; btn.textContent = "Guardar Registro";
+    }
+});
 
-        selectCD.addEventListener('change', function() {
-            const cd = this.value;
-            numeroMaquina.innerHTML = '<option value="" disabled selected>-- Seleccione Máquina --</option>';
-            if (maquinasPorCD[cd]) {
-                maquinasPorCD[cd].forEach(m => {
-                    const opt = document.createElement('option');
-                    opt.value = m; opt.textContent = m;
-                    numeroMaquina.appendChild(opt);
-                });
-                numeroMaquina.disabled = false;
-                numeroMaquina.classList.replace('bg-gray-100', 'bg-gray-50');
-            } else { numeroMaquina.disabled = true; }
+// ==========================================
+// DASHBOARD - CARGA DE DATOS
+// ==========================================
+let datosGlobales = [];
+let charts = {};
+
+async function iniciarDashboard() {
+    console.log('=== INICIANDO DASHBOARD ===');
+    try {
+        const urlCompleta = `${WEB_APP_URL}?action=get`;
+        const res = await fetch(urlCompleta);
+        const text = await res.text();
+        const data = JSON.parse(text);
+        if (!data.success) throw new Error(data.message || 'Error en la respuesta');
+        
+        datosGlobales = data.rows || [];
+        console.log('Total rows loaded:', datosGlobales.length);
+        
+        if (datosGlobales.length === 0) {
+            document.getElementById('loadingDash').innerHTML = '<p class="text-red-600 font-bold">❌ No hay datos registrados aún en Google Sheets.</p>';
+            return;
+        }
+        
+        const cds = [...new Set(datosGlobales.map(r => r.cd))].sort();
+        const selectFilterCD = document.getElementById('filtroCD');
+        cds.forEach(cd => {
+            const opt = document.createElement('option');
+            opt.value = cd; opt.textContent = cd;
+            selectFilterCD.appendChild(opt);
         });
+        
+        document.getElementById('loadingDash').classList.add('hidden');
+        document.getElementById('dashboardContent').classList.remove('hidden');
+        generarAnalisis();
+    } catch (err) {
+        console.error('ERROR:', err);
+        document.getElementById('loadingDash').innerHTML = `
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
+                <p class="font-bold">❌ Error al cargar datos</p>
+                <p class="text-sm mt-1">${err.message}</p>
+            </div>
+        `;
+    }
+}
 
-        fotoInput.addEventListener('change', function(e) {
-            const file = e.target.files[0]; if (!file) return;
-            const reader = new FileReader();
-            reader.onload = function(event) {
-                const img = new Image();
-                img.onload = function() {
-                    canvas.width = img.width; canvas.height = img.height;
-                    ctx.drawImage(img, 0, 0);
-                    const cd = selectCD.value || "S/CD";
-                    const maq = numeroMaquina.value || "S/N";
-                    const fecha = new Date().toLocaleString('es-CO', { timeZone: 'America/Bogota' });
-                    const texto = `CD ${cd} - FLT: ${maq} - ${fecha}`;
-                    const fontSize = Math.max(20, Math.floor(img.width * 0.03));
-                    ctx.font = `bold ${fontSize}px Arial`;
-                    ctx.fillStyle = "rgba(0, 0, 0, 0.6)";
-                    const textWidth = ctx.measureText(texto).width;
-                    ctx.fillRect(20, img.height - fontSize - 30, textWidth + 20, fontSize + 15);
-                    ctx.fillStyle = "#FFC72C";
-                    ctx.fillText(texto, 30, img.height - 30);
-                    imagenConMarcaDeAguaBase64 = canvas.toDataURL('image/jpeg', 0.8);
-                    previewImage.src = imagenConMarcaDeAguaBase64;
-                    previewImage.classList.remove('hidden');
-                    uploadPrompt.classList.add('hidden');
-                };
-                img.src = event.target.result;
-            };
-            reader.readAsDataURL(file);
+document.getElementById('filtroCD').addEventListener('change', function() {
+    const cd = this.value;
+    const selectM = document.getElementById('filtroMaquina');
+    selectM.innerHTML = '<option value="">Todas las máquinas</option>';
+    if (cd) {
+        const maqs = [...new Set(datosGlobales.filter(r => r.cd === cd).map(r => r.maquina))].sort();
+        maqs.forEach(m => {
+            const opt = document.createElement('option');
+            opt.value = m; opt.textContent = m;
+            selectM.appendChild(opt);
         });
+        selectM.disabled = false;
+    } else { selectM.disabled = true; }
+});
 
-        form.addEventListener('submit', async function(e) {
-            e.preventDefault();
-            const btn = document.getElementById('btnGuardar');
-            btn.disabled = true; btn.textContent = "Enviando...";
-            const datos = {
-                cd: selectCD.value, maquina: numeroMaquina.value, horometro: horometro.value,
-                llantaDI: document.getElementById('llantaDI').value, llantaDD: document.getElementById('llantaDD').value,
-                llantaTI: document.getElementById('llantaTI').value, llantaTD: document.getElementById('llantaTD').value,
-                foto: imagenConMarcaDeAguaBase64 
-            };
-            try {
-                await fetch(WEB_APP_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(datos) });
-                alert(`¡Registro guardado correctamente para el montacargas ${datos.maquina} del CD ${datos.cd}!`);
-                form.reset();
-                numeroMaquina.innerHTML = '<option value="" disabled selected>-- Primero elija un CD --</option>';
-                numeroMaquina.disabled = true; numeroMaquina.classList.replace('bg-gray-50', 'bg-gray-100');
-                previewImage.classList.add('hidden'); previewImage.src = "";
-                uploadPrompt.classList.remove('hidden'); imagenConMarcaDeAguaBase64 = "";
-            } catch (error) {
-                alert("Hubo un problema al guardar el registro.");
-            } finally {
-                btn.disabled = false; btn.textContent = "Guardar Registro";
+// ==========================================
+// FUNCIONES AUXILIARES
+// ==========================================
+function obtenerValorLlanta(r, posicion) {
+    if (posicion === 'DI') return Number(r.llantaDI || 0);
+    if (posicion === 'DD') return Number(r.llantaDD || 0);
+    if (posicion === 'TI') return Number(r.llantaTI || 0);
+    if (posicion === 'TD') return Number(r.llantaTD || 0);
+    return (Number(r.llantaDI||0) + Number(r.llantaDD||0) + Number(r.llantaTI||0) + Number(r.llantaTD||0)) / 4;
+}
+
+function agruparPorMaquina(datos) {
+    const grupos = {};
+    datos.forEach(r => {
+        const key = `${r.cd}|${r.maquina}`;
+        if (!grupos[key]) grupos[key] = [];
+        grupos[key].push(r);
+    });
+    Object.keys(grupos).forEach(key => {
+        grupos[key].sort((a, b) => new Date(a.fecha) - new Date(b.fecha));
+    });
+    return grupos;
+}
+
+function agruparPorMes(datos, posicion) {
+    const grupos = {};
+    datos.forEach(r => {
+        const fecha = new Date(r.fecha);
+        const mes = `${fecha.getFullYear()}-${String(fecha.getMonth() + 1).padStart(2, '0')}`;
+        if (!grupos[mes]) grupos[mes] = [];
+        grupos[mes].push(r);
+    });
+    return Object.keys(grupos).sort().map(mes => {
+        const registrosMes = grupos[mes];
+        const suma = registrosMes.reduce((sum, r) => sum + obtenerValorLlanta(r, posicion), 0);
+        const promedio = suma / registrosMes.length;
+        return { mes, promedio };
+    });
+}
+
+function obtenerMesAnterior(mesActual) {
+    if (!mesActual) return null;
+    const [anio, mes] = mesActual.split('-').map(Number);
+    const mesAnt = mes === 1 ? 12 : mes - 1;
+    const anioAnt = mes === 1 ? anio - 1 : anio;
+    return `${anioAnt}-${String(mesAnt).padStart(2, '0')}`;
+}
+
+// ==========================================
+// GENERAR ANÁLISIS PRINCIPAL
+// ==========================================
+function generarAnalisis() {
+    console.log('=== GENERANDO ANÁLISIS ===');
+    const cd = document.getElementById('filtroCD').value;
+    const maq = document.getElementById('filtroMaquina').value;
+    const mes = document.getElementById('filtroMes').value;
+    const posicion = document.getElementById('filtroPosicion').value;
+
+    let datos = datosGlobales;
+    if (cd) datos = datos.filter(r => r.cd === cd);
+    if (maq) datos = datos.filter(r => r.maquina === maq);
+    
+    let datosConHistorial = datos;
+    if (mes) {
+        const mesAnterior = obtenerMesAnterior(mes);
+        console.log('Mes seleccionado:', mes, '| Mes anterior:', mesAnterior);
+        
+        datos = datosGlobales.filter(r => r.fecha.startsWith(mes));
+        if (cd) datos = datos.filter(r => r.cd === cd);
+        if (maq) datos = datos.filter(r => r.maquina === maq);
+        
+        datosConHistorial = datosGlobales.filter(r => 
+            r.fecha.startsWith(mes) || r.fecha.startsWith(mesAnterior)
+        );
+        if (cd) datosConHistorial = datosConHistorial.filter(r => r.cd === cd);
+        if (maq) datosConHistorial = datosConHistorial.filter(r => r.maquina === maq);
+    }
+
+    console.log('Datos del mes:', datos.length, '| Con historial:', datosConHistorial.length);
+    
+    if (datos.length === 0) { 
+        alert("No hay datos para estos filtros"); 
+        return; 
+    }
+    
+    // Análisis existentes
+    actualizarKPIs(datosConHistorial, posicion, mes); 
+    graficarProfundidad(datosConHistorial, posicion); 
+    graficarDesgasteMensual(datosConHistorial, posicion);
+    generarTablaAlertas(datosConHistorial, posicion, mes);
+    generarPrediccion(datosConHistorial, posicion);
+    
+    // NUEVOS análisis avanzados
+    generarAnalisisEficiencia(datosConHistorial, posicion);
+    generarRankingHoras(datosConHistorial);
+    generarAnalisisAsimetria(datosConHistorial);
+}
+
+// ==========================================
+// KPIs y Gráficas existentes
+// ==========================================
+function actualizarKPIs(datos, posicion, mesActual = null) {
+    document.getElementById('kpiRegistros').textContent = datos.length;
+    const maqsUnicas = new Set(datos.map(r => `${r.cd}-${r.maquina}`));
+    document.getElementById('kpiMaquinas').textContent = maqsUnicas.size;
+    
+    const grupos = agruparPorMaquina(datos);
+    let desgastes = [];
+    let alertas = 0;
+
+    Object.values(grupos).forEach(arr => {
+        if (arr.length >= 2) {
+            const valInicio = obtenerValorLlanta(arr[0], posicion);
+            const valFin = obtenerValorLlanta(arr[arr.length - 1], posicion);
+            const desg = valInicio - valFin;
+            if (desg > 0 && desg < 50) {
+                desgastes.push(desg);
+                if (desg > 3.5) alertas++;
             }
-        });
-
-        // ==========================================
-        // 3. LÓGICA DEL DASHBOARD
-        // ==========================================
-        let datosGlobales = [];
-        let charts = {};
-
-        async function iniciarDashboard() {
-            try {
-                const res = await fetch(`${WEB_APP_URL}?action=get`);
-                const data = await res.json();
-                if (!data.success) throw new Error(data.message);
-                datosGlobales = data.rows || [];
-                if (datosGlobales.length === 0) {
-                    document.getElementById('loadingDash').innerHTML = '<p class="text-red-600 font-bold">No hay datos registrados aún.</p>';
-                    return;
-                }
-                const cds = [...new Set(datosGlobales.map(r => r.cd))].sort();
-                const selectFilterCD = document.getElementById('filtroCD');
-                cds.forEach(cd => {
-                    const opt = document.createElement('option');
-                    opt.value = cd; opt.textContent = cd;
-                    selectFilterCD.appendChild(opt);
-                });
-                document.getElementById('loadingDash').classList.add('hidden');
-                document.getElementById('dashboardContent').classList.remove('hidden');
-                generarAnalisis();
-            } catch (err) {
-                document.getElementById('loadingDash').innerHTML = `<p class="text-red-600 font-bold">Error: ${err.message}</p>`;
-            }
         }
+    });
+    
+    const desgastePromedio = desgastes.length > 0 
+        ? (desgastes.reduce((a, b) => a + b, 0) / desgastes.length).toFixed(1)
+        : '0.0';
+    
+    document.getElementById('kpiDesgaste').textContent = desgastePromedio + ' mm';
+    document.getElementById('kpiAlertas').textContent = alertas;
+}
 
-        document.getElementById('filtroCD').addEventListener('change', function() {
-            const cd = this.value;
-            const selectM = document.getElementById('filtroMaquina');
-            selectM.innerHTML = '<option value="">Todas las máquinas</option>';
-            if (cd) {
-                const maqs = [...new Set(datosGlobales.filter(r => r.cd === cd).map(r => r.maquina))].sort();
-                maqs.forEach(m => {
-                    const opt = document.createElement('option');
-                    opt.value = m; opt.textContent = m;
-                    selectM.appendChild(opt);
-                });
-                selectM.disabled = false;
-            } else { selectM.disabled = true; }
-        });
-
-        function generarAnalisis() {
-            const cd = document.getElementById('filtroCD').value;
-            const maq = document.getElementById('filtroMaquina').value;
-            let datos = datosGlobales;
-            if (cd) datos = datos.filter(r => r.cd === cd);
-            if (maq) datos = datos.filter(r => r.maquina === maq);
-            if (datos.length === 0) { alert("No hay datos para estos filtros"); return; }
-            actualizarKPIs(datos); graficarProfundidad(datos); graficarDesgasteMensual(datos);
-            generarTablaAlertas(datos); generarPrediccion(datos);
+function graficarProfundidad(datos, posicion) {
+    const porMes = agruparPorMes(datos, posicion);
+    if (charts.prof) charts.prof.destroy();
+    charts.prof = new Chart(document.getElementById('chartProfundidad'), {
+        type: 'line',
+        data: {
+            labels: porMes.map(p => p.mes),
+            datasets: [{
+                label: 'Profundidad (mm)',
+                data: porMes.map(p => (p.promedio > 0 && p.promedio < 100) ? p.promedio.toFixed(1) : null),
+                borderColor: '#C8102E',
+                backgroundColor: 'rgba(200, 16, 46, 0.1)',
+                fill: true,
+                tension: 0.3,
+                pointRadius: 3,
+                pointHoverRadius: 4
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false }, tooltip: { enabled: true } },
+            scales: { y: { beginAtZero: false, ticks: { font: { size: 10 } }, min: 0, max: 100 }, x: { ticks: { font: { size: 10 } } } }
         }
+    });
+}
 
-        function promedioLlantas(r) {
-            return (Number(r.llantaDI||0) + Number(r.llantaDD||0) + Number(r.llantaTI||0) + Number(r.llantaTD||0)) / 4;
+function graficarDesgasteMensual(datos, posicion) {
+    const porMes = agruparPorMes(datos, posicion);
+    const desgastes = [];
+    for (let i = 1; i < porMes.length; i++) {
+        const prev = porMes[i-1].promedio;
+        const curr = porMes[i].promedio;
+        const desg = prev - curr;
+        if (desg >= 0 && desg <= 20) {
+            desgastes.push({ mes: porMes[i].mes, valor: desg.toFixed(1) });
         }
-
-        function agruparPorMaquina(datos) {
-            const grupos = {};
-            datos.forEach(r => {
-                const key = `${r.cd}|${r.maquina}`;
-                if (!grupos[key]) grupos[key] = [];
-                grupos[key].push(r);
-            });
-            return grupos;
+    }
+    if (charts.desg) charts.desg.destroy();
+    charts.desg = new Chart(document.getElementById('chartDesgaste'), {
+        type: 'bar',
+        data: {
+            labels: desgastes.map(d => d.mes),
+            datasets: [{
+                label: 'Desgaste (mm)',
+                data: desgastes.map(d => d.valor),
+                backgroundColor: '#FFC72C',
+                borderColor: '#C8102E',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: { y: { beginAtZero: true, ticks: { font: { size: 10 } }, max: 20 }, x: { ticks: { font: { size: 10 } } } }
         }
+    });
+}
 
-        function agruparPorMes(datos) {
-            const grupos = {};
-            datos.forEach(r => {
-                const fecha = new Date(r.fecha);
-                const mes = `${fecha.getFullYear()}-${String(fecha.getMonth() + 1).padStart(2, '0')}`;
-                if (!grupos[mes]) grupos[mes] = [];
-                grupos[mes].push(r);
-            });
-            return Object.keys(grupos).sort().map(mes => ({
-                mes, promedio: grupos[mes].reduce((sum, r) => sum + promedioLlantas(r), 0) / grupos[mes].length
-            }));
+function generarTablaAlertas(datos, posicion, mesActual = null) {
+    const grupos = agruparPorMaquina(datos);
+    const tbody = document.getElementById('tablaAlertas');
+    tbody.innerHTML = '';
+    let filas = [];
+    
+    Object.entries(grupos).forEach(([key, arr]) => {
+        if (arr.length < 2) return;
+        const valInicio = obtenerValorLlanta(arr[0], posicion);
+        const valFin = obtenerValorLlanta(arr[arr.length - 1], posicion);
+        const desg = valInicio - valFin;
+        
+        if (desg > 3.0 && desg < 100) {
+            const [cd, maq] = key.split('|');
+            const diasEntre = (new Date(arr[arr.length - 1].fecha) - new Date(arr[0].fecha)) / (1000 * 60 * 60 * 24);
+            const mesesEntre = Math.max(1, diasEntre / 30);
+            const desgasteMensual = desg / mesesEntre;
+            filas.push({ cd, maq, horometro: arr[arr.length - 1].horometro, actual: valFin, desgasteMensual });
         }
+    });
+    
+    filas.sort((a, b) => b.desgasteMensual - a.desgasteMensual).slice(0, 10).forEach(f => {
+        const estado = f.desgasteMensual > 5 ? 
+            '<span class="bg-red-100 text-red-800 px-2 py-1 rounded text-xs font-bold">CRÍTICO</span>' : 
+            f.desgasteMensual > 3.5 ? 
+            '<span class="bg-orange-100 text-orange-800 px-2 py-1 rounded text-xs font-bold">ALTO</span>' : 
+            '<span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded text-xs font-bold">MODERADO</span>';
+        tbody.innerHTML += `<tr class="hover:bg-gray-50">
+            <td class="p-3 font-semibold">${f.cd}</td><td class="p-3 font-bold text-bavaria-red">${f.maq}</td>
+            <td class="p-3 text-right">${f.horometro}</td><td class="p-3 text-right">${f.actual.toFixed(1)} mm</td>
+            <td class="p-3 text-right font-bold">${f.desgasteMensual.toFixed(2)} mm</td><td class="p-3 text-center">${estado}</td>
+        </tr>`;
+    });
+    
+    if (filas.length === 0) tbody.innerHTML = '<tr><td colspan="6" class="p-4 text-center text-gray-500">✅ No hay máquinas con desgaste acelerado</td></tr>';
+}
 
-        function actualizarKPIs(datos) {
-            document.getElementById('kpiRegistros').textContent = datos.length;
-            const maqsUnicas = new Set(datos.map(r => `${r.cd}-${r.maquina}`));
-            document.getElementById('kpiMaquinas').textContent = maqsUnicas.size;
-            const grupos = agruparPorMaquina(datos);
-            let desgasteTotal = 0, count = 0, alertas = 0;
-            Object.values(grupos).forEach(arr => {
-                if (arr.length >= 2) {
-                    const desg = promedioLlantas(arr[0]) - promedioLlantas(arr[arr.length - 1]);
-                    desgasteTotal += desg; count++;
-                    if (desg > 3.5) alertas++;
-                }
-            });
-            document.getElementById('kpiDesgaste').textContent = count ? (desgasteTotal / count).toFixed(1) + ' mm' : '0.0 mm';
-            document.getElementById('kpiAlertas').textContent = alertas;
-        }
-
-        function graficarProfundidad(datos) {
-            const porMes = agruparPorMes(datos);
-            if (charts.prof) charts.prof.destroy();
-            charts.prof = new Chart(document.getElementById('chartProfundidad'), {
-                type: 'line',
-                data: {
-                    labels: porMes.map(p => p.mes),
-                    datasets: [{
-                        label: 'Profundidad (mm)',
-                        data: porMes.map(p => p.promedio.toFixed(1)),
-                        borderColor: '#C8102E',
-                        backgroundColor: 'rgba(200, 16, 46, 0.1)',
-                        fill: true,
-                        tension: 0.3,
-                        pointRadius: 3,
-                        pointHoverRadius: 4
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: { legend: { display: false }, tooltip: { enabled: true } },
-                    scales: { 
-                        y: { beginAtZero: false, ticks: { font: { size: 10 } } },
-                        x: { ticks: { font: { size: 10 } } }
+function generarPrediccion(datos, posicion) {
+    const grupos = agruparPorMaquina(datos);
+    const ul = document.getElementById('listaPrediccion');
+    ul.innerHTML = '';
+    let todasPredicciones = [];
+    const LIMITE_CRITICO = 15;
+    const LIMITE_ALERTA = 20;
+    
+    const nombresPos = {
+        'DI': 'Delantera Izq (P2)', 'DD': 'Delantera Der (P1)',
+        'TI': 'Trasera Izq (P4)', 'TD': 'Trasera Der (P3)'
+    };
+    
+    const posicionesAAnalizar = posicion === 'TODAS' ? ['DI', 'DD', 'TI', 'TD'] : [posicion];
+    
+    Object.entries(grupos).forEach(([key, arr]) => {
+        const [cd, maq] = key.split('|');
+        posicionesAAnalizar.forEach(pos => {
+            const registrosOrdenados = [...arr].sort((a, b) => new Date(a.fecha) - new Date(b.fecha));
+            if (registrosOrdenados.length < 1) return;
+            
+            const ultimoRegistro = registrosOrdenados[registrosOrdenados.length - 1];
+            const valActual = obtenerValorLlanta(ultimoRegistro, pos);
+            
+            if (registrosOrdenados.length >= 2) {
+                const penultimo = registrosOrdenados[registrosOrdenados.length - 2];
+                const valPenultimo = obtenerValorLlanta(penultimo, pos);
+                
+                if (valActual > valPenultimo && valPenultimo > 0) {
+                    if (valActual <= LIMITE_CRITICO) {
+                        todasPredicciones.push({ cd, maq, posicion: nombresPos[pos], dias: 0, fecha: 'INMEDIATO', profundidadActual: valActual, urgente: true, tipo: 'critica' });
+                    } else { return; }
+                } else {
+                    let primerRegistroValido = registrosOrdenados[0];
+                    for (let i = 0; i < registrosOrdenados.length; i++) {
+                        if (obtenerValorLlanta(registrosOrdenados[i], pos) > 0) {
+                            primerRegistroValido = registrosOrdenados[i];
+                            break;
+                        }
+                    }
+                    const diasEntre = (new Date(ultimoRegistro.fecha) - new Date(primerRegistroValido.fecha)) / (1000 * 60 * 60 * 24);
+                    const valInicio = obtenerValorLlanta(primerRegistroValido, pos);
+                    if (diasEntre <= 0) return;
+                    const desgDiario = (valInicio - valActual) / diasEntre;
+                    
+                    if (valActual <= LIMITE_CRITICO) {
+                        todasPredicciones.push({ cd, maq, posicion: nombresPos[pos], dias: 0, fecha: 'INMEDIATO', profundidadActual: valActual, urgente: true, tipo: 'critica' });
+                    } else if (valActual <= LIMITE_ALERTA) {
+                        if (desgDiario > 0) {
+                            const diasRestantes = (valActual - LIMITE_CRITICO) / desgDiario;
+                            const fechaEst = new Date();
+                            fechaEst.setDate(fechaEst.getDate() + diasRestantes);
+                            todasPredicciones.push({ cd, maq, posicion: nombresPos[pos], dias: Math.ceil(diasRestantes), fecha: fechaEst.toLocaleDateString('es-CO'), profundidadActual: valActual, urgente: false, tipo: 'alerta' });
+                        }
+                    } else {
+                        if (desgDiario > 0) {
+                            const diasRestantes = (valActual - LIMITE_CRITICO) / desgDiario;
+                            const fechaEst = new Date();
+                            fechaEst.setDate(fechaEst.getDate() + diasRestantes);
+                            todasPredicciones.push({ cd, maq, posicion: nombresPos[pos], dias: Math.ceil(diasRestantes), fecha: fechaEst.toLocaleDateString('es-CO'), profundidadActual: valActual, urgente: false, tipo: 'normal' });
+                        }
                     }
                 }
-            });
-        }
-
-        function graficarDesgasteMensual(datos) {
-            const porMes = agruparPorMes(datos);
-            const desgastes = [];
-            for (let i = 1; i < porMes.length; i++) {
-                const desg = Math.max(0, porMes[i-1].promedio - porMes[i].promedio);
-                desgastes.push({ mes: porMes[i].mes, valor: desg.toFixed(1) });
+            } else {
+                if (valActual <= LIMITE_CRITICO) {
+                    todasPredicciones.push({ cd, maq, posicion: nombresPos[pos], dias: 0, fecha: 'INMEDIATO', profundidadActual: valActual, urgente: true, tipo: 'critica' });
+                } else if (valActual <= LIMITE_ALERTA) {
+                    todasPredicciones.push({ cd, maq, posicion: nombresPos[pos], dias: 30, fecha: 'PRÓXIMO MES', profundidadActual: valActual, urgente: false, tipo: 'alerta' });
+                }
             }
-            if (charts.desg) charts.desg.destroy();
-            charts.desg = new Chart(document.getElementById('chartDesgaste'), {
-                type: 'bar',
-                data: {
-                    labels: desgastes.map(d => d.mes),
-                    datasets: [{
-                        label: 'Desgaste (mm)',
-                        data: desgastes.map(d => d.valor),
-                        backgroundColor: '#FFC72C',
-                        borderColor: '#C8102E',
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: { legend: { display: false } },
-                    scales: {
-                        y: { beginAtZero: true, ticks: { font: { size: 10 } } },
-                        x: { ticks: { font: { size: 10 } } }
-                    }
-                }
-            });
+        });
+    });
+    
+    todasPredicciones.sort((a, b) => {
+        if (a.urgente && !b.urgente) return -1;
+        if (!a.urgente && b.urgente) return 1;
+        if (a.tipo === 'alerta' && b.tipo !== 'alerta') return -1;
+        if (a.tipo !== 'alerta' && b.tipo === 'alerta') return 1;
+        return a.dias - b.dias;
+    });
+    
+    const prediccionesAMostrar = todasPredicciones.slice(0, 15);
+    if (prediccionesAMostrar.length === 0) {
+        ul.innerHTML = '<li class="bg-green-50 p-3 rounded border-l-4 border-green-600">✅ Todas las llantas están dentro de los parámetros normales de vida útil.</li>';
+        return;
+    }
+    
+    prediccionesAMostrar.forEach(p => {
+        let html = '';
+        if (p.tipo === 'critica') {
+            html = `<li class="bg-red-50 p-3 rounded border-l-4 border-red-600 mb-2">
+                <div><span class="text-red-700 font-bold">🔴 URGENTE</span><strong class="ml-2">${p.cd} - FLT ${p.maq}</strong><span class="text-xs text-gray-600 ml-2">[${p.posicion}]</span></div>
+                <div class="mt-1 text-sm"><span class="text-red-700 font-bold">Cambio inmediato requerido</span><span class="text-gray-700 ml-2">Profundidad: <strong>${p.profundidadActual.toFixed(1)} mm</strong></span></div>
+            </li>`;
+        } else if (p.tipo === 'alerta') {
+            html = `<li class="bg-orange-50 p-3 rounded border-l-4 border-orange-500 mb-2">
+                <div><span class="text-orange-700 font-bold">⚠️ ALERTA</span><strong class="ml-2">${p.cd} - FLT ${p.maq}</strong><span class="text-xs text-gray-600 ml-2">[${p.posicion}]</span></div>
+                <div class="mt-1 text-sm"><span class="text-orange-700">Planificar cambio en <strong>${p.dias} días</strong> (${p.fecha})</span><span class="text-gray-700 ml-2">Profundidad: <strong>${p.profundidadActual.toFixed(1)} mm</strong></span></div>
+            </li>`;
+        } else {
+            html = `<li class="bg-blue-50 p-3 rounded border-l-4 border-blue-500 mb-2">
+                <div><span class="text-blue-700 font-bold">🔵 PROGRAMADA</span><strong class="ml-2">${p.cd} - FLT ${p.maq}</strong><span class="text-xs text-gray-600 ml-2">[${p.posicion}]</span></div>
+                <div class="mt-1 text-sm"><span class="text-blue-700">Cambio en <strong>${p.dias} días</strong> (${p.fecha})</span><span class="text-gray-700 ml-2">Profundidad: <strong>${p.profundidadActual.toFixed(1)} mm</strong></span></div>
+            </li>`;
         }
+        ul.innerHTML += html;
+    });
+    
+    const criticas = todasPredicciones.filter(p => p.tipo === 'critica').length;
+    const alertas = todasPredicciones.filter(p => p.tipo === 'alerta').length;
+    const normales = todasPredicciones.filter(p => p.tipo === 'normal').length;
+    if (criticas > 0 || alertas > 0) {
+        ul.innerHTML += `<li class="mt-3 p-3 bg-gray-100 rounded text-xs text-gray-700">📊 <strong>Resumen:</strong> ${criticas} crítica(s) | ${alertas} en alerta | ${normales} programadas | ${todasPredicciones.length} total en monitoreo</li>`;
+    }
+}
 
-        function generarTablaAlertas(datos) {
-            const grupos = agruparPorMaquina(datos);
-            const tbody = document.getElementById('tablaAlertas');
-            tbody.innerHTML = '';
-            let filas = [];
-            Object.entries(grupos).forEach(([key, arr]) => {
-                if (arr.length < 2) return;
-                const desg = promedioLlantas(arr[0]) - promedioLlantas(arr[arr.length - 1]);
-                if (desg > 3.0) {
-                    const [cd, maq] = key.split('|');
-                    filas.push({ cd, maq, horometro: arr[arr.length - 1].horometro, actual: promedioLlantas(arr[arr.length - 1]), desg });
-                }
-            });
-            filas.sort((a, b) => b.desg - a.desg).slice(0, 10).forEach(f => {
-                const estado = f.desg > 5 ? '<span class="bg-red-100 text-red-800 px-2 py-1 rounded text-xs font-bold">CRÍTICO</span>' : 
-                               f.desg > 3.5 ? '<span class="bg-orange-100 text-orange-800 px-2 py-1 rounded text-xs font-bold">ALTO</span>' : 
-                               '<span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded text-xs font-bold">MODERADO</span>';
-                tbody.innerHTML += `<tr class="hover:bg-gray-50">
-                    <td class="p-3 font-semibold">${f.cd}</td><td class="p-3 font-bold text-bavaria-red">${f.maq}</td>
-                    <td class="p-3 text-right">${f.horometro}</td><td class="p-3 text-right">${f.actual.toFixed(1)} mm</td>
-                    <td class="p-3 text-right font-bold">${f.desg.toFixed(2)} mm</td><td class="p-3 text-center">${estado}</td>
-                </tr>`;
-            });
-            if (filas.length === 0) tbody.innerHTML = '<tr><td colspan="6" class="p-4 text-center text-gray-500">✅ No hay máquinas con desgaste acelerado</td></tr>';
-        }
+// ==========================================
+// NUEVOS ANÁLISIS AVANZADOS
+// ==========================================
 
-        function generarPrediccion(datos) {
-            const grupos = agruparPorMaquina(datos);
-            const ul = document.getElementById('listaPrediccion');
-            ul.innerHTML = '';
-            let predicciones = [];
-            const LIMITE_CAMBIO = 25; 
-            Object.entries(grupos).forEach(([key, arr]) => {
-                if (arr.length < 2) return;
-                const diasEntre = (new Date(arr[arr.length - 1].fecha) - new Date(arr[0].fecha)) / (1000 * 60 * 60 * 24);
-                if (diasEntre <= 0) return;
-                const desgDiario = (promedioLlantas(arr[0]) - promedioLlantas(arr[arr.length - 1])) / diasEntre;
-                const actual = promedioLlantas(arr[arr.length - 1]);
-                if (desgDiario > 0 && actual > LIMITE_CAMBIO) {
-                    const diasRestantes = (actual - LIMITE_CAMBIO) / desgDiario;
-                    const fechaEst = new Date();
-                    fechaEst.setDate(fechaEst.getDate() + diasRestantes);
-                    const [cd, maq] = key.split('|');
-                    predicciones.push({ cd, maq, dias: Math.ceil(diasRestantes), fecha: fechaEst.toLocaleDateString('es-CO') });
-                }
-            });
-            predicciones.sort((a, b) => a.dias - b.dias).slice(0, 5).forEach(p => {
-                ul.innerHTML += `<li>🔸 <strong>${p.cd} - FLT ${p.maq}</strong>: Cambio estimado en <strong class="text-bavaria-red">${p.dias} días</strong> (${p.fecha}).</li>`;
-            });
-            if (predicciones.length === 0) ul.innerHTML = '<li>✅ Todas las llantas están dentro de los parámetros normales de vida útil.</li>';
+// 1. EFICIENCIA mm/hora
+function generarAnalisisEficiencia(datos, posicion) {
+    const grupos = agruparPorMaquina(datos);
+    const tbody = document.getElementById('tablaEficiencia');
+    tbody.innerHTML = '';
+    let filas = [];
+    
+    Object.entries(grupos).forEach(([key, arr]) => {
+        if (arr.length < 2) return;
+        
+        const valInicio = obtenerValorLlanta(arr[0], posicion);
+        const valFin = obtenerValorLlanta(arr[arr.length - 1], posicion);
+        const horasInicio = Number(arr[0].horometro || 0);
+        const horasFin = Number(arr[arr.length - 1].horometro || 0);
+        const horasTrabajadas = horasFin - horasInicio;
+        const desgaste = valInicio - valFin;
+        
+        if (horasTrabajadas > 0 && desgaste > 0 && desgaste < 50) {
+            const eficiencia = desgaste / horasTrabajadas;
+            const [cd, maq] = key.split('|');
+            filas.push({ cd, maq, horasTrabajadas, desgaste, eficiencia });
         }
-    </script>
+    });
+    
+    filas.sort((a, b) => b.eficiencia - a.eficiencia).slice(0, 15).forEach(f => {
+        const estado = f.eficiencia > 0.02 ? '<span class="bg-red-100 text-red-800 px-2 py-1 rounded text-xs font-bold">🔴 MALA</span>' : 
+                       f.eficiencia > 0.01 ? '<span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded text-xs font-bold">🟡 REGULAR</span>' : 
+                       '<span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs font-bold">🟢 BUENA</span>';
+        
+        tbody.innerHTML += `<tr class="hover:bg-gray-50">
+            <td class="p-2 font-semibold">${f.cd}</td>
+            <td class="p-2 font-bold text-bavaria-red">${f.maq}</td>
+            <td class="p-2 text-right">${f.horasTrabajadas.toFixed(0)} hrs</td>
+            <td class="p-2 text-right">${f.desgaste.toFixed(1)} mm</td>
+            <td class="p-2 text-right font-bold">${f.eficiencia.toFixed(4)}</td>
+            <td class="p-2 text-center">${estado}</td>
+        </tr>`;
+    });
+    
+    if (filas.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="6" class="p-4 text-center text-gray-500">ℹ️ No hay datos suficientes para calcular eficiencia (se requieren al menos 2 registros por máquina con horómetro válido)</td></tr>';
+    }
+}
+
+// 2. RANKING DE HORAS
+function generarRankingHoras(datos) {
+    const grupos = agruparPorMaquina(datos);
+    const tbody = document.getElementById('tablaRankingHoras');
+    tbody.innerHTML = '';
+    let filas = [];
+    
+    Object.entries(grupos).forEach(([key, arr]) => {
+        const [cd, maq] = key.split('|');
+        const ultimoHorometro = Number(arr[arr.length - 1].horometro || 0);
+        const primerHorometro = Number(arr[0].horometro || 0);
+        const horasPeriodo = ultimoHorometro - primerHorometro;
+        const diasEntre = (new Date(arr[arr.length - 1].fecha) - new Date(arr[0].fecha)) / (1000 * 60 * 60 * 24);
+        const horasDiarias = diasEntre > 0 ? horasPeriodo / diasEntre : 0;
+        
+        if (horasPeriodo > 0) {
+            filas.push({ cd, maq, horasPeriodo, horasDiarias, ultimoHorometro });
+        }
+    });
+    
+    filas.sort((a, b) => b.horasPeriodo - a.horasPeriodo).slice(0, 15).forEach((f, i) => {
+        const medalla = i === 0 ? '' : i === 1 ? '🥈' : i === 2 ? '🥉' : `${i + 1}°`;
+        tbody.innerHTML += `<tr class="hover:bg-gray-50">
+            <td class="p-2 text-center text-lg">${medalla}</td>
+            <td class="p-2 font-semibold">${f.cd}</td>
+            <td class="p-2 font-bold text-bavaria-red">${f.maq}</td>
+            <td class="p-2 text-right font-bold">${f.horasPeriodo.toFixed(0)} hrs</td>
+            <td class="p-2 text-right">${f.horasDiarias.toFixed(1)} hrs/día</td>
+            <td class="p-2 text-right text-xs text-gray-500">${f.ultimoHorometro} hrs</td>
+        </tr>`;
+    });
+    
+    if (filas.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="6" class="p-4 text-center text-gray-500">ℹ️ No hay datos de horómetro disponibles para generar el ranking</td></tr>';
+    }
+}
+
+// 3. ASIMETRÍA DE LLANTAS
+function generarAnalisisAsimetria(datos) {
+    const grupos = agruparPorMaquina(datos);
+    const tbody = document.getElementById('tablaAsimetria');
+    tbody.innerHTML = '';
+    let filas = [];
+    
+    Object.entries(grupos).forEach(([key, arr]) => {
+        if (arr.length < 1) return;
+        const ultimo = arr[arr.length - 1];
+        
+        const di = Number(ultimo.llantaDI || 0);
+        const dd = Number(ultimo.llantaDD || 0);
+        const ti = Number(ultimo.llantaTI || 0);
+        const td = Number(ultimo.llantaTD || 0);
+        
+        // Solo analizar si hay valores válidos
+        if (di === 0 && dd === 0 && ti === 0 && td === 0) return;
+        
+        const difDelantera = Math.abs(di - dd);
+        const difTrasera = Math.abs(ti - td);
+        const [cd, maq] = key.split('|');
+        
+        // Mostrar si hay diferencia significativa (> 3mm)
+        if (difDelantera > 3 || difTrasera > 3) {
+            filas.push({ cd, maq, di, dd, ti, td, difDelantera, difTrasera });
+        }
+    });
+    
+    filas.sort((a, b) => (b.difDelantera + b.difTrasera) - (a.difDelantera + a.difTrasera)).slice(0, 15).forEach(f => {
+        const estado = (f.difDelantera > 5 || f.difTrasera > 5) ? 
+            '<span class="bg-red-100 text-red-800 px-2 py-1 rounded text-xs font-bold">🔴 CRÍTICO</span>' : 
+            '<span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded text-xs font-bold"> REVISAR</span>';
+        
+        tbody.innerHTML += `<tr class="hover:bg-gray-50">
+            <td class="p-2 font-semibold">${f.cd}</td>
+            <td class="p-2 font-bold text-bavaria-red">${f.maq}</td>
+            <td class="p-2 text-center">${f.di.toFixed(1)} / ${f.dd.toFixed(1)}</td>
+            <td class="p-2 text-right font-bold ${f.difDelantera > 5 ? 'text-red-600' : 'text-yellow-600'}">${f.difDelantera.toFixed(1)} mm</td>
+            <td class="p-2 text-center">${f.ti.toFixed(1)} / ${f.td.toFixed(1)}</td>
+            <td class="p-2 text-right font-bold ${f.difTrasera > 5 ? 'text-red-600' : 'text-yellow-600'}">${f.difTrasera.toFixed(1)} mm</td>
+            <td class="p-2 text-center">${estado}</td>
+        </tr>`;
+    });
+    
+    if (filas.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="7" class="p-4 text-center text-gray-500">✅ Todas las máquinas tienen llantas simétricas (diferencia < 3mm entre ejes)</td></tr>';
+    }
+}
+</script>
 </body>
 </html>
