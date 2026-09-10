@@ -194,41 +194,24 @@
                 <ul id="listaPrediccion" class="space-y-1.5 text-sm text-gray-700"></ul>
             </div>
 
-            <!-- ========================================== -->
-            <!-- NUEVAS SECCIONES: ANÁLISIS AVANZADOS       -->
-            <!-- ========================================== -->
+            <!-- Análisis Avanzados -->
             <div class="bg-white p-3 rounded-xl shadow">
                 <h3 class="font-bold text-gray-800 mb-3 text-sm uppercase">🔬 Análisis Avanzados de Flota</h3>
                 
-                <!-- Pestañas -->
                 <div class="flex flex-wrap gap-2 mb-4 border-b border-gray-200 pb-2">
-                    <button onclick="cambiarTab('eficiencia')" id="tabEficiencia" class="px-4 py-2 rounded-lg text-xs font-bold transition tab-activa">
-                        ⚡ Eficiencia mm/hr
-                    </button>
-                    <button onclick="cambiarTab('ranking')" id="tabRanking" class="px-4 py-2 rounded-lg text-xs font-bold transition tab-inactiva">
-                         Ranking Horas
-                    </button>
-                    <button onclick="cambiarTab('asimetria')" id="tabAsimetria" class="px-4 py-2 rounded-lg text-xs font-bold transition tab-inactiva">
-                        ⚖️ Asimetría (Alineación)
-                    </button>
+                    <button onclick="cambiarTab('eficiencia')" id="tabEficiencia" class="px-4 py-2 rounded-lg text-xs font-bold transition tab-activa">⚡ Eficiencia mm/hr</button>
+                    <button onclick="cambiarTab('ranking')" id="tabRanking" class="px-4 py-2 rounded-lg text-xs font-bold transition tab-inactiva">🏆 Ranking Horas</button>
+                    <button onclick="cambiarTab('asimetria')" id="tabAsimetria" class="px-4 py-2 rounded-lg text-xs font-bold transition tab-inactiva">⚖️ Asimetría</button>
                 </div>
 
-                <!-- Contenido pestañas -->
                 <div id="contenidoEficiencia" class="tab-contenido">
                     <div class="mb-3 p-2 bg-blue-50 rounded border-l-4 border-blue-500 text-xs text-blue-800">
-                        💡 <strong>Eficiencia de llantas:</strong> Mide cuántos mm se desgasta por cada hora de operación. Valores > 0.02 mm/hr indican problemas mecánicos (alineación, frenos, suspensión).
+                        💡 <strong>Eficiencia de llantas:</strong> Mide cuántos mm se desgasta por cada hora de operación. Valores > 0.02 mm/hr indican problemas mecánicos.
                     </div>
                     <div class="overflow-x-auto">
                         <table class="w-full text-sm text-left">
                             <thead class="bg-gray-100 text-gray-700 uppercase text-xs">
-                                <tr>
-                                    <th class="p-2">CD</th>
-                                    <th class="p-2">Máquina</th>
-                                    <th class="p-2 text-right">Horas Trabajadas</th>
-                                    <th class="p-2 text-right">Desgaste Total</th>
-                                    <th class="p-2 text-right">Eficiencia (mm/hr)</th>
-                                    <th class="p-2 text-center">Estado</th>
-                                </tr>
+                                <tr><th class="p-2">CD</th><th class="p-2">Máquina</th><th class="p-2 text-right">Horas Trabajadas</th><th class="p-2 text-right">Desgaste Total</th><th class="p-2 text-right">Eficiencia (mm/hr)</th><th class="p-2 text-center">Estado</th></tr>
                             </thead>
                             <tbody id="tablaEficiencia" class="divide-y divide-gray-100"></tbody>
                         </table>
@@ -237,19 +220,12 @@
 
                 <div id="contenidoRanking" class="tab-contenido vista-oculta">
                     <div class="mb-3 p-2 bg-yellow-50 rounded border-l-4 border-yellow-500 text-xs text-yellow-800">
-                        💡 <strong>Ranking de uso:</strong> Identifica las máquinas con mayor carga de trabajo. Útil para programar mantenimientos preventivos y balancear la operación entre CDs.
+                        💡 <strong>Ranking de uso:</strong> Identifica las máquinas con mayor carga de trabajo para programar mantenimientos preventivos.
                     </div>
                     <div class="overflow-x-auto">
                         <table class="w-full text-sm text-left">
                             <thead class="bg-gray-100 text-gray-700 uppercase text-xs">
-                                <tr>
-                                    <th class="p-2 text-center">#</th>
-                                    <th class="p-2">CD</th>
-                                    <th class="p-2">Máquina</th>
-                                    <th class="p-2 text-right">Horas en Período</th>
-                                    <th class="p-2 text-right">Promedio hrs/día</th>
-                                    <th class="p-2 text-right text-xs text-gray-500">Horómetro Total</th>
-                                </tr>
+                                <tr><th class="p-2 text-center">#</th><th class="p-2">CD</th><th class="p-2">Máquina</th><th class="p-2 text-right">Horas en Período</th><th class="p-2 text-right">Promedio hrs/día</th><th class="p-2 text-right text-xs text-gray-500">Horómetro Total</th></tr>
                             </thead>
                             <tbody id="tablaRankingHoras" class="divide-y divide-gray-100"></tbody>
                         </table>
@@ -258,20 +234,12 @@
 
                 <div id="contenidoAsimetria" class="tab-contenido vista-oculta">
                     <div class="mb-3 p-2 bg-orange-50 rounded border-l-4 border-orange-500 text-xs text-orange-800">
-                        💡 <strong>Asimetría de llantas:</strong> Detecta diferencias de desgaste entre llantas del mismo eje. Diferencias > 5mm indican problemas de alineación, suspensión o hábitos de conducción.
+                        💡 <strong>Asimetría de llantas:</strong> Detecta diferencias de desgaste entre llantas del mismo eje (> 5mm indica problemas de alineación).
                     </div>
                     <div class="overflow-x-auto">
                         <table class="w-full text-sm text-left">
                             <thead class="bg-gray-100 text-gray-700 uppercase text-xs">
-                                <tr>
-                                    <th class="p-2">CD</th>
-                                    <th class="p-2">Máquina</th>
-                                    <th class="p-2 text-center">Delanteras (Izq/Der)</th>
-                                    <th class="p-2 text-right">Dif. Delantera</th>
-                                    <th class="p-2 text-center">Traseras (Izq/Der)</th>
-                                    <th class="p-2 text-right">Dif. Trasera</th>
-                                    <th class="p-2 text-center">Estado</th>
-                                </tr>
+                                <tr><th class="p-2">CD</th><th class="p-2">Máquina</th><th class="p-2 text-center">Delanteras (Izq/Der)</th><th class="p-2 text-right">Dif. Delantera</th><th class="p-2 text-center">Traseras (Izq/Der)</th><th class="p-2 text-right">Dif. Trasera</th><th class="p-2 text-center">Estado</th></tr>
                             </thead>
                             <tbody id="tablaAsimetria" class="divide-y divide-gray-100"></tbody>
                         </table>
@@ -285,44 +253,109 @@
         &copy; 2026 Anderson Alzate. - Desarrollador de Software
     </footer>
 
+    <!-- ========================================== -->
+    <!-- MODAL DE CLAVE DE ACCESO AL DASHBOARD      -->
+    <!-- ========================================== -->
+    <div id="modalClave" class="vista-oculta fixed inset-0 bg-black/60 flex items-center justify-center z-[100] p-4 backdrop-blur-sm">
+        <div class="bg-white rounded-xl shadow-2xl w-full max-w-md border-2 border-bavaria-gold overflow-hidden transform transition-all">
+            <div class="bg-bavaria-red text-white p-4 text-center">
+                <h3 class="font-bold text-lg uppercase tracking-wide">Acceso Restringido</h3>
+                <p class="text-xs opacity-90 mt-1">Dashboard de Análisis - Bavaria S.A.</p>
+            </div>
+            <div class="p-6 space-y-4">
+                <p class="text-sm text-gray-600 text-center">Ingrese la clave de administrador para visualizar el dashboard.</p>
+                <input type="password" id="inputClave" placeholder="Ingrese la clave..." 
+                       class="w-full border-2 border-gray-300 rounded-lg p-3 text-center font-bold text-lg focus:border-bavaria-red focus:outline-none transition-colors">
+                <p id="mensajeErrorClave" class="vista-oculta text-red-600 text-sm text-center font-semibold bg-red-50 p-2 rounded border border-red-200">
+                    ❌ Clave incorrecta. Intente nuevamente.
+                </p>
+                <div class="flex gap-3 pt-2">
+                    <button onclick="cerrarModalClave()" class="flex-1 bg-gray-200 text-gray-700 font-bold py-2.5 rounded-lg hover:bg-gray-300 transition text-sm">
+                        Cancelar
+                    </button>
+                    <button onclick="verificarClave()" class="flex-1 bg-bavaria-red text-white font-bold py-2.5 rounded-lg hover:bg-bavaria-dark-red transition text-sm shadow">
+                        Ingresar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 <script>
 // ==========================================
-// NAVEGACIÓN
+// CONFIGURACIÓN DE SEGURIDAD
+// ==========================================
+const CLAVE_DASHBOARD = "Ander2026"; // <--- CAMBIA ESTA CLAVE POR LA QUE DESEES
+
+// ==========================================
+// NAVEGACIÓN Y MODAL
 // ==========================================
 function cambiarVista(vista) {
-    const formView = document.getElementById('vistaFormulario');
-    const dashView = document.getElementById('vistaDashboard');
-    const btnForm = document.getElementById('btnForm');
-    const btnDash = document.getElementById('btnDash');
-    if (vista === 'formulario') {
+    if (vista === 'dashboard') {
+        // Mostrar modal de contraseña en lugar de cambiar la vista directamente
+        document.getElementById('modalClave').classList.remove('vista-oculta');
+        document.getElementById('inputClave').value = '';
+        document.getElementById('mensajeErrorClave').classList.add('vista-oculta');
+        setTimeout(() => document.getElementById('inputClave').focus(), 100);
+    } else {
+        // Lógica original para ir al formulario
+        const formView = document.getElementById('vistaFormulario');
+        const dashView = document.getElementById('vistaDashboard');
+        const btnForm = document.getElementById('btnForm');
+        const btnDash = document.getElementById('btnDash');
+        
         formView.classList.remove('vista-oculta');
         dashView.classList.add('vista-oculta');
         btnForm.classList.add('bg-white', 'text-bavaria-red', 'shadow');
         btnForm.classList.remove('text-white', 'hover:bg-white/20');
         btnDash.classList.remove('bg-white', 'text-bavaria-red', 'shadow');
         btnDash.classList.add('text-white', 'hover:bg-white/20');
-    } else {
+    }
+}
+
+function verificarClave() {
+    const input = document.getElementById('inputClave').value;
+    
+    if (input === CLAVE_DASHBOARD) {
+        // Clave correcta: ocultar modal y mostrar dashboard
+        document.getElementById('modalClave').classList.add('vista-oculta');
+        
+        const formView = document.getElementById('vistaFormulario');
+        const dashView = document.getElementById('vistaDashboard');
+        const btnForm = document.getElementById('btnForm');
+        const btnDash = document.getElementById('btnDash');
+        
         formView.classList.add('vista-oculta');
         dashView.classList.remove('vista-oculta');
         btnDash.classList.add('bg-white', 'text-bavaria-red', 'shadow');
         btnDash.classList.remove('text-white', 'hover:bg-white/20');
         btnForm.classList.remove('bg-white', 'text-bavaria-red', 'shadow');
         btnForm.classList.add('text-white', 'hover:bg-white/20');
+        
         if (datosGlobales.length === 0) iniciarDashboard();
+    } else {
+        // Clave incorrecta
+        document.getElementById('mensajeErrorClave').classList.remove('vista-oculta');
+        document.getElementById('inputClave').value = '';
+        document.getElementById('inputClave').focus();
     }
 }
 
-// NUEVA: Sistema de pestañas para análisis avanzados
+function cerrarModalClave() {
+    document.getElementById('modalClave').classList.add('vista-oculta');
+}
+
+// Permitir usar la tecla Enter para enviar la clave
+document.getElementById('inputClave').addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') verificarClave();
+});
+
 function cambiarTab(tab) {
-    // Ocultar todos los contenidos
     document.querySelectorAll('.tab-contenido').forEach(el => el.classList.add('vista-oculta'));
-    // Quitar clase activa de todos los botones
     document.querySelectorAll('[id^="tab"]').forEach(el => {
         el.classList.remove('tab-activa');
         el.classList.add('tab-inactiva');
     });
-    
-    // Mostrar el seleccionado
     document.getElementById('contenido' + tab.charAt(0).toUpperCase() + tab.slice(1)).classList.remove('vista-oculta');
     document.getElementById('tab' + tab.charAt(0).toUpperCase() + tab.slice(1)).classList.remove('tab-inactiva');
     document.getElementById('tab' + tab.charAt(0).toUpperCase() + tab.slice(1)).classList.add('tab-activa');
@@ -546,8 +579,6 @@ function generarAnalisis() {
     let datosConHistorial = datos;
     if (mes) {
         const mesAnterior = obtenerMesAnterior(mes);
-        console.log('Mes seleccionado:', mes, '| Mes anterior:', mesAnterior);
-        
         datos = datosGlobales.filter(r => r.fecha.startsWith(mes));
         if (cd) datos = datos.filter(r => r.cd === cd);
         if (maq) datos = datos.filter(r => r.maquina === maq);
@@ -559,28 +590,23 @@ function generarAnalisis() {
         if (maq) datosConHistorial = datosConHistorial.filter(r => r.maquina === maq);
     }
 
-    console.log('Datos del mes:', datos.length, '| Con historial:', datosConHistorial.length);
-    
     if (datos.length === 0) { 
         alert("No hay datos para estos filtros"); 
         return; 
     }
     
-    // Análisis existentes
     actualizarKPIs(datosConHistorial, posicion, mes); 
     graficarProfundidad(datosConHistorial, posicion); 
     graficarDesgasteMensual(datosConHistorial, posicion);
     generarTablaAlertas(datosConHistorial, posicion, mes);
     generarPrediccion(datosConHistorial, posicion);
-    
-    // NUEVOS análisis avanzados
     generarAnalisisEficiencia(datosConHistorial, posicion);
     generarRankingHoras(datosConHistorial);
     generarAnalisisAsimetria(datosConHistorial);
 }
 
 // ==========================================
-// KPIs y Gráficas existentes
+// KPIs y Gráficas
 // ==========================================
 function actualizarKPIs(datos, posicion, mesActual = null) {
     document.getElementById('kpiRegistros').textContent = datos.length;
@@ -825,10 +851,8 @@ function generarPrediccion(datos, posicion) {
 }
 
 // ==========================================
-// NUEVOS ANÁLISIS AVANZADOS
+// ANÁLISIS AVANZADOS
 // ==========================================
-
-// 1. EFICIENCIA mm/hora
 function generarAnalisisEficiencia(datos, posicion) {
     const grupos = agruparPorMaquina(datos);
     const tbody = document.getElementById('tablaEficiencia');
@@ -837,7 +861,6 @@ function generarAnalisisEficiencia(datos, posicion) {
     
     Object.entries(grupos).forEach(([key, arr]) => {
         if (arr.length < 2) return;
-        
         const valInicio = obtenerValorLlanta(arr[0], posicion);
         const valFin = obtenerValorLlanta(arr[arr.length - 1], posicion);
         const horasInicio = Number(arr[0].horometro || 0);
@@ -856,23 +879,15 @@ function generarAnalisisEficiencia(datos, posicion) {
         const estado = f.eficiencia > 0.02 ? '<span class="bg-red-100 text-red-800 px-2 py-1 rounded text-xs font-bold">🔴 MALA</span>' : 
                        f.eficiencia > 0.01 ? '<span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded text-xs font-bold">🟡 REGULAR</span>' : 
                        '<span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs font-bold">🟢 BUENA</span>';
-        
         tbody.innerHTML += `<tr class="hover:bg-gray-50">
-            <td class="p-2 font-semibold">${f.cd}</td>
-            <td class="p-2 font-bold text-bavaria-red">${f.maq}</td>
-            <td class="p-2 text-right">${f.horasTrabajadas.toFixed(0)} hrs</td>
-            <td class="p-2 text-right">${f.desgaste.toFixed(1)} mm</td>
-            <td class="p-2 text-right font-bold">${f.eficiencia.toFixed(4)}</td>
-            <td class="p-2 text-center">${estado}</td>
+            <td class="p-2 font-semibold">${f.cd}</td><td class="p-2 font-bold text-bavaria-red">${f.maq}</td>
+            <td class="p-2 text-right">${f.horasTrabajadas.toFixed(0)} hrs</td><td class="p-2 text-right">${f.desgaste.toFixed(1)} mm</td>
+            <td class="p-2 text-right font-bold">${f.eficiencia.toFixed(4)}</td><td class="p-2 text-center">${estado}</td>
         </tr>`;
     });
-    
-    if (filas.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="6" class="p-4 text-center text-gray-500">ℹ️ No hay datos suficientes para calcular eficiencia (se requieren al menos 2 registros por máquina con horómetro válido)</td></tr>';
-    }
+    if (filas.length === 0) tbody.innerHTML = '<tr><td colspan="6" class="p-4 text-center text-gray-500">ℹ️ No hay datos suficientes para calcular eficiencia</td></tr>';
 }
 
-// 2. RANKING DE HORAS
 function generarRankingHoras(datos) {
     const grupos = agruparPorMaquina(datos);
     const tbody = document.getElementById('tablaRankingHoras');
@@ -886,30 +901,20 @@ function generarRankingHoras(datos) {
         const horasPeriodo = ultimoHorometro - primerHorometro;
         const diasEntre = (new Date(arr[arr.length - 1].fecha) - new Date(arr[0].fecha)) / (1000 * 60 * 60 * 24);
         const horasDiarias = diasEntre > 0 ? horasPeriodo / diasEntre : 0;
-        
-        if (horasPeriodo > 0) {
-            filas.push({ cd, maq, horasPeriodo, horasDiarias, ultimoHorometro });
-        }
+        if (horasPeriodo > 0) filas.push({ cd, maq, horasPeriodo, horasDiarias, ultimoHorometro });
     });
     
     filas.sort((a, b) => b.horasPeriodo - a.horasPeriodo).slice(0, 15).forEach((f, i) => {
         const medalla = i === 0 ? '' : i === 1 ? '🥈' : i === 2 ? '🥉' : `${i + 1}°`;
         tbody.innerHTML += `<tr class="hover:bg-gray-50">
-            <td class="p-2 text-center text-lg">${medalla}</td>
-            <td class="p-2 font-semibold">${f.cd}</td>
-            <td class="p-2 font-bold text-bavaria-red">${f.maq}</td>
-            <td class="p-2 text-right font-bold">${f.horasPeriodo.toFixed(0)} hrs</td>
-            <td class="p-2 text-right">${f.horasDiarias.toFixed(1)} hrs/día</td>
+            <td class="p-2 text-center text-lg">${medalla}</td><td class="p-2 font-semibold">${f.cd}</td><td class="p-2 font-bold text-bavaria-red">${f.maq}</td>
+            <td class="p-2 text-right font-bold">${f.horasPeriodo.toFixed(0)} hrs</td><td class="p-2 text-right">${f.horasDiarias.toFixed(1)} hrs/día</td>
             <td class="p-2 text-right text-xs text-gray-500">${f.ultimoHorometro} hrs</td>
         </tr>`;
     });
-    
-    if (filas.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="6" class="p-4 text-center text-gray-500">ℹ️ No hay datos de horómetro disponibles para generar el ranking</td></tr>';
-    }
+    if (filas.length === 0) tbody.innerHTML = '<tr><td colspan="6" class="p-4 text-center text-gray-500">ℹ️ No hay datos de horómetro disponibles</td></tr>';
 }
 
-// 3. ASIMETRÍA DE LLANTAS
 function generarAnalisisAsimetria(datos) {
     const grupos = agruparPorMaquina(datos);
     const tbody = document.getElementById('tablaAsimetria');
@@ -919,20 +924,16 @@ function generarAnalisisAsimetria(datos) {
     Object.entries(grupos).forEach(([key, arr]) => {
         if (arr.length < 1) return;
         const ultimo = arr[arr.length - 1];
-        
         const di = Number(ultimo.llantaDI || 0);
         const dd = Number(ultimo.llantaDD || 0);
         const ti = Number(ultimo.llantaTI || 0);
         const td = Number(ultimo.llantaTD || 0);
-        
-        // Solo analizar si hay valores válidos
         if (di === 0 && dd === 0 && ti === 0 && td === 0) return;
         
         const difDelantera = Math.abs(di - dd);
         const difTrasera = Math.abs(ti - td);
         const [cd, maq] = key.split('|');
         
-        // Mostrar si hay diferencia significativa (> 3mm)
         if (difDelantera > 3 || difTrasera > 3) {
             filas.push({ cd, maq, di, dd, ti, td, difDelantera, difTrasera });
         }
@@ -941,11 +942,9 @@ function generarAnalisisAsimetria(datos) {
     filas.sort((a, b) => (b.difDelantera + b.difTrasera) - (a.difDelantera + a.difTrasera)).slice(0, 15).forEach(f => {
         const estado = (f.difDelantera > 5 || f.difTrasera > 5) ? 
             '<span class="bg-red-100 text-red-800 px-2 py-1 rounded text-xs font-bold">🔴 CRÍTICO</span>' : 
-            '<span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded text-xs font-bold"> REVISAR</span>';
-        
+            '<span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded text-xs font-bold">🟡 REVISAR</span>';
         tbody.innerHTML += `<tr class="hover:bg-gray-50">
-            <td class="p-2 font-semibold">${f.cd}</td>
-            <td class="p-2 font-bold text-bavaria-red">${f.maq}</td>
+            <td class="p-2 font-semibold">${f.cd}</td><td class="p-2 font-bold text-bavaria-red">${f.maq}</td>
             <td class="p-2 text-center">${f.di.toFixed(1)} / ${f.dd.toFixed(1)}</td>
             <td class="p-2 text-right font-bold ${f.difDelantera > 5 ? 'text-red-600' : 'text-yellow-600'}">${f.difDelantera.toFixed(1)} mm</td>
             <td class="p-2 text-center">${f.ti.toFixed(1)} / ${f.td.toFixed(1)}</td>
@@ -953,10 +952,7 @@ function generarAnalisisAsimetria(datos) {
             <td class="p-2 text-center">${estado}</td>
         </tr>`;
     });
-    
-    if (filas.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="7" class="p-4 text-center text-gray-500">✅ Todas las máquinas tienen llantas simétricas (diferencia < 3mm entre ejes)</td></tr>';
-    }
+    if (filas.length === 0) tbody.innerHTML = '<tr><td colspan="7" class="p-4 text-center text-gray-500">✅ Todas las máquinas tienen llantas simétricas</td></tr>';
 }
 </script>
 </body>
