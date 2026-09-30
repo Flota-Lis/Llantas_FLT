@@ -68,17 +68,16 @@
             </div>
 
             <!-- ========================================== -->
-            <!-- DIAGRAMA RESPONSIVE (IMAGEN + TARJETAS)    -->
+            <!-- DIAGRAMA CON CAMPOS SUPERPUESTOS (TODOS)   -->
             <!-- ========================================== -->
             <div class="w-full my-2">
-                <!-- Imagen del montacargas (visible en todos los dispositivos) -->
-                <div class="relative w-full bg-gray-50 rounded-lg p-3 border border-gray-200 overflow-hidden">
-                    <img src="montacargas.png" alt="Montacargas superior" class="w-full h-auto object-contain opacity-90 max-h-[200px] mx-auto">
+                <div class="relative w-full bg-gray-50 rounded-lg p-2 sm:p-4 border border-gray-200 overflow-hidden">
+                    <img src="montacargas.png" alt="Montacargas superior" class="w-full h-auto object-contain opacity-90 mx-auto">
                     
-                    <!-- Vista Desktop: campos posicionados sobre la imagen -->
-                    <div class="hidden sm:block absolute top-[5%] left-[25%] flex flex-col items-center gap-1 z-10">
-                        <span class="text-xs font-bold text-gray-700 bg-white px-2 py-0.5 rounded border border-gray-300">P2</span>
-                        <select id="marcaDI" class="w-24 bg-white border-2 border-gray-400 rounded px-1 py-1 text-center font-bold text-xs focus:ring-2 focus:ring-red-500 shadow-sm">
+                    <!-- P2 - Delantera Izquierda (ARRIBA IZQUIERDA) -->
+                    <div class="absolute top-[2%] left-[15%] sm:left-[25%] flex flex-col items-center gap-0.5 z-10">
+                        <span class="text-[9px] sm:text-xs font-bold text-gray-700 bg-white px-1.5 sm:px-2 py-0.5 rounded border border-gray-300">P2</span>
+                        <select id="marcaDI" class="w-16 sm:w-24 bg-white border-2 border-gray-400 rounded px-1 py-0.5 sm:py-1 text-center font-bold text-[9px] sm:text-xs focus:ring-2 focus:ring-red-500 shadow-sm">
                             <option value="">Marca</option>
                             <option value="SOLID STAR">SOLID STAR</option>
                             <option value="BASUM">BASUM</option>
@@ -92,12 +91,13 @@
                             <option value="SOLIDEAL">SOLIDEAL</option>
                             <option value="CONTINENTAL">CONTINENTAL</option>
                         </select>
-                        <input type="number" id="llantaDI" step="0.1" min="0" placeholder="mm" required class="w-24 bg-white border-2 border-gray-400 rounded px-1 py-1 text-center font-bold text-sm focus:ring-2 focus:ring-red-500 shadow-sm">
+                        <input type="number" id="llantaDI" step="0.1" min="0" placeholder="mm" required class="w-16 sm:w-24 bg-white border-2 border-gray-400 rounded px-1 py-0.5 sm:py-1 text-center font-bold text-[10px] sm:text-sm focus:ring-2 focus:ring-red-500 shadow-sm">
                     </div>
 
-                    <div class="hidden sm:block absolute bottom-[5%] left-[25%] flex flex-col items-center gap-1 z-10">
-                        <input type="number" id="llantaDD" step="0.1" min="0" placeholder="mm" required class="w-24 bg-white border-2 border-gray-400 rounded px-1 py-1 text-center font-bold text-sm focus:ring-2 focus:ring-red-500 shadow-sm">
-                        <select id="marcaDD" class="w-24 bg-white border-2 border-gray-400 rounded px-1 py-1 text-center font-bold text-xs focus:ring-2 focus:ring-red-500 shadow-sm">
+                    <!-- P1 - Delantera Derecha (ABAJO IZQUIERDA) -->
+                    <div class="absolute bottom-[2%] left-[15%] sm:left-[25%] flex flex-col items-center gap-0.5 z-10">
+                        <input type="number" id="llantaDD" step="0.1" min="0" placeholder="mm" required class="w-16 sm:w-24 bg-white border-2 border-gray-400 rounded px-1 py-0.5 sm:py-1 text-center font-bold text-[10px] sm:text-sm focus:ring-2 focus:ring-red-500 shadow-sm">
+                        <select id="marcaDD" class="w-16 sm:w-24 bg-white border-2 border-gray-400 rounded px-1 py-0.5 sm:py-1 text-center font-bold text-[9px] sm:text-xs focus:ring-2 focus:ring-red-500 shadow-sm">
                             <option value="">Marca</option>
                             <option value="SOLID STAR">SOLID STAR</option>
                             <option value="BASUM">BASUM</option>
@@ -111,12 +111,13 @@
                             <option value="SOLIDEAL">SOLIDEAL</option>
                             <option value="CONTINENTAL">CONTINENTAL</option>
                         </select>
-                        <span class="text-xs font-bold text-gray-700 bg-white px-2 py-0.5 rounded border border-gray-300">P1</span>
+                        <span class="text-[9px] sm:text-xs font-bold text-gray-700 bg-white px-1.5 sm:px-2 py-0.5 rounded border border-gray-300">P1</span>
                     </div>
 
-                    <div class="hidden sm:block absolute top-[5%] right-[20%] flex flex-col items-center gap-1 z-10">
-                        <span class="text-xs font-bold text-gray-700 bg-white px-2 py-0.5 rounded border border-gray-300">P4</span>
-                        <select id="marcaTI" class="w-24 bg-white border-2 border-gray-400 rounded px-1 py-1 text-center font-bold text-xs focus:ring-2 focus:ring-red-500 shadow-sm">
+                    <!-- P4 - Trasera Izquierda (ARRIBA DERECHA) -->
+                    <div class="absolute top-[2%] right-[10%] sm:right-[20%] flex flex-col items-center gap-0.5 z-10">
+                        <span class="text-[9px] sm:text-xs font-bold text-gray-700 bg-white px-1.5 sm:px-2 py-0.5 rounded border border-gray-300">P4</span>
+                        <select id="marcaTI" class="w-16 sm:w-24 bg-white border-2 border-gray-400 rounded px-1 py-0.5 sm:py-1 text-center font-bold text-[9px] sm:text-xs focus:ring-2 focus:ring-red-500 shadow-sm">
                             <option value="">Marca</option>
                             <option value="SOLID STAR">SOLID STAR</option>
                             <option value="BASUM">BASUM</option>
@@ -130,12 +131,13 @@
                             <option value="SOLIDEAL">SOLIDEAL</option>
                             <option value="CONTINENTAL">CONTINENTAL</option>
                         </select>
-                        <input type="number" id="llantaTI" step="0.1" min="0" placeholder="mm" required class="w-24 bg-white border-2 border-gray-400 rounded px-1 py-1 text-center font-bold text-sm focus:ring-2 focus:ring-red-500 shadow-sm">
+                        <input type="number" id="llantaTI" step="0.1" min="0" placeholder="mm" required class="w-16 sm:w-24 bg-white border-2 border-gray-400 rounded px-1 py-0.5 sm:py-1 text-center font-bold text-[10px] sm:text-sm focus:ring-2 focus:ring-red-500 shadow-sm">
                     </div>
 
-                    <div class="hidden sm:block absolute bottom-[5%] right-[20%] flex flex-col items-center gap-1 z-10">
-                        <input type="number" id="llantaTD" step="0.1" min="0" placeholder="mm" required class="w-24 bg-white border-2 border-gray-400 rounded px-1 py-1 text-center font-bold text-sm focus:ring-2 focus:ring-red-500 shadow-sm">
-                        <select id="marcaTD" class="w-24 bg-white border-2 border-gray-400 rounded px-1 py-1 text-center font-bold text-xs focus:ring-2 focus:ring-red-500 shadow-sm">
+                    <!-- P3 - Trasera Derecha (ABAJO DERECHA) -->
+                    <div class="absolute bottom-[2%] right-[10%] sm:right-[20%] flex flex-col items-center gap-0.5 z-10">
+                        <input type="number" id="llantaTD" step="0.1" min="0" placeholder="mm" required class="w-16 sm:w-24 bg-white border-2 border-gray-400 rounded px-1 py-0.5 sm:py-1 text-center font-bold text-[10px] sm:text-sm focus:ring-2 focus:ring-red-500 shadow-sm">
+                        <select id="marcaTD" class="w-16 sm:w-24 bg-white border-2 border-gray-400 rounded px-1 py-0.5 sm:py-1 text-center font-bold text-[9px] sm:text-xs focus:ring-2 focus:ring-red-500 shadow-sm">
                             <option value="">Marca</option>
                             <option value="SOLID STAR">SOLID STAR</option>
                             <option value="BASUM">BASUM</option>
@@ -149,90 +151,7 @@
                             <option value="SOLIDEAL">SOLIDEAL</option>
                             <option value="CONTINENTAL">CONTINENTAL</option>
                         </select>
-                        <span class="text-xs font-bold text-gray-700 bg-white px-2 py-0.5 rounded border border-gray-300">P3</span>
-                    </div>
-                </div>
-
-                <!-- Vista Móvil: tarjetas debajo de la imagen -->
-                <div class="sm:hidden grid grid-cols-2 gap-3 p-3 mt-3 bg-gray-50 rounded-lg border border-gray-200">
-                    <!-- P2 -->
-                    <div class="bg-white p-2 rounded border border-gray-300">
-                        <label class="block text-xs font-bold text-gray-700 mb-1 text-center">P2 - Del. Izq</label>
-                        <select id="marcaDI" class="w-full bg-white border-2 border-gray-400 rounded px-2 py-1.5 text-center font-bold text-xs mb-1 focus:ring-2 focus:ring-red-500">
-                            <option value="">Marca</option>
-                            <option value="SOLID STAR">SOLID STAR</option>
-                            <option value="BASUM">BASUM</option>
-                            <option value="KUMANEKO">KUMANEKO</option>
-                            <option value="KUMANEKO T">KUMANEKO T</option>
-                            <option value="NUMA">NUMA</option>
-                            <option value="MAGNUM">MAGNUM</option>
-                            <option value="NUM 7">NUM 7</option>
-                            <option value="TRELLEBORG">TRELLEBORG</option>
-                            <option value="SOLIO ST">SOLIO ST</option>
-                            <option value="SOLIDEAL">SOLIDEAL</option>
-                            <option value="CONTINENTAL">CONTINENTAL</option>
-                        </select>
-                        <input type="number" id="llantaDI" step="0.1" min="0" placeholder="Profundidad (mm)" required class="w-full bg-white border-2 border-gray-400 rounded px-2 py-1.5 text-center font-bold text-sm focus:ring-2 focus:ring-red-500">
-                    </div>
-
-                    <!-- P1 -->
-                    <div class="bg-white p-2 rounded border border-gray-300">
-                        <label class="block text-xs font-bold text-gray-700 mb-1 text-center">P1 - Del. Der</label>
-                        <input type="number" id="llantaDD" step="0.1" min="0" placeholder="Profundidad (mm)" required class="w-full bg-white border-2 border-gray-400 rounded px-2 py-1.5 text-center font-bold text-sm mb-1 focus:ring-2 focus:ring-red-500">
-                        <select id="marcaDD" class="w-full bg-white border-2 border-gray-400 rounded px-2 py-1.5 text-center font-bold text-xs focus:ring-2 focus:ring-red-500">
-                            <option value="">Marca</option>
-                            <option value="SOLID STAR">SOLID STAR</option>
-                            <option value="BASUM">BASUM</option>
-                            <option value="KUMANEKO">KUMANEKO</option>
-                            <option value="KUMANEKO T">KUMANEKO T</option>
-                            <option value="NUMA">NUMA</option>
-                            <option value="MAGNUM">MAGNUM</option>
-                            <option value="NUM 7">NUM 7</option>
-                            <option value="TRELLEBORG">TRELLEBORG</option>
-                            <option value="SOLIO ST">SOLIO ST</option>
-                            <option value="SOLIDEAL">SOLIDEAL</option>
-                            <option value="CONTINENTAL">CONTINENTAL</option>
-                        </select>
-                    </div>
-
-                    <!-- P4 -->
-                    <div class="bg-white p-2 rounded border border-gray-300">
-                        <label class="block text-xs font-bold text-gray-700 mb-1 text-center">P4 - Tras. Izq</label>
-                        <select id="marcaTI" class="w-full bg-white border-2 border-gray-400 rounded px-2 py-1.5 text-center font-bold text-xs mb-1 focus:ring-2 focus:ring-red-500">
-                            <option value="">Marca</option>
-                            <option value="SOLID STAR">SOLID STAR</option>
-                            <option value="BASUM">BASUM</option>
-                            <option value="KUMANEKO">KUMANEKO</option>
-                            <option value="KUMANEKO T">KUMANEKO T</option>
-                            <option value="NUMA">NUMA</option>
-                            <option value="MAGNUM">MAGNUM</option>
-                            <option value="NUM 7">NUM 7</option>
-                            <option value="TRELLEBORG">TRELLEBORG</option>
-                            <option value="SOLIO ST">SOLIO ST</option>
-                            <option value="SOLIDEAL">SOLIDEAL</option>
-                            <option value="CONTINENTAL">CONTINENTAL</option>
-                        </select>
-                        <input type="number" id="llantaTI" step="0.1" min="0" placeholder="Profundidad (mm)" required class="w-full bg-white border-2 border-gray-400 rounded px-2 py-1.5 text-center font-bold text-sm focus:ring-2 focus:ring-red-500">
-                    </div>
-
-                    <!-- P3 -->
-                    <div class="bg-white p-2 rounded border border-gray-300">
-                        <label class="block text-xs font-bold text-gray-700 mb-1 text-center">P3 - Tras. Der</label>
-                        <input type="number" id="llantaTD" step="0.1" min="0" placeholder="Profundidad (mm)" required class="w-full bg-white border-2 border-gray-400 rounded px-2 py-1.5 text-center font-bold text-sm mb-1 focus:ring-2 focus:ring-red-500">
-                        <select id="marcaTD" class="w-full bg-white border-2 border-gray-400 rounded px-2 py-1.5 text-center font-bold text-xs focus:ring-2 focus:ring-red-500">
-                            <option value="">Marca</option>
-                            <option value="SOLID STAR">SOLID STAR</option>
-                            <option value="BASUM">BASUM</option>
-                            <option value="KUMANEKO">KUMANEKO</option>
-                            <option value="KUMANEKO T">KUMANEKO T</option>
-                            <option value="NUMA">NUMA</option>
-                            <option value="MAGNUM">MAGNUM</option>
-                            <option value="NUM 7">NUM 7</option>
-                            <option value="TRELLEBORG">TRELLEBORG</option>
-                            <option value="SOLIO ST">SOLIO ST</option>
-                            <option value="SOLIDEAL">SOLIDEAL</option>
-                            <option value="CONTINENTAL">CONTINENTAL</option>
-                        </select>
+                        <span class="text-[9px] sm:text-xs font-bold text-gray-700 bg-white px-1.5 sm:px-2 py-0.5 rounded border border-gray-300">P3</span>
                     </div>
                 </div>
             </div>
@@ -332,7 +251,7 @@
             </div>
 
             <div class="bg-white p-3 rounded-xl shadow">
-                <h3 class="font-bold text-gray-800 mb-2 text-sm uppercase"> Montacargas con Desgaste Acelerado (>3.5 mm/mes)</h3>
+                <h3 class="font-bold text-gray-800 mb-2 text-sm uppercase">🚨 Montacargas con Desgaste Acelerado (>3.5 mm/mes)</h3>
                 <div class="overflow-x-auto">
                     <table class="w-full text-sm text-left">
                         <thead class="bg-gray-100 text-gray-700 uppercase text-xs">
@@ -351,7 +270,7 @@
             <div class="bg-white p-3 rounded-xl shadow">
                 <h3 class="font-bold text-gray-800 mb-3 text-sm uppercase"> Análisis Avanzados de Flota</h3>
                 <div class="flex flex-wrap gap-2 mb-4 border-b border-gray-200 pb-2">
-                    <button onclick="cambiarTab('eficiencia')" id="tabEficiencia" class="px-4 py-2 rounded-lg text-xs font-bold transition tab-activa">⚡ Eficiencia mm/hr</button>
+                    <button onclick="cambiarTab('eficiencia')" id="tabEficiencia" class="px-4 py-2 rounded-lg text-xs font-bold transition tab-activa"> Eficiencia mm/hr</button>
                     <button onclick="cambiarTab('ranking')" id="tabRanking" class="px-4 py-2 rounded-lg text-xs font-bold transition tab-inactiva">🏆 Ranking Horas</button>
                     <button onclick="cambiarTab('asimetria')" id="tabAsimetria" class="px-4 py-2 rounded-lg text-xs font-bold transition tab-inactiva">⚖️ Asimetría</button>
                 </div>
@@ -905,7 +824,7 @@ function generarPrediccion(datos, posicion) {
             </li>`;
         } else if (p.tipo === 'alerta') {
             html = `<li class="bg-orange-50 p-3 rounded border-l-4 border-orange-500 mb-2">
-                <div><span class="text-orange-700 font-bold">⚠️ ALERTA</span><strong class="ml-2">${p.cd} - FLT ${p.maq}</strong><span class="text-xs text-gray-600 ml-2">[${p.posicion}]</span></div>
+                <div><span class="text-orange-700 font-bold">️ ALERTA</span><strong class="ml-2">${p.cd} - FLT ${p.maq}</strong><span class="text-xs text-gray-600 ml-2">[${p.posicion}]</span></div>
                 <div class="mt-1 text-sm"><span class="text-orange-700">Planificar cambio en <strong>${p.dias} días</strong> (${p.fecha})</span><span class="text-gray-700 ml-2">Profundidad: <strong>${p.profundidadActual.toFixed(1)} mm</strong></span></div>
             </li>`;
         } else {
@@ -972,7 +891,7 @@ function generarRankingHoras(datos) {
         if (horasPeriodo > 0) filas.push({ cd, maq, horasPeriodo, horasDiarias, ultimoHorometro });
     });
     filas.sort((a, b) => b.horasPeriodo - a.horasPeriodo).slice(0, 15).forEach((f, i) => {
-        const medalla = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '' : `${i + 1}°`;
+        const medalla = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : `${i + 1}°`;
         tbody.innerHTML += `<tr class="hover:bg-gray-50">
             <td class="p-2 text-center text-lg">${medalla}</td><td class="p-2 font-semibold">${f.cd}</td><td class="p-2 font-bold text-bavaria-red">${f.maq}</td>
             <td class="p-2 text-right font-bold">${f.horasPeriodo.toFixed(0)} hrs</td><td class="p-2 text-right">${f.horasDiarias.toFixed(1)} hrs/día</td>
@@ -1005,7 +924,7 @@ function generarAnalisisAsimetria(datos) {
     filas.sort((a, b) => (b.difDelantera + b.difTrasera) - (a.difDelantera + a.difTrasera)).slice(0, 15).forEach(f => {
         const estado = (f.difDelantera > 5 || f.difTrasera > 5) ? 
             '<span class="bg-red-100 text-red-800 px-2 py-1 rounded text-xs font-bold">🔴 CRÍTICO</span>' : 
-            '<span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded text-xs font-bold"> REVISAR</span>';
+            '<span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded text-xs font-bold">🟡 REVISAR</span>';
         tbody.innerHTML += `<tr class="hover:bg-gray-50">
             <td class="p-2 font-semibold">${f.cd}</td><td class="p-2 font-bold text-bavaria-red">${f.maq}</td>
             <td class="p-2 text-center">${f.di.toFixed(1)} / ${f.dd.toFixed(1)}</td>
