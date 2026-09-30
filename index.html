@@ -66,25 +66,98 @@
                 <label for="horometro" class="block text-gray-700 font-bold mb-1.5 text-xs sm:text-sm uppercase tracking-wider">Horómetro de la Máquina</label>
                 <input type="number" id="horometro" min="0" step="1" placeholder="Ej: 12345" required class="w-full sm:w-2/3 mx-auto block bg-gray-50 border-2 border-gray-300 rounded-lg py-2.5 px-4 text-center font-bold text-base sm:text-lg text-gray-800 focus:outline-none focus:border-red-600 transition-colors">
             </div>
-            <div class="relative w-full aspect-[2/1] my-2 flex items-center justify-center bg-gray-50 rounded-lg p-1 border border-gray-200 overflow-hidden">
+
+            <!-- DIAGRAMA CON SELECTS DE MARCA VISIBLES -->
+            <div class="relative w-full aspect-[2/1] my-2 flex items-center justify-center bg-gray-50 rounded-lg p-4 border border-gray-200 overflow-hidden">
                 <img src="montacargas.png" alt="Montacargas superior" class="h-full w-auto object-contain opacity-90 max-w-[85%]">
-                <div class="absolute top-[8%] left-[28%] flex flex-col items-center">
-                    <span class="text-[9px] sm:text-[10px] font-bold text-gray-600 leading-tight">P2</span>
-                    <input type="number" id="llantaDI" step="0.1" min="0" placeholder="mm" required class="w-14 sm:w-16 bg-white border border-gray-400 rounded px-1 py-0.5 sm:py-1 text-center font-bold text-xs sm:text-sm focus:ring-2 focus:ring-red-500 shadow-sm">
+
+                <!-- P2 - Delantera Izquierda -->
+                <div class="absolute top-[5%] left-[25%] flex flex-col items-center gap-1 z-10">
+                    <span class="text-[10px] sm:text-xs font-bold text-gray-700 bg-white px-2 py-0.5 rounded border border-gray-300">P2</span>
+                    <select id="marcaDI" class="w-20 sm:w-24 bg-white border-2 border-gray-400 rounded px-1 py-1 text-center font-bold text-[10px] sm:text-xs focus:ring-2 focus:ring-red-500 shadow-sm">
+                        <option value="">Marca</option>
+                        <option value="SOLID STAR">SOLID STAR</option>
+                        <option value="BASUM">BASUM</option>
+                        <option value="KUMANEKO">KUMANEKO</option>
+                        <option value="KUMANEKO T">KUMANEKO T</option>
+                        <option value="NUMA">NUMA</option>
+                        <option value="MAGNUM">MAGNUM</option>
+                        <option value="NUM 7">NUM 7</option>
+                        <option value="TRELLEBORG">TRELLEBORG</option>
+                        <option value="SOLIO ST">SOLIO ST</option>
+                        <option value="SOLIDEAL">SOLIDEAL</option>
+                        <option value="CONTINENTAL">CONTINENTAL</option>
+                    </select>
+                    <input type="number" id="llantaDI" step="0.1" min="0" placeholder="mm" required class="w-20 sm:w-24 bg-white border-2 border-gray-400 rounded px-1 py-1 text-center font-bold text-xs sm:text-sm focus:ring-2 focus:ring-red-500 shadow-sm">
                 </div>
-                <div class="absolute bottom-[8%] left-[28%] flex flex-col items-center">
-                    <input type="number" id="llantaDD" step="0.1" min="0" placeholder="mm" required class="w-14 sm:w-16 bg-white border border-gray-400 rounded px-1 py-0.5 sm:py-1 text-center font-bold text-xs sm:text-sm focus:ring-2 focus:ring-red-500 shadow-sm">
-                    <span class="text-[9px] sm:text-[10px] font-bold text-gray-600 leading-tight">P1</span>
+
+                <!-- P1 - Delantera Derecha -->
+                <div class="absolute bottom-[5%] left-[25%] flex flex-col items-center gap-1 z-10">
+                    <input type="number" id="llantaDD" step="0.1" min="0" placeholder="mm" required class="w-20 sm:w-24 bg-white border-2 border-gray-400 rounded px-1 py-1 text-center font-bold text-xs sm:text-sm focus:ring-2 focus:ring-red-500 shadow-sm">
+                    <select id="marcaDD" class="w-20 sm:w-24 bg-white border-2 border-gray-400 rounded px-1 py-1 text-center font-bold text-[10px] sm:text-xs focus:ring-2 focus:ring-red-500 shadow-sm">
+                        <option value="">Marca</option>
+                        <option value="SOLID STAR">SOLID STAR</option>
+                        <option value="BASUM">BASUM</option>
+                        <option value="KUMANEKO">KUMANEKO</option>
+                        <option value="KUMANEKO T">KUMANEKO T</option>
+                        <option value="NUMA">NUMA</option>
+                        <option value="MAGNUM">MAGNUM</option>
+                        <option value="NUM 7">NUM 7</option>
+                        <option value="TRELLEBORG">TRELLEBORG</option>
+                        <option value="SOLIO ST">SOLIO ST</option>
+                        <option value="SOLIDEAL">SOLIDEAL</option>
+                        <option value="CONTINENTAL">CONTINENTAL</option>
+                    </select>
+                    <span class="text-[10px] sm:text-xs font-bold text-gray-700 bg-white px-2 py-0.5 rounded border border-gray-300">P1</span>
                 </div>
-                <div class="absolute top-[8%] right-[22%] flex flex-col items-center">
-                    <span class="text-[9px] sm:text-[10px] font-bold text-gray-600 leading-tight">P4</span>
-                    <input type="number" id="llantaTI" step="0.1" min="0" placeholder="mm" required class="w-14 sm:w-16 bg-white border border-gray-400 rounded px-1 py-0.5 sm:py-1 text-center font-bold text-xs sm:text-sm focus:ring-2 focus:ring-red-500 shadow-sm">
+
+                <!-- P4 - Trasera Izquierda -->
+                <div class="absolute top-[5%] right-[20%] flex flex-col items-center gap-1 z-10">
+                    <span class="text-[10px] sm:text-xs font-bold text-gray-700 bg-white px-2 py-0.5 rounded border border-gray-300">P4</span>
+                    <select id="marcaTI" class="w-20 sm:w-24 bg-white border-2 border-gray-400 rounded px-1 py-1 text-center font-bold text-[10px] sm:text-xs focus:ring-2 focus:ring-red-500 shadow-sm">
+                        <option value="">Marca</option>
+                        <option value="SOLID STAR">SOLID STAR</option>
+                        <option value="BASUM">BASUM</option>
+                        <option value="KUMANEKO">KUMANEKO</option>
+                        <option value="KUMANEKO T">KUMANEKO T</option>
+                        <option value="NUMA">NUMA</option>
+                        <option value="MAGNUM">MAGNUM</option>
+                        <option value="NUM 7">NUM 7</option>
+                        <option value="TRELLEBORG">TRELLEBORG</option>
+                        <option value="SOLIO ST">SOLIO ST</option>
+                        <option value="SOLIDEAL">SOLIDEAL</option>
+                        <option value="CONTINENTAL">CONTINENTAL</option>
+                    </select>
+                    <input type="number" id="llantaTI" step="0.1" min="0" placeholder="mm" required class="w-20 sm:w-24 bg-white border-2 border-gray-400 rounded px-1 py-1 text-center font-bold text-xs sm:text-sm focus:ring-2 focus:ring-red-500 shadow-sm">
                 </div>
-                <div class="absolute bottom-[8%] right-[22%] flex flex-col items-center">
-                    <input type="number" id="llantaTD" step="0.1" min="0" placeholder="mm" required class="w-14 sm:w-16 bg-white border border-gray-400 rounded px-1 py-0.5 sm:py-1 text-center font-bold text-xs sm:text-sm focus:ring-2 focus:ring-red-500 shadow-sm">
-                    <span class="text-[9px] sm:text-[10px] font-bold text-gray-600 leading-tight">P3</span>
+
+                <!-- P3 - Trasera Derecha -->
+                <div class="absolute bottom-[5%] right-[20%] flex flex-col items-center gap-1 z-10">
+                    <input type="number" id="llantaTD" step="0.1" min="0" placeholder="mm" required class="w-20 sm:w-24 bg-white border-2 border-gray-400 rounded px-1 py-1 text-center font-bold text-xs sm:text-sm focus:ring-2 focus:ring-red-500 shadow-sm">
+                    <select id="marcaTD" class="w-20 sm:w-24 bg-white border-2 border-gray-400 rounded px-1 py-1 text-center font-bold text-[10px] sm:text-xs focus:ring-2 focus:ring-red-500 shadow-sm">
+                        <option value="">Marca</option>
+                        <option value="SOLID STAR">SOLID STAR</option>
+                        <option value="BASUM">BASUM</option>
+                        <option value="KUMANEKO">KUMANEKO</option>
+                        <option value="KUMANEKO T">KUMANEKO T</option>
+                        <option value="NUMA">NUMA</option>
+                        <option value="MAGNUM">MAGNUM</option>
+                        <option value="NUM 7">NUM 7</option>
+                        <option value="TRELLEBORG">TRELLEBORG</option>
+                        <option value="SOLIO ST">SOLIO ST</option>
+                        <option value="SOLIDEAL">SOLIDEAL</option>
+                        <option value="CONTINENTAL">CONTINENTAL</option>
+                    </select>
+                    <span class="text-[10px] sm:text-xs font-bold text-gray-700 bg-white px-2 py-0.5 rounded border border-gray-300">P3</span>
                 </div>
             </div>
+
+            <div class="bg-blue-50 border-l-4 border-blue-500 p-3 rounded mb-2">
+                <p class="text-xs text-blue-800">
+                    <strong>💡 Instrucciones:</strong> Seleccione la marca de la llanta y luego ingrese la profundidad en mm para cada posición (P1, P2, P3, P4).
+                </p>
+            </div>
+
             <div class="border-t border-gray-200 pt-3">
                 <label class="block text-gray-700 font-bold mb-1.5 text-xs sm:text-sm uppercase tracking-wider text-center">Evidencia Fotográfica</label>
                 <div class="flex flex-col items-center justify-center border-2 border-dashed border-gray-300 rounded-lg p-3 bg-gray-50 hover:bg-gray-100 transition-colors cursor-pointer relative min-h-[90px]">
@@ -143,7 +216,6 @@
         </div>
 
         <div id="dashboardContent" class="hidden space-y-4">
-            <!-- KPIs -->
             <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
                 <div class="bg-white p-3 rounded-xl shadow border-l-4 border-bavaria-red">
                     <p class="text-[10px] font-bold text-gray-500 uppercase">Registros</p>
@@ -163,19 +235,17 @@
                 </div>
             </div>
 
-            <!-- Gráficas -->
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
                 <div class="bg-white p-3 rounded-xl shadow">
-                    <h3 class="font-bold text-gray-800 mb-2 text-sm uppercase"> Profundidad Promedio Mensual (mm)</h3>
+                    <h3 class="font-bold text-gray-800 mb-2 text-sm uppercase">📉 Profundidad Promedio Mensual (mm)</h3>
                     <div class="relative h-[200px]"><canvas id="chartProfundidad"></canvas></div>
                 </div>
                 <div class="bg-white p-3 rounded-xl shadow">
-                    <h3 class="font-bold text-gray-800 mb-2 text-sm uppercase"> Desgaste Mensual Acumulado (mm)</h3>
+                    <h3 class="font-bold text-gray-800 mb-2 text-sm uppercase">🔥 Desgaste Mensual Acumulado (mm)</h3>
                     <div class="relative h-[200px]"><canvas id="chartDesgaste"></canvas></div>
                 </div>
             </div>
 
-            <!-- Tabla de alertas -->
             <div class="bg-white p-3 rounded-xl shadow">
                 <h3 class="font-bold text-gray-800 mb-2 text-sm uppercase">🚨 Montacargas con Desgaste Acelerado (>3.5 mm/mes)</h3>
                 <div class="overflow-x-auto">
@@ -188,16 +258,13 @@
                 </div>
             </div>
 
-            <!-- Predicción -->
             <div class="bg-gradient-to-r from-red-50 to-yellow-50 p-3 rounded-xl shadow border-l-4 border-bavaria-red">
                 <h3 class="font-bold text-gray-800 mb-2 text-sm uppercase">🔮 Predicción de Cambio de Llantas</h3>
                 <ul id="listaPrediccion" class="space-y-1.5 text-sm text-gray-700"></ul>
             </div>
 
-            <!-- Análisis Avanzados -->
             <div class="bg-white p-3 rounded-xl shadow">
-                <h3 class="font-bold text-gray-800 mb-3 text-sm uppercase">🔬 Análisis Avanzados de Flota</h3>
-                
+                <h3 class="font-bold text-gray-800 mb-3 text-sm uppercase"> Análisis Avanzados de Flota</h3>
                 <div class="flex flex-wrap gap-2 mb-4 border-b border-gray-200 pb-2">
                     <button onclick="cambiarTab('eficiencia')" id="tabEficiencia" class="px-4 py-2 rounded-lg text-xs font-bold transition tab-activa">⚡ Eficiencia mm/hr</button>
                     <button onclick="cambiarTab('ranking')" id="tabRanking" class="px-4 py-2 rounded-lg text-xs font-bold transition tab-inactiva">🏆 Ranking Horas</button>
@@ -234,7 +301,7 @@
 
                 <div id="contenidoAsimetria" class="tab-contenido vista-oculta">
                     <div class="mb-3 p-2 bg-orange-50 rounded border-l-4 border-orange-500 text-xs text-orange-800">
-                        💡 <strong>Asimetría de llantas:</strong> Detecta diferencias de desgaste entre llantas del mismo eje (> 5mm indica problemas de alineación).
+                         <strong>Asimetría de llantas:</strong> Detecta diferencias de desgaste entre llantas del mismo eje (> 5mm indica problemas de alineación).
                     </div>
                     <div class="overflow-x-auto">
                         <table class="w-full text-sm text-left">
@@ -253,9 +320,6 @@
         &copy; 2026 Anderson Alzate. - Desarrollador de Software
     </footer>
 
-    <!-- ========================================== -->
-    <!-- MODAL DE CLAVE DE ACCESO AL DASHBOARD      -->
-    <!-- ========================================== -->
     <div id="modalClave" class="vista-oculta fixed inset-0 bg-black/60 flex items-center justify-center z-[100] p-4 backdrop-blur-sm">
         <div class="bg-white rounded-xl shadow-2xl w-full max-w-md border-2 border-bavaria-gold overflow-hidden transform transition-all">
             <div class="bg-bavaria-red text-white p-4 text-center">
@@ -264,46 +328,30 @@
             </div>
             <div class="p-6 space-y-4">
                 <p class="text-sm text-gray-600 text-center">Ingrese la clave de administrador para visualizar el dashboard.</p>
-                <input type="password" id="inputClave" placeholder="Ingrese la clave..." 
-                       class="w-full border-2 border-gray-300 rounded-lg p-3 text-center font-bold text-lg focus:border-bavaria-red focus:outline-none transition-colors">
-                <p id="mensajeErrorClave" class="vista-oculta text-red-600 text-sm text-center font-semibold bg-red-50 p-2 rounded border border-red-200">
-                    ❌ Clave incorrecta. Intente nuevamente.
-                </p>
+                <input type="password" id="inputClave" placeholder="Ingrese la clave..." class="w-full border-2 border-gray-300 rounded-lg p-3 text-center font-bold text-lg focus:border-bavaria-red focus:outline-none transition-colors">
+                <p id="mensajeErrorClave" class="vista-oculta text-red-600 text-sm text-center font-semibold bg-red-50 p-2 rounded border border-red-200">❌ Clave incorrecta. Intente nuevamente.</p>
                 <div class="flex gap-3 pt-2">
-                    <button onclick="cerrarModalClave()" class="flex-1 bg-gray-200 text-gray-700 font-bold py-2.5 rounded-lg hover:bg-gray-300 transition text-sm">
-                        Cancelar
-                    </button>
-                    <button onclick="verificarClave()" class="flex-1 bg-bavaria-red text-white font-bold py-2.5 rounded-lg hover:bg-bavaria-dark-red transition text-sm shadow">
-                        Ingresar
-                    </button>
+                    <button onclick="cerrarModalClave()" class="flex-1 bg-gray-200 text-gray-700 font-bold py-2.5 rounded-lg hover:bg-gray-300 transition text-sm">Cancelar</button>
+                    <button onclick="verificarClave()" class="flex-1 bg-bavaria-red text-white font-bold py-2.5 rounded-lg hover:bg-bavaria-dark-red transition text-sm shadow">Ingresar</button>
                 </div>
             </div>
         </div>
     </div>
 
 <script>
-// ==========================================
-// CONFIGURACIÓN DE SEGURIDAD
-// ==========================================
-const CLAVE_DASHBOARD = "Ander2026"; // <--- CAMBIA ESTA CLAVE POR LA QUE DESEES
+const CLAVE_DASHBOARD = "Ander2026";
 
-// ==========================================
-// NAVEGACIÓN Y MODAL
-// ==========================================
 function cambiarVista(vista) {
     if (vista === 'dashboard') {
-        // Mostrar modal de contraseña en lugar de cambiar la vista directamente
         document.getElementById('modalClave').classList.remove('vista-oculta');
         document.getElementById('inputClave').value = '';
         document.getElementById('mensajeErrorClave').classList.add('vista-oculta');
         setTimeout(() => document.getElementById('inputClave').focus(), 100);
     } else {
-        // Lógica original para ir al formulario
         const formView = document.getElementById('vistaFormulario');
         const dashView = document.getElementById('vistaDashboard');
         const btnForm = document.getElementById('btnForm');
         const btnDash = document.getElementById('btnDash');
-        
         formView.classList.remove('vista-oculta');
         dashView.classList.add('vista-oculta');
         btnForm.classList.add('bg-white', 'text-bavaria-red', 'shadow');
@@ -315,26 +363,20 @@ function cambiarVista(vista) {
 
 function verificarClave() {
     const input = document.getElementById('inputClave').value;
-    
     if (input === CLAVE_DASHBOARD) {
-        // Clave correcta: ocultar modal y mostrar dashboard
         document.getElementById('modalClave').classList.add('vista-oculta');
-        
         const formView = document.getElementById('vistaFormulario');
         const dashView = document.getElementById('vistaDashboard');
         const btnForm = document.getElementById('btnForm');
         const btnDash = document.getElementById('btnDash');
-        
         formView.classList.add('vista-oculta');
         dashView.classList.remove('vista-oculta');
         btnDash.classList.add('bg-white', 'text-bavaria-red', 'shadow');
         btnDash.classList.remove('text-white', 'hover:bg-white/20');
         btnForm.classList.remove('bg-white', 'text-bavaria-red', 'shadow');
         btnForm.classList.add('text-white', 'hover:bg-white/20');
-        
         if (datosGlobales.length === 0) iniciarDashboard();
     } else {
-        // Clave incorrecta
         document.getElementById('mensajeErrorClave').classList.remove('vista-oculta');
         document.getElementById('inputClave').value = '';
         document.getElementById('inputClave').focus();
@@ -345,7 +387,6 @@ function cerrarModalClave() {
     document.getElementById('modalClave').classList.add('vista-oculta');
 }
 
-// Permitir usar la tecla Enter para enviar la clave
 document.getElementById('inputClave').addEventListener('keypress', function(e) {
     if (e.key === 'Enter') verificarClave();
 });
@@ -361,9 +402,6 @@ function cambiarTab(tab) {
     document.getElementById('tab' + tab.charAt(0).toUpperCase() + tab.slice(1)).classList.add('tab-activa');
 }
 
-// ==========================================
-// FORMULARIO
-// ==========================================
 const maquinasPorCD = {
     "GIRARDOTA": ["561", "562", "567", "603", "681", "761", "832", "838", "855", "860", "CP2"],
     "CALI": ["598", "604", "611", "780", "839", "842", "844", "850", "A13"],
@@ -435,8 +473,10 @@ form.addEventListener('submit', async function(e) {
     btn.disabled = true; btn.textContent = "Enviando...";
     const datos = {
         cd: selectCD.value, maquina: numeroMaquina.value, horometro: horometro.value,
-        llantaDI: document.getElementById('llantaDI').value, llantaDD: document.getElementById('llantaDD').value,
-        llantaTI: document.getElementById('llantaTI').value, llantaTD: document.getElementById('llantaTD').value,
+        llantaDI: document.getElementById('llantaDI').value, marcaDI: document.getElementById('marcaDI').value,
+        llantaDD: document.getElementById('llantaDD').value, marcaDD: document.getElementById('marcaDD').value,
+        llantaTI: document.getElementById('llantaTI').value, marcaTI: document.getElementById('marcaTI').value,
+        llantaTD: document.getElementById('llantaTD').value, marcaTD: document.getElementById('marcaTD').value,
         foto: imagenConMarcaDeAguaBase64 
     };
     try {
@@ -454,14 +494,10 @@ form.addEventListener('submit', async function(e) {
     }
 });
 
-// ==========================================
-// DASHBOARD - CARGA DE DATOS
-// ==========================================
 let datosGlobales = [];
 let charts = {};
 
 async function iniciarDashboard() {
-    console.log('=== INICIANDO DASHBOARD ===');
     try {
         const urlCompleta = `${WEB_APP_URL}?action=get`;
         const res = await fetch(urlCompleta);
@@ -470,8 +506,6 @@ async function iniciarDashboard() {
         if (!data.success) throw new Error(data.message || 'Error en la respuesta');
         
         datosGlobales = data.rows || [];
-        console.log('Total rows loaded:', datosGlobales.length);
-        
         if (datosGlobales.length === 0) {
             document.getElementById('loadingDash').innerHTML = '<p class="text-red-600 font-bold">❌ No hay datos registrados aún en Google Sheets.</p>';
             return;
@@ -490,12 +524,7 @@ async function iniciarDashboard() {
         generarAnalisis();
     } catch (err) {
         console.error('ERROR:', err);
-        document.getElementById('loadingDash').innerHTML = `
-            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
-                <p class="font-bold">❌ Error al cargar datos</p>
-                <p class="text-sm mt-1">${err.message}</p>
-            </div>
-        `;
+        document.getElementById('loadingDash').innerHTML = `<div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded"><p class="font-bold">❌ Error al cargar datos</p><p class="text-sm mt-1">${err.message}</p></div>`;
     }
 }
 
@@ -514,9 +543,6 @@ document.getElementById('filtroCD').addEventListener('change', function() {
     } else { selectM.disabled = true; }
 });
 
-// ==========================================
-// FUNCIONES AUXILIARES
-// ==========================================
 function obtenerValorLlanta(r, posicion) {
     if (posicion === 'DI') return Number(r.llantaDI || 0);
     if (posicion === 'DD') return Number(r.llantaDD || 0);
@@ -562,11 +588,7 @@ function obtenerMesAnterior(mesActual) {
     return `${anioAnt}-${String(mesAnt).padStart(2, '0')}`;
 }
 
-// ==========================================
-// GENERAR ANÁLISIS PRINCIPAL
-// ==========================================
 function generarAnalisis() {
-    console.log('=== GENERANDO ANÁLISIS ===');
     const cd = document.getElementById('filtroCD').value;
     const maq = document.getElementById('filtroMaquina').value;
     const mes = document.getElementById('filtroMes').value;
@@ -583,17 +605,12 @@ function generarAnalisis() {
         if (cd) datos = datos.filter(r => r.cd === cd);
         if (maq) datos = datos.filter(r => r.maquina === maq);
         
-        datosConHistorial = datosGlobales.filter(r => 
-            r.fecha.startsWith(mes) || r.fecha.startsWith(mesAnterior)
-        );
+        datosConHistorial = datosGlobales.filter(r => r.fecha.startsWith(mes) || r.fecha.startsWith(mesAnterior));
         if (cd) datosConHistorial = datosConHistorial.filter(r => r.cd === cd);
         if (maq) datosConHistorial = datosConHistorial.filter(r => r.maquina === maq);
     }
 
-    if (datos.length === 0) { 
-        alert("No hay datos para estos filtros"); 
-        return; 
-    }
+    if (datos.length === 0) { alert("No hay datos para estos filtros"); return; }
     
     actualizarKPIs(datosConHistorial, posicion, mes); 
     graficarProfundidad(datosConHistorial, posicion); 
@@ -605,18 +622,13 @@ function generarAnalisis() {
     generarAnalisisAsimetria(datosConHistorial);
 }
 
-// ==========================================
-// KPIs y Gráficas
-// ==========================================
 function actualizarKPIs(datos, posicion, mesActual = null) {
     document.getElementById('kpiRegistros').textContent = datos.length;
     const maqsUnicas = new Set(datos.map(r => `${r.cd}-${r.maquina}`));
     document.getElementById('kpiMaquinas').textContent = maqsUnicas.size;
-    
     const grupos = agruparPorMaquina(datos);
     let desgastes = [];
     let alertas = 0;
-
     Object.values(grupos).forEach(arr => {
         if (arr.length >= 2) {
             const valInicio = obtenerValorLlanta(arr[0], posicion);
@@ -628,11 +640,7 @@ function actualizarKPIs(datos, posicion, mesActual = null) {
             }
         }
     });
-    
-    const desgastePromedio = desgastes.length > 0 
-        ? (desgastes.reduce((a, b) => a + b, 0) / desgastes.length).toFixed(1)
-        : '0.0';
-    
+    const desgastePromedio = desgastes.length > 0 ? (desgastes.reduce((a, b) => a + b, 0) / desgastes.length).toFixed(1) : '0.0';
     document.getElementById('kpiDesgaste').textContent = desgastePromedio + ' mm';
     document.getElementById('kpiAlertas').textContent = alertas;
 }
@@ -702,13 +710,11 @@ function generarTablaAlertas(datos, posicion, mesActual = null) {
     const tbody = document.getElementById('tablaAlertas');
     tbody.innerHTML = '';
     let filas = [];
-    
     Object.entries(grupos).forEach(([key, arr]) => {
         if (arr.length < 2) return;
         const valInicio = obtenerValorLlanta(arr[0], posicion);
         const valFin = obtenerValorLlanta(arr[arr.length - 1], posicion);
         const desg = valInicio - valFin;
-        
         if (desg > 3.0 && desg < 100) {
             const [cd, maq] = key.split('|');
             const diasEntre = (new Date(arr[arr.length - 1].fecha) - new Date(arr[0].fecha)) / (1000 * 60 * 60 * 24);
@@ -717,20 +723,16 @@ function generarTablaAlertas(datos, posicion, mesActual = null) {
             filas.push({ cd, maq, horometro: arr[arr.length - 1].horometro, actual: valFin, desgasteMensual });
         }
     });
-    
     filas.sort((a, b) => b.desgasteMensual - a.desgasteMensual).slice(0, 10).forEach(f => {
-        const estado = f.desgasteMensual > 5 ? 
-            '<span class="bg-red-100 text-red-800 px-2 py-1 rounded text-xs font-bold">CRÍTICO</span>' : 
-            f.desgasteMensual > 3.5 ? 
-            '<span class="bg-orange-100 text-orange-800 px-2 py-1 rounded text-xs font-bold">ALTO</span>' : 
-            '<span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded text-xs font-bold">MODERADO</span>';
+        const estado = f.desgasteMensual > 5 ? '<span class="bg-red-100 text-red-800 px-2 py-1 rounded text-xs font-bold">CRÍTICO</span>' : 
+                       f.desgasteMensual > 3.5 ? '<span class="bg-orange-100 text-orange-800 px-2 py-1 rounded text-xs font-bold">ALTO</span>' : 
+                       '<span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded text-xs font-bold">MODERADO</span>';
         tbody.innerHTML += `<tr class="hover:bg-gray-50">
             <td class="p-3 font-semibold">${f.cd}</td><td class="p-3 font-bold text-bavaria-red">${f.maq}</td>
             <td class="p-3 text-right">${f.horometro}</td><td class="p-3 text-right">${f.actual.toFixed(1)} mm</td>
             <td class="p-3 text-right font-bold">${f.desgasteMensual.toFixed(2)} mm</td><td class="p-3 text-center">${estado}</td>
         </tr>`;
     });
-    
     if (filas.length === 0) tbody.innerHTML = '<tr><td colspan="6" class="p-4 text-center text-gray-500">✅ No hay máquinas con desgaste acelerado</td></tr>';
 }
 
@@ -741,12 +743,7 @@ function generarPrediccion(datos, posicion) {
     let todasPredicciones = [];
     const LIMITE_CRITICO = 15;
     const LIMITE_ALERTA = 20;
-    
-    const nombresPos = {
-        'DI': 'Delantera Izq (P2)', 'DD': 'Delantera Der (P1)',
-        'TI': 'Trasera Izq (P4)', 'TD': 'Trasera Der (P3)'
-    };
-    
+    const nombresPos = { 'DI': 'Delantera Izq (P2)', 'DD': 'Delantera Der (P1)', 'TI': 'Trasera Izq (P4)', 'TD': 'Trasera Der (P3)' };
     const posicionesAAnalizar = posicion === 'TODAS' ? ['DI', 'DD', 'TI', 'TD'] : [posicion];
     
     Object.entries(grupos).forEach(([key, arr]) => {
@@ -754,14 +751,12 @@ function generarPrediccion(datos, posicion) {
         posicionesAAnalizar.forEach(pos => {
             const registrosOrdenados = [...arr].sort((a, b) => new Date(a.fecha) - new Date(b.fecha));
             if (registrosOrdenados.length < 1) return;
-            
             const ultimoRegistro = registrosOrdenados[registrosOrdenados.length - 1];
             const valActual = obtenerValorLlanta(ultimoRegistro, pos);
             
             if (registrosOrdenados.length >= 2) {
                 const penultimo = registrosOrdenados[registrosOrdenados.length - 2];
                 const valPenultimo = obtenerValorLlanta(penultimo, pos);
-                
                 if (valActual > valPenultimo && valPenultimo > 0) {
                     if (valActual <= LIMITE_CRITICO) {
                         todasPredicciones.push({ cd, maq, posicion: nombresPos[pos], dias: 0, fecha: 'INMEDIATO', profundidadActual: valActual, urgente: true, tipo: 'critica' });
@@ -769,10 +764,7 @@ function generarPrediccion(datos, posicion) {
                 } else {
                     let primerRegistroValido = registrosOrdenados[0];
                     for (let i = 0; i < registrosOrdenados.length; i++) {
-                        if (obtenerValorLlanta(registrosOrdenados[i], pos) > 0) {
-                            primerRegistroValido = registrosOrdenados[i];
-                            break;
-                        }
+                        if (obtenerValorLlanta(registrosOrdenados[i], pos) > 0) { primerRegistroValido = registrosOrdenados[i]; break; }
                     }
                     const diasEntre = (new Date(ultimoRegistro.fecha) - new Date(primerRegistroValido.fecha)) / (1000 * 60 * 60 * 24);
                     const valInicio = obtenerValorLlanta(primerRegistroValido, pos);
@@ -784,15 +776,13 @@ function generarPrediccion(datos, posicion) {
                     } else if (valActual <= LIMITE_ALERTA) {
                         if (desgDiario > 0) {
                             const diasRestantes = (valActual - LIMITE_CRITICO) / desgDiario;
-                            const fechaEst = new Date();
-                            fechaEst.setDate(fechaEst.getDate() + diasRestantes);
+                            const fechaEst = new Date(); fechaEst.setDate(fechaEst.getDate() + diasRestantes);
                             todasPredicciones.push({ cd, maq, posicion: nombresPos[pos], dias: Math.ceil(diasRestantes), fecha: fechaEst.toLocaleDateString('es-CO'), profundidadActual: valActual, urgente: false, tipo: 'alerta' });
                         }
                     } else {
                         if (desgDiario > 0) {
                             const diasRestantes = (valActual - LIMITE_CRITICO) / desgDiario;
-                            const fechaEst = new Date();
-                            fechaEst.setDate(fechaEst.getDate() + diasRestantes);
+                            const fechaEst = new Date(); fechaEst.setDate(fechaEst.getDate() + diasRestantes);
                             todasPredicciones.push({ cd, maq, posicion: nombresPos[pos], dias: Math.ceil(diasRestantes), fecha: fechaEst.toLocaleDateString('es-CO'), profundidadActual: valActual, urgente: false, tipo: 'normal' });
                         }
                     }
@@ -830,12 +820,12 @@ function generarPrediccion(datos, posicion) {
             </li>`;
         } else if (p.tipo === 'alerta') {
             html = `<li class="bg-orange-50 p-3 rounded border-l-4 border-orange-500 mb-2">
-                <div><span class="text-orange-700 font-bold">⚠️ ALERTA</span><strong class="ml-2">${p.cd} - FLT ${p.maq}</strong><span class="text-xs text-gray-600 ml-2">[${p.posicion}]</span></div>
+                <div><span class="text-orange-700 font-bold">️ ALERTA</span><strong class="ml-2">${p.cd} - FLT ${p.maq}</strong><span class="text-xs text-gray-600 ml-2">[${p.posicion}]</span></div>
                 <div class="mt-1 text-sm"><span class="text-orange-700">Planificar cambio en <strong>${p.dias} días</strong> (${p.fecha})</span><span class="text-gray-700 ml-2">Profundidad: <strong>${p.profundidadActual.toFixed(1)} mm</strong></span></div>
             </li>`;
         } else {
             html = `<li class="bg-blue-50 p-3 rounded border-l-4 border-blue-500 mb-2">
-                <div><span class="text-blue-700 font-bold">🔵 PROGRAMADA</span><strong class="ml-2">${p.cd} - FLT ${p.maq}</strong><span class="text-xs text-gray-600 ml-2">[${p.posicion}]</span></div>
+                <div><span class="text-blue-700 font-bold"> PROGRAMADA</span><strong class="ml-2">${p.cd} - FLT ${p.maq}</strong><span class="text-xs text-gray-600 ml-2">[${p.posicion}]</span></div>
                 <div class="mt-1 text-sm"><span class="text-blue-700">Cambio en <strong>${p.dias} días</strong> (${p.fecha})</span><span class="text-gray-700 ml-2">Profundidad: <strong>${p.profundidadActual.toFixed(1)} mm</strong></span></div>
             </li>`;
         }
@@ -846,19 +836,15 @@ function generarPrediccion(datos, posicion) {
     const alertas = todasPredicciones.filter(p => p.tipo === 'alerta').length;
     const normales = todasPredicciones.filter(p => p.tipo === 'normal').length;
     if (criticas > 0 || alertas > 0) {
-        ul.innerHTML += `<li class="mt-3 p-3 bg-gray-100 rounded text-xs text-gray-700">📊 <strong>Resumen:</strong> ${criticas} crítica(s) | ${alertas} en alerta | ${normales} programadas | ${todasPredicciones.length} total en monitoreo</li>`;
+        ul.innerHTML += `<li class="mt-3 p-3 bg-gray-100 rounded text-xs text-gray-700"> <strong>Resumen:</strong> ${criticas} crítica(s) | ${alertas} en alerta | ${normales} programadas | ${todasPredicciones.length} total en monitoreo</li>`;
     }
 }
 
-// ==========================================
-// ANÁLISIS AVANZADOS
-// ==========================================
 function generarAnalisisEficiencia(datos, posicion) {
     const grupos = agruparPorMaquina(datos);
     const tbody = document.getElementById('tablaEficiencia');
     tbody.innerHTML = '';
     let filas = [];
-    
     Object.entries(grupos).forEach(([key, arr]) => {
         if (arr.length < 2) return;
         const valInicio = obtenerValorLlanta(arr[0], posicion);
@@ -867,16 +853,14 @@ function generarAnalisisEficiencia(datos, posicion) {
         const horasFin = Number(arr[arr.length - 1].horometro || 0);
         const horasTrabajadas = horasFin - horasInicio;
         const desgaste = valInicio - valFin;
-        
         if (horasTrabajadas > 0 && desgaste > 0 && desgaste < 50) {
             const eficiencia = desgaste / horasTrabajadas;
             const [cd, maq] = key.split('|');
             filas.push({ cd, maq, horasTrabajadas, desgaste, eficiencia });
         }
     });
-    
     filas.sort((a, b) => b.eficiencia - a.eficiencia).slice(0, 15).forEach(f => {
-        const estado = f.eficiencia > 0.02 ? '<span class="bg-red-100 text-red-800 px-2 py-1 rounded text-xs font-bold">🔴 MALA</span>' : 
+        const estado = f.eficiencia > 0.02 ? '<span class="bg-red-100 text-red-800 px-2 py-1 rounded text-xs font-bold"> MALA</span>' : 
                        f.eficiencia > 0.01 ? '<span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded text-xs font-bold">🟡 REGULAR</span>' : 
                        '<span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs font-bold">🟢 BUENA</span>';
         tbody.innerHTML += `<tr class="hover:bg-gray-50">
@@ -893,7 +877,6 @@ function generarRankingHoras(datos) {
     const tbody = document.getElementById('tablaRankingHoras');
     tbody.innerHTML = '';
     let filas = [];
-    
     Object.entries(grupos).forEach(([key, arr]) => {
         const [cd, maq] = key.split('|');
         const ultimoHorometro = Number(arr[arr.length - 1].horometro || 0);
@@ -903,9 +886,8 @@ function generarRankingHoras(datos) {
         const horasDiarias = diasEntre > 0 ? horasPeriodo / diasEntre : 0;
         if (horasPeriodo > 0) filas.push({ cd, maq, horasPeriodo, horasDiarias, ultimoHorometro });
     });
-    
     filas.sort((a, b) => b.horasPeriodo - a.horasPeriodo).slice(0, 15).forEach((f, i) => {
-        const medalla = i === 0 ? '' : i === 1 ? '🥈' : i === 2 ? '🥉' : `${i + 1}°`;
+        const medalla = i === 0 ? '' : i === 1 ? '' : i === 2 ? '🥉' : `${i + 1}°`;
         tbody.innerHTML += `<tr class="hover:bg-gray-50">
             <td class="p-2 text-center text-lg">${medalla}</td><td class="p-2 font-semibold">${f.cd}</td><td class="p-2 font-bold text-bavaria-red">${f.maq}</td>
             <td class="p-2 text-right font-bold">${f.horasPeriodo.toFixed(0)} hrs</td><td class="p-2 text-right">${f.horasDiarias.toFixed(1)} hrs/día</td>
@@ -920,7 +902,6 @@ function generarAnalisisAsimetria(datos) {
     const tbody = document.getElementById('tablaAsimetria');
     tbody.innerHTML = '';
     let filas = [];
-    
     Object.entries(grupos).forEach(([key, arr]) => {
         if (arr.length < 1) return;
         const ultimo = arr[arr.length - 1];
@@ -929,16 +910,13 @@ function generarAnalisisAsimetria(datos) {
         const ti = Number(ultimo.llantaTI || 0);
         const td = Number(ultimo.llantaTD || 0);
         if (di === 0 && dd === 0 && ti === 0 && td === 0) return;
-        
         const difDelantera = Math.abs(di - dd);
         const difTrasera = Math.abs(ti - td);
         const [cd, maq] = key.split('|');
-        
         if (difDelantera > 3 || difTrasera > 3) {
             filas.push({ cd, maq, di, dd, ti, td, difDelantera, difTrasera });
         }
     });
-    
     filas.sort((a, b) => (b.difDelantera + b.difTrasera) - (a.difDelantera + a.difTrasera)).slice(0, 15).forEach(f => {
         const estado = (f.difDelantera > 5 || f.difTrasera > 5) ? 
             '<span class="bg-red-100 text-red-800 px-2 py-1 rounded text-xs font-bold">🔴 CRÍTICO</span>' : 
