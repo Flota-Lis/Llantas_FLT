@@ -67,88 +67,176 @@
                 <input type="number" id="horometro" min="0" step="1" placeholder="Ej: 12345" required class="w-full sm:w-2/3 mx-auto block bg-gray-50 border-2 border-gray-300 rounded-lg py-2.5 px-4 text-center font-bold text-base sm:text-lg text-gray-800 focus:outline-none focus:border-red-600 transition-colors">
             </div>
 
-            <!-- DIAGRAMA CON SELECTS DE MARCA VISIBLES -->
-            <div class="relative w-full aspect-[2/1] my-2 flex items-center justify-center bg-gray-50 rounded-lg p-4 border border-gray-200 overflow-hidden">
-                <img src="montacargas.png" alt="Montacargas superior" class="h-full w-auto object-contain opacity-90 max-w-[85%]">
+            <!-- ========================================== -->
+            <!-- DIAGRAMA RESPONSIVE (DESKTOP + MÓVIL)      -->
+            <!-- ========================================== -->
+            <div class="w-full my-2">
+                <!-- Vista Desktop (oculta en móvil) -->
+                <div class="hidden sm:block relative w-full aspect-[2/1] bg-gray-50 rounded-lg p-4 border border-gray-200 overflow-hidden">
+                    <img src="montacargas.png" alt="Montacargas superior" class="h-full w-auto object-contain opacity-90 max-w-[85%] mx-auto">
+                    
+                    <!-- P2 - Delantera Izquierda -->
+                    <div class="absolute top-[5%] left-[25%] flex flex-col items-center gap-1 z-10">
+                        <span class="text-xs font-bold text-gray-700 bg-white px-2 py-0.5 rounded border border-gray-300">P2</span>
+                        <select id="marcaDI" class="w-24 bg-white border-2 border-gray-400 rounded px-1 py-1 text-center font-bold text-xs focus:ring-2 focus:ring-red-500 shadow-sm">
+                            <option value="">Marca</option>
+                            <option value="SOLID STAR">SOLID STAR</option>
+                            <option value="BASUM">BASUM</option>
+                            <option value="KUMANEKO">KUMANEKO</option>
+                            <option value="KUMANEKO T">KUMANEKO T</option>
+                            <option value="NUMA">NUMA</option>
+                            <option value="MAGNUM">MAGNUM</option>
+                            <option value="NUM 7">NUM 7</option>
+                            <option value="TRELLEBORG">TRELLEBORG</option>
+                            <option value="SOLIO ST">SOLIO ST</option>
+                            <option value="SOLIDEAL">SOLIDEAL</option>
+                            <option value="CONTINENTAL">CONTINENTAL</option>
+                        </select>
+                        <input type="number" id="llantaDI" step="0.1" min="0" placeholder="mm" required class="w-24 bg-white border-2 border-gray-400 rounded px-1 py-1 text-center font-bold text-sm focus:ring-2 focus:ring-red-500 shadow-sm">
+                    </div>
 
-                <!-- P2 - Delantera Izquierda -->
-                <div class="absolute top-[5%] left-[25%] flex flex-col items-center gap-1 z-10">
-                    <span class="text-[10px] sm:text-xs font-bold text-gray-700 bg-white px-2 py-0.5 rounded border border-gray-300">P2</span>
-                    <select id="marcaDI" class="w-20 sm:w-24 bg-white border-2 border-gray-400 rounded px-1 py-1 text-center font-bold text-[10px] sm:text-xs focus:ring-2 focus:ring-red-500 shadow-sm">
-                        <option value="">Marca</option>
-                        <option value="SOLID STAR">SOLID STAR</option>
-                        <option value="BASUM">BASUM</option>
-                        <option value="KUMANEKO">KUMANEKO</option>
-                        <option value="KUMANEKO T">KUMANEKO T</option>
-                        <option value="NUMA">NUMA</option>
-                        <option value="MAGNUM">MAGNUM</option>
-                        <option value="NUM 7">NUM 7</option>
-                        <option value="TRELLEBORG">TRELLEBORG</option>
-                        <option value="SOLIO ST">SOLIO ST</option>
-                        <option value="SOLIDEAL">SOLIDEAL</option>
-                        <option value="CONTINENTAL">CONTINENTAL</option>
-                    </select>
-                    <input type="number" id="llantaDI" step="0.1" min="0" placeholder="mm" required class="w-20 sm:w-24 bg-white border-2 border-gray-400 rounded px-1 py-1 text-center font-bold text-xs sm:text-sm focus:ring-2 focus:ring-red-500 shadow-sm">
+                    <!-- P1 - Delantera Derecha -->
+                    <div class="absolute bottom-[5%] left-[25%] flex flex-col items-center gap-1 z-10">
+                        <input type="number" id="llantaDD" step="0.1" min="0" placeholder="mm" required class="w-24 bg-white border-2 border-gray-400 rounded px-1 py-1 text-center font-bold text-sm focus:ring-2 focus:ring-red-500 shadow-sm">
+                        <select id="marcaDD" class="w-24 bg-white border-2 border-gray-400 rounded px-1 py-1 text-center font-bold text-xs focus:ring-2 focus:ring-red-500 shadow-sm">
+                            <option value="">Marca</option>
+                            <option value="SOLID STAR">SOLID STAR</option>
+                            <option value="BASUM">BASUM</option>
+                            <option value="KUMANEKO">KUMANEKO</option>
+                            <option value="KUMANEKO T">KUMANEKO T</option>
+                            <option value="NUMA">NUMA</option>
+                            <option value="MAGNUM">MAGNUM</option>
+                            <option value="NUM 7">NUM 7</option>
+                            <option value="TRELLEBORG">TRELLEBORG</option>
+                            <option value="SOLIO ST">SOLIO ST</option>
+                            <option value="SOLIDEAL">SOLIDEAL</option>
+                            <option value="CONTINENTAL">CONTINENTAL</option>
+                        </select>
+                        <span class="text-xs font-bold text-gray-700 bg-white px-2 py-0.5 rounded border border-gray-300">P1</span>
+                    </div>
+
+                    <!-- P4 - Trasera Izquierda -->
+                    <div class="absolute top-[5%] right-[20%] flex flex-col items-center gap-1 z-10">
+                        <span class="text-xs font-bold text-gray-700 bg-white px-2 py-0.5 rounded border border-gray-300">P4</span>
+                        <select id="marcaTI" class="w-24 bg-white border-2 border-gray-400 rounded px-1 py-1 text-center font-bold text-xs focus:ring-2 focus:ring-red-500 shadow-sm">
+                            <option value="">Marca</option>
+                            <option value="SOLID STAR">SOLID STAR</option>
+                            <option value="BASUM">BASUM</option>
+                            <option value="KUMANEKO">KUMANEKO</option>
+                            <option value="KUMANEKO T">KUMANEKO T</option>
+                            <option value="NUMA">NUMA</option>
+                            <option value="MAGNUM">MAGNUM</option>
+                            <option value="NUM 7">NUM 7</option>
+                            <option value="TRELLEBORG">TRELLEBORG</option>
+                            <option value="SOLIO ST">SOLIO ST</option>
+                            <option value="SOLIDEAL">SOLIDEAL</option>
+                            <option value="CONTINENTAL">CONTINENTAL</option>
+                        </select>
+                        <input type="number" id="llantaTI" step="0.1" min="0" placeholder="mm" required class="w-24 bg-white border-2 border-gray-400 rounded px-1 py-1 text-center font-bold text-sm focus:ring-2 focus:ring-red-500 shadow-sm">
+                    </div>
+
+                    <!-- P3 - Trasera Derecha -->
+                    <div class="absolute bottom-[5%] right-[20%] flex flex-col items-center gap-1 z-10">
+                        <input type="number" id="llantaTD" step="0.1" min="0" placeholder="mm" required class="w-24 bg-white border-2 border-gray-400 rounded px-1 py-1 text-center font-bold text-sm focus:ring-2 focus:ring-red-500 shadow-sm">
+                        <select id="marcaTD" class="w-24 bg-white border-2 border-gray-400 rounded px-1 py-1 text-center font-bold text-xs focus:ring-2 focus:ring-red-500 shadow-sm">
+                            <option value="">Marca</option>
+                            <option value="SOLID STAR">SOLID STAR</option>
+                            <option value="BASUM">BASUM</option>
+                            <option value="KUMANEKO">KUMANEKO</option>
+                            <option value="KUMANEKO T">KUMANEKO T</option>
+                            <option value="NUMA">NUMA</option>
+                            <option value="MAGNUM">MAGNUM</option>
+                            <option value="NUM 7">NUM 7</option>
+                            <option value="TRELLEBORG">TRELLEBORG</option>
+                            <option value="SOLIO ST">SOLIO ST</option>
+                            <option value="SOLIDEAL">SOLIDEAL</option>
+                            <option value="CONTINENTAL">CONTINENTAL</option>
+                        </select>
+                        <span class="text-xs font-bold text-gray-700 bg-white px-2 py-0.5 rounded border border-gray-300">P3</span>
+                    </div>
                 </div>
 
-                <!-- P1 - Delantera Derecha -->
-                <div class="absolute bottom-[5%] left-[25%] flex flex-col items-center gap-1 z-10">
-                    <input type="number" id="llantaDD" step="0.1" min="0" placeholder="mm" required class="w-20 sm:w-24 bg-white border-2 border-gray-400 rounded px-1 py-1 text-center font-bold text-xs sm:text-sm focus:ring-2 focus:ring-red-500 shadow-sm">
-                    <select id="marcaDD" class="w-20 sm:w-24 bg-white border-2 border-gray-400 rounded px-1 py-1 text-center font-bold text-[10px] sm:text-xs focus:ring-2 focus:ring-red-500 shadow-sm">
-                        <option value="">Marca</option>
-                        <option value="SOLID STAR">SOLID STAR</option>
-                        <option value="BASUM">BASUM</option>
-                        <option value="KUMANEKO">KUMANEKO</option>
-                        <option value="KUMANEKO T">KUMANEKO T</option>
-                        <option value="NUMA">NUMA</option>
-                        <option value="MAGNUM">MAGNUM</option>
-                        <option value="NUM 7">NUM 7</option>
-                        <option value="TRELLEBORG">TRELLEBORG</option>
-                        <option value="SOLIO ST">SOLIO ST</option>
-                        <option value="SOLIDEAL">SOLIDEAL</option>
-                        <option value="CONTINENTAL">CONTINENTAL</option>
-                    </select>
-                    <span class="text-[10px] sm:text-xs font-bold text-gray-700 bg-white px-2 py-0.5 rounded border border-gray-300">P1</span>
-                </div>
+                <!-- Vista Móvil (solo visible en celular) -->
+                <div class="sm:hidden grid grid-cols-2 gap-3 p-3 bg-gray-50 rounded-lg border border-gray-200">
+                    <!-- P2 -->
+                    <div class="bg-white p-2 rounded border border-gray-300">
+                        <label class="block text-xs font-bold text-gray-700 mb-1 text-center">P2 - Del. Izq</label>
+                        <select id="marcaDI" class="w-full bg-white border-2 border-gray-400 rounded px-2 py-1.5 text-center font-bold text-xs mb-1 focus:ring-2 focus:ring-red-500">
+                            <option value="">Marca</option>
+                            <option value="SOLID STAR">SOLID STAR</option>
+                            <option value="BASUM">BASUM</option>
+                            <option value="KUMANEKO">KUMANEKO</option>
+                            <option value="KUMANEKO T">KUMANEKO T</option>
+                            <option value="NUMA">NUMA</option>
+                            <option value="MAGNUM">MAGNUM</option>
+                            <option value="NUM 7">NUM 7</option>
+                            <option value="TRELLEBORG">TRELLEBORG</option>
+                            <option value="SOLIO ST">SOLIO ST</option>
+                            <option value="SOLIDEAL">SOLIDEAL</option>
+                            <option value="CONTINENTAL">CONTINENTAL</option>
+                        </select>
+                        <input type="number" id="llantaDI" step="0.1" min="0" placeholder="Profundidad (mm)" required class="w-full bg-white border-2 border-gray-400 rounded px-2 py-1.5 text-center font-bold text-sm focus:ring-2 focus:ring-red-500">
+                    </div>
 
-                <!-- P4 - Trasera Izquierda -->
-                <div class="absolute top-[5%] right-[20%] flex flex-col items-center gap-1 z-10">
-                    <span class="text-[10px] sm:text-xs font-bold text-gray-700 bg-white px-2 py-0.5 rounded border border-gray-300">P4</span>
-                    <select id="marcaTI" class="w-20 sm:w-24 bg-white border-2 border-gray-400 rounded px-1 py-1 text-center font-bold text-[10px] sm:text-xs focus:ring-2 focus:ring-red-500 shadow-sm">
-                        <option value="">Marca</option>
-                        <option value="SOLID STAR">SOLID STAR</option>
-                        <option value="BASUM">BASUM</option>
-                        <option value="KUMANEKO">KUMANEKO</option>
-                        <option value="KUMANEKO T">KUMANEKO T</option>
-                        <option value="NUMA">NUMA</option>
-                        <option value="MAGNUM">MAGNUM</option>
-                        <option value="NUM 7">NUM 7</option>
-                        <option value="TRELLEBORG">TRELLEBORG</option>
-                        <option value="SOLIO ST">SOLIO ST</option>
-                        <option value="SOLIDEAL">SOLIDEAL</option>
-                        <option value="CONTINENTAL">CONTINENTAL</option>
-                    </select>
-                    <input type="number" id="llantaTI" step="0.1" min="0" placeholder="mm" required class="w-20 sm:w-24 bg-white border-2 border-gray-400 rounded px-1 py-1 text-center font-bold text-xs sm:text-sm focus:ring-2 focus:ring-red-500 shadow-sm">
-                </div>
+                    <!-- P1 -->
+                    <div class="bg-white p-2 rounded border border-gray-300">
+                        <label class="block text-xs font-bold text-gray-700 mb-1 text-center">P1 - Del. Der</label>
+                        <input type="number" id="llantaDD" step="0.1" min="0" placeholder="Profundidad (mm)" required class="w-full bg-white border-2 border-gray-400 rounded px-2 py-1.5 text-center font-bold text-sm mb-1 focus:ring-2 focus:ring-red-500">
+                        <select id="marcaDD" class="w-full bg-white border-2 border-gray-400 rounded px-2 py-1.5 text-center font-bold text-xs focus:ring-2 focus:ring-red-500">
+                            <option value="">Marca</option>
+                            <option value="SOLID STAR">SOLID STAR</option>
+                            <option value="BASUM">BASUM</option>
+                            <option value="KUMANEKO">KUMANEKO</option>
+                            <option value="KUMANEKO T">KUMANEKO T</option>
+                            <option value="NUMA">NUMA</option>
+                            <option value="MAGNUM">MAGNUM</option>
+                            <option value="NUM 7">NUM 7</option>
+                            <option value="TRELLEBORG">TRELLEBORG</option>
+                            <option value="SOLIO ST">SOLIO ST</option>
+                            <option value="SOLIDEAL">SOLIDEAL</option>
+                            <option value="CONTINENTAL">CONTINENTAL</option>
+                        </select>
+                    </div>
 
-                <!-- P3 - Trasera Derecha -->
-                <div class="absolute bottom-[5%] right-[20%] flex flex-col items-center gap-1 z-10">
-                    <input type="number" id="llantaTD" step="0.1" min="0" placeholder="mm" required class="w-20 sm:w-24 bg-white border-2 border-gray-400 rounded px-1 py-1 text-center font-bold text-xs sm:text-sm focus:ring-2 focus:ring-red-500 shadow-sm">
-                    <select id="marcaTD" class="w-20 sm:w-24 bg-white border-2 border-gray-400 rounded px-1 py-1 text-center font-bold text-[10px] sm:text-xs focus:ring-2 focus:ring-red-500 shadow-sm">
-                        <option value="">Marca</option>
-                        <option value="SOLID STAR">SOLID STAR</option>
-                        <option value="BASUM">BASUM</option>
-                        <option value="KUMANEKO">KUMANEKO</option>
-                        <option value="KUMANEKO T">KUMANEKO T</option>
-                        <option value="NUMA">NUMA</option>
-                        <option value="MAGNUM">MAGNUM</option>
-                        <option value="NUM 7">NUM 7</option>
-                        <option value="TRELLEBORG">TRELLEBORG</option>
-                        <option value="SOLIO ST">SOLIO ST</option>
-                        <option value="SOLIDEAL">SOLIDEAL</option>
-                        <option value="CONTINENTAL">CONTINENTAL</option>
-                    </select>
-                    <span class="text-[10px] sm:text-xs font-bold text-gray-700 bg-white px-2 py-0.5 rounded border border-gray-300">P3</span>
+                    <!-- P4 -->
+                    <div class="bg-white p-2 rounded border border-gray-300">
+                        <label class="block text-xs font-bold text-gray-700 mb-1 text-center">P4 - Tras. Izq</label>
+                        <select id="marcaTI" class="w-full bg-white border-2 border-gray-400 rounded px-2 py-1.5 text-center font-bold text-xs mb-1 focus:ring-2 focus:ring-red-500">
+                            <option value="">Marca</option>
+                            <option value="SOLID STAR">SOLID STAR</option>
+                            <option value="BASUM">BASUM</option>
+                            <option value="KUMANEKO">KUMANEKO</option>
+                            <option value="KUMANEKO T">KUMANEKO T</option>
+                            <option value="NUMA">NUMA</option>
+                            <option value="MAGNUM">MAGNUM</option>
+                            <option value="NUM 7">NUM 7</option>
+                            <option value="TRELLEBORG">TRELLEBORG</option>
+                            <option value="SOLIO ST">SOLIO ST</option>
+                            <option value="SOLIDEAL">SOLIDEAL</option>
+                            <option value="CONTINENTAL">CONTINENTAL</option>
+                        </select>
+                        <input type="number" id="llantaTI" step="0.1" min="0" placeholder="Profundidad (mm)" required class="w-full bg-white border-2 border-gray-400 rounded px-2 py-1.5 text-center font-bold text-sm focus:ring-2 focus:ring-red-500">
+                    </div>
+
+                    <!-- P3 -->
+                    <div class="bg-white p-2 rounded border border-gray-300">
+                        <label class="block text-xs font-bold text-gray-700 mb-1 text-center">P3 - Tras. Der</label>
+                        <input type="number" id="llantaTD" step="0.1" min="0" placeholder="Profundidad (mm)" required class="w-full bg-white border-2 border-gray-400 rounded px-2 py-1.5 text-center font-bold text-sm mb-1 focus:ring-2 focus:ring-red-500">
+                        <select id="marcaTD" class="w-full bg-white border-2 border-gray-400 rounded px-2 py-1.5 text-center font-bold text-xs focus:ring-2 focus:ring-red-500">
+                            <option value="">Marca</option>
+                            <option value="SOLID STAR">SOLID STAR</option>
+                            <option value="BASUM">BASUM</option>
+                            <option value="KUMANEKO">KUMANEKO</option>
+                            <option value="KUMANEKO T">KUMANEKO T</option>
+                            <option value="NUMA">NUMA</option>
+                            <option value="MAGNUM">MAGNUM</option>
+                            <option value="NUM 7">NUM 7</option>
+                            <option value="TRELLEBORG">TRELLEBORG</option>
+                            <option value="SOLIO ST">SOLIO ST</option>
+                            <option value="SOLIDEAL">SOLIDEAL</option>
+                            <option value="CONTINENTAL">CONTINENTAL</option>
+                        </select>
+                    </div>
                 </div>
             </div>
 
@@ -207,7 +295,7 @@
             </div>
         </div>
         <div class="text-center">
-            <button onclick="generarAnalisis()" class="bg-bavaria-red text-white font-bold py-2 px-8 rounded-lg shadow hover:bg-red-800 transition text-sm uppercase">📊 Actualizar Análisis</button>
+            <button onclick="generarAnalisis()" class="bg-bavaria-red text-white font-bold py-2 px-8 rounded-lg shadow hover:bg-red-800 transition text-sm uppercase"> Actualizar Análisis</button>
         </div>
 
         <div id="loadingDash" class="text-center py-12">
@@ -264,11 +352,11 @@
             </div>
 
             <div class="bg-white p-3 rounded-xl shadow">
-                <h3 class="font-bold text-gray-800 mb-3 text-sm uppercase"> Análisis Avanzados de Flota</h3>
+                <h3 class="font-bold text-gray-800 mb-3 text-sm uppercase">🔬 Análisis Avanzados de Flota</h3>
                 <div class="flex flex-wrap gap-2 mb-4 border-b border-gray-200 pb-2">
                     <button onclick="cambiarTab('eficiencia')" id="tabEficiencia" class="px-4 py-2 rounded-lg text-xs font-bold transition tab-activa">⚡ Eficiencia mm/hr</button>
                     <button onclick="cambiarTab('ranking')" id="tabRanking" class="px-4 py-2 rounded-lg text-xs font-bold transition tab-inactiva">🏆 Ranking Horas</button>
-                    <button onclick="cambiarTab('asimetria')" id="tabAsimetria" class="px-4 py-2 rounded-lg text-xs font-bold transition tab-inactiva">⚖️ Asimetría</button>
+                    <button onclick="cambiarTab('asimetria')" id="tabAsimetria" class="px-4 py-2 rounded-lg text-xs font-bold transition tab-inactiva">️ Asimetría</button>
                 </div>
 
                 <div id="contenidoEficiencia" class="tab-contenido">
@@ -301,7 +389,7 @@
 
                 <div id="contenidoAsimetria" class="tab-contenido vista-oculta">
                     <div class="mb-3 p-2 bg-orange-50 rounded border-l-4 border-orange-500 text-xs text-orange-800">
-                         <strong>Asimetría de llantas:</strong> Detecta diferencias de desgaste entre llantas del mismo eje (> 5mm indica problemas de alineación).
+                        💡 <strong>Asimetría de llantas:</strong> Detecta diferencias de desgaste entre llantas del mismo eje (> 5mm indica problemas de alineación).
                     </div>
                     <div class="overflow-x-auto">
                         <table class="w-full text-sm text-left">
@@ -404,7 +492,7 @@ function cambiarTab(tab) {
 
 const maquinasPorCD = {
     "GIRARDOTA": ["561", "562", "567", "603", "681", "761", "832", "838", "855", "860", "CP2"],
-    "CALI": ["568","598", "604", "611", "780", "839", "842", "844", "850", "A13"],
+    "CALI": ["598", "604", "611", "780", "839", "842", "844", "850", "A13"],
     "TULUA": ["MC1"], "PEREIRA": ["629", "690", "786", "789"],
     "FORJANDES": ["751", "818", "862", "863"], "ARENOSA": ["MC7", "MC8", "688", "752"],
     "SANTA MARTA": ["656", "657", "658", "808"], "SIBERIA": ["632", "634", "635", "636", "638", "639", "649", "685", "877"],
@@ -860,8 +948,8 @@ function generarAnalisisEficiencia(datos, posicion) {
         }
     });
     filas.sort((a, b) => b.eficiencia - a.eficiencia).slice(0, 15).forEach(f => {
-        const estado = f.eficiencia > 0.02 ? '<span class="bg-red-100 text-red-800 px-2 py-1 rounded text-xs font-bold"> MALA</span>' : 
-                       f.eficiencia > 0.01 ? '<span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded text-xs font-bold">🟡 REGULAR</span>' : 
+        const estado = f.eficiencia > 0.02 ? '<span class="bg-red-100 text-red-800 px-2 py-1 rounded text-xs font-bold">🔴 MALA</span>' : 
+                       f.eficiencia > 0.01 ? '<span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded text-xs font-bold"> REGULAR</span>' : 
                        '<span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs font-bold">🟢 BUENA</span>';
         tbody.innerHTML += `<tr class="hover:bg-gray-50">
             <td class="p-2 font-semibold">${f.cd}</td><td class="p-2 font-bold text-bavaria-red">${f.maq}</td>
@@ -887,7 +975,7 @@ function generarRankingHoras(datos) {
         if (horasPeriodo > 0) filas.push({ cd, maq, horasPeriodo, horasDiarias, ultimoHorometro });
     });
     filas.sort((a, b) => b.horasPeriodo - a.horasPeriodo).slice(0, 15).forEach((f, i) => {
-        const medalla = i === 0 ? '' : i === 1 ? '' : i === 2 ? '🥉' : `${i + 1}°`;
+        const medalla = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : `${i + 1}°`;
         tbody.innerHTML += `<tr class="hover:bg-gray-50">
             <td class="p-2 text-center text-lg">${medalla}</td><td class="p-2 font-semibold">${f.cd}</td><td class="p-2 font-bold text-bavaria-red">${f.maq}</td>
             <td class="p-2 text-right font-bold">${f.horasPeriodo.toFixed(0)} hrs</td><td class="p-2 text-right">${f.horasDiarias.toFixed(1)} hrs/día</td>
@@ -919,7 +1007,7 @@ function generarAnalisisAsimetria(datos) {
     });
     filas.sort((a, b) => (b.difDelantera + b.difTrasera) - (a.difDelantera + a.difTrasera)).slice(0, 15).forEach(f => {
         const estado = (f.difDelantera > 5 || f.difTrasera > 5) ? 
-            '<span class="bg-red-100 text-red-800 px-2 py-1 rounded text-xs font-bold">🔴 CRÍTICO</span>' : 
+            '<span class="bg-red-100 text-red-800 px-2 py-1 rounded text-xs font-bold"> CRÍTICO</span>' : 
             '<span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded text-xs font-bold">🟡 REVISAR</span>';
         tbody.innerHTML += `<tr class="hover:bg-gray-50">
             <td class="p-2 font-semibold">${f.cd}</td><td class="p-2 font-bold text-bavaria-red">${f.maq}</td>
